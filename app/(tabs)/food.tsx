@@ -1,10 +1,10 @@
 import { View, ScrollView, StyleSheet } from 'react-native';
 import { useState } from 'react';
-import { colors } from '../theme/colors';
+import { colors } from '../../src/theme/colors';
 
-import { ScreenHeader } from '../components/ScreenHeader';
-import { DishCard } from '../components/DishCard';
-import { SearchBar } from '../components/SearchBar';
+import { ScreenHeader } from '../../src/components/ScreenHeader';
+import { DishCard } from '../../src/components/DishCard';
+import { SearchBar } from '../../src/components/SearchBar';
 
 const featuredDishes = [
   {
