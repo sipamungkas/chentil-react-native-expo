@@ -1,11 +1,11 @@
 import { View, ScrollView, StyleSheet } from 'react-native';
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
-import { colors } from '../../src/theme/colors';
+import { colors } from '../theme/colors';
 
-import { ScreenHeader } from '../../src/components/ScreenHeader';
-import { SearchBar } from '../../src/components/SearchBar';
-import { EventCard } from '../../src/components/EventCard';
+import { ScreenHeader } from '../components/ScreenHeader';
+import { SearchBar } from '../components/SearchBar';
+import { EventCard } from '../components/EventCard';
 
 const UPCOMING_EVENTS = [
   {

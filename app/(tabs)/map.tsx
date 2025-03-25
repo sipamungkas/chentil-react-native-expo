@@ -1,8 +1,8 @@
 import { View, StyleSheet } from 'react-native';
-import { colors } from '../../src/theme/colors';
+import { colors } from '../theme/colors';
 
-import { ScreenHeader } from '../../src/components/ScreenHeader';
-import { MapView } from '../../src/components/MapView';
+import { ScreenHeader } from '../components/ScreenHeader';
+import { MapView } from '../components/MapView';
 
 const INITIAL_REGION = {
   latitude: -6.200000,
