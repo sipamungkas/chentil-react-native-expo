@@ -31,26 +31,13 @@ export default function TabLayout() {
           fontSize: 12,
         },
         headerShown: false,
-      }}>
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
           title: 'Home',
           tabBarIcon: ({ color, size }) => <Home size={size} color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="outbound"
-        options={{
-          title: 'Outbound',
-          tabBarIcon: ({ color, size }) => <Plane size={size} color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="recommendations"
-        options={{
-          title: 'For You',
-          tabBarIcon: ({ color, size }) => <Star size={size} color={color} />,
         }}
       />
       <Tabs.Screen

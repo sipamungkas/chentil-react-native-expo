@@ -1,6 +1,6 @@
 import { View, Text, Image, Pressable, StyleSheet } from 'react-native';
 import { Star } from 'lucide-react-native';
-import { colors } from '../app/theme/colors';
+import { colors } from '../theme/colors';
 
 interface Dish {
   id: string;

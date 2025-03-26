@@ -1,10 +1,10 @@
 import { View, ScrollView, StyleSheet } from 'react-native';
 import { useState } from 'react';
-import { colors } from '../theme/colors';
+import { colors } from '@/theme/colors';
 
-import { ScreenHeader } from '../../components/ScreenHeader';
-import { DishCard } from '../../components/DishCard';
-import { SearchBar } from '../../components/SearchBar';
+import { ScreenHeader } from '@/components/ScreenHeader';
+import { DishCard } from '@/components/DishCard';
+import { SearchBar } from '@/components/SearchBar';
 
 const featuredDishes = [
   {
@@ -46,10 +46,7 @@ export default function FoodScreen() {
 
   return (
     <View style={styles.container}>
-      <ScreenHeader
-        title="Food"
-        subtitle="Discover delicious meals"
-      />
+      <ScreenHeader title="Food" subtitle="Discover delicious meals" />
       <ScrollView style={styles.content}>
         <SearchBar
           value={searchQuery}
@@ -57,11 +54,7 @@ export default function FoodScreen() {
           placeholder="Search for food..."
         />
         {featuredDishes.map((dish) => (
-          <DishCard
-            key={dish.id}
-            dish={dish}
-            onPress={handleDishPress}
-          />
+          <DishCard key={dish.id} dish={dish} onPress={handleDishPress} />
         ))}
       </ScrollView>
     </View>

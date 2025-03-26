@@ -1,6 +1,6 @@
 import { View, Text, Image, Pressable, StyleSheet } from 'react-native';
 import { Calendar, MapPin, Users } from 'lucide-react-native';
-import { colors } from '../app/theme/colors';
+import { colors } from '../theme/colors';
 
 interface Event {
   id: string;

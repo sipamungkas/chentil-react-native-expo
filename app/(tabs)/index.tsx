@@ -10,12 +10,12 @@ import {
   Heart,
 } from 'lucide-react-native';
 
-import { NewsSlider } from '../../components/NewsSlider';
-import { SearchBar } from '../../components/SearchBar';
-import { MenuGrid } from '../../components/MenuGrid';
-import { MapSection } from '../../components/MapSection';
-import { TopPicks } from '../../components/TopPicks';
-import { FloatingActionButton } from '../../components/FloatingActionButton';
+import { NewsSlider } from '@/components/NewsSlider';
+import { SearchBar } from '@/components/SearchBar';
+import { MenuGrid } from '@/components/MenuGrid';
+import { MapSection } from '@/components/MapSection';
+import { TopPicks } from '@/components/TopPicks';
+import { FloatingActionButton } from '@/components/FloatingActionButton';
 
 const NEWS_SLIDES = [
   {
