@@ -1,6 +1,7 @@
 import { View, ScrollView, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
+import { useState } from 'react';
 import {
   Compass,
   Plane,
@@ -16,6 +17,7 @@ import { MenuGrid } from '@/components/MenuGrid';
 import { MapSection } from '@/components/MapSection';
 import { TopPicks } from '@/components/TopPicks';
 import { FloatingActionButton } from '@/components/FloatingActionButton';
+import { colors } from '@/theme/colors';
 
 const NEWS_SLIDES = [
   {
@@ -42,24 +44,39 @@ const MENU_ITEMS = [
   {
     icon: Compass,
     label: 'Destinations',
-    color: '#FF4D8D',
-    route: '/destination',
+    color: colors.chentil.cerise,
+    route: '/destination' as const,
   },
-  { icon: Plane, label: 'Outbound', color: '#4299E1', route: '/outbound' },
-  { icon: Palette, label: 'Culture', color: '#48BB78', route: '/culture' },
+  { 
+    icon: Plane, 
+    label: 'Outbound', 
+    color: colors.chentil.watermelon,
+    route: '/outbound' as const,
+  },
+  { 
+    icon: Palette, 
+    label: 'Culture', 
+    color: colors.chentil.bubbleGum,
+    route: '/culture' as const,
+  },
   {
     icon: Utensils,
     label: 'Food & Beverage',
-    color: '#ED8936',
-    route: '/food-and-beverage',
+    color: colors.chentil.rosePink,
+    route: '/food-and-beverage' as const,
   },
   {
     icon: Star,
     label: 'Recommendations',
-    color: '#9F7AEA',
-    route: 'recommendations',
+    color: colors.chentil.hotPink,
+    route: '/recommendations' as const,
   },
-  { icon: Heart, label: 'Favorites', color: '#F56565', route: null },
+  { 
+    icon: Heart, 
+    label: 'Favorites', 
+    color: colors.chentil.ruby,
+    route: null 
+  },
 ];
 
 const TOP_PICKS = [
@@ -83,6 +100,7 @@ const TOP_PICKS = [
 
 export default function HomeScreen() {
   const router = useRouter();
+  const [searchText, setSearchText] = useState('');
 
   const handleMenuPress = (route: string | null) => {
     if (route) {
@@ -91,7 +109,8 @@ export default function HomeScreen() {
   };
 
   const handlePlacePress = (id: string) => {
-    router.push(`/destination/${id}`);
+    const route = `/destination/${id}` as const;
+    router.push(route);
   };
 
   return (
@@ -101,14 +120,18 @@ export default function HomeScreen() {
         showsVerticalScrollIndicator={false}
       >
         <NewsSlider slides={NEWS_SLIDES} />
-        <View style={{ padding: 16 }}>
-          <SearchBar onPress={() => router.push('/search')} />
+        <View style={styles.searchContainer}>
+          <SearchBar 
+            value={searchText}
+            onChangeText={setSearchText}
+            placeholder="Search destinations..."
+          />
         </View>
         <MenuGrid items={MENU_ITEMS} onItemPress={handleMenuPress} />
         <MapSection />
         <TopPicks places={TOP_PICKS} onPlacePress={handlePlacePress} />
       </ScrollView>
-      <FloatingActionButton onPress={() => router.push('/calendar')} />
+      <FloatingActionButton onPress={() => router.push('/calendar' as const)} />
     </SafeAreaView>
   );
 }
@@ -116,9 +139,16 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.background.primary,
   },
   scrollView: {
     flex: 1,
+  },
+  searchContainer: {
+    padding: 16,
+    backgroundColor: colors.background.secondary,
+    marginHorizontal: 16,
+    marginTop: 16,
+    borderRadius: 12,
   },
 });
