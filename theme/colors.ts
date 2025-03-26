@@ -1,9 +1,9 @@
 export const colors = {
-  // Background colors - Updated to be more white-based with subtle pink tints
+  // Background colors - Updated to be more harmonious with primary
   background: {
-    primary: '#FFF5F7', // Very light pink tint, almost white
-    secondary: '#FFF0F3', // Slightly more pink than primary
-    tertiary: '#FFE5EA', // Light pink for depth
+    primary: '#FFF7FF', // Very light pink tint, almost white
+    secondary: '#FFF3FC', // Slightly more pink than primary, but still very subtle
+    tertiary: '#FFEEF9', // Light pink for depth, maintaining subtlety
   },
   
   // Text colors

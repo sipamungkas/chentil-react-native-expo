@@ -44,38 +44,38 @@ const MENU_ITEMS = [
   {
     icon: Compass,
     label: 'Destinations',
-    color: colors.chentil.cerise,
+    color: colors.brand.primary,
     route: '/destination' as const,
   },
-  { 
-    icon: Plane, 
-    label: 'Outbound', 
-    color: colors.chentil.watermelon,
+  {
+    icon: Plane,
+    label: 'Outbound',
+    color: colors.brand.primary,
     route: '/outbound' as const,
   },
-  { 
-    icon: Palette, 
-    label: 'Culture', 
-    color: colors.chentil.bubbleGum,
+  {
+    icon: Palette,
+    label: 'Culture',
+    color: colors.brand.primary,
     route: '/culture' as const,
   },
   {
     icon: Utensils,
     label: 'Food & Beverage',
-    color: colors.chentil.rosePink,
+    color: colors.brand.primary,
     route: '/food-and-beverage' as const,
   },
   {
     icon: Star,
     label: 'Recommendations',
-    color: colors.chentil.hotPink,
+    color: colors.brand.primary,
     route: '/recommendations' as const,
   },
-  { 
-    icon: Heart, 
-    label: 'Favorites', 
-    color: colors.chentil.ruby,
-    route: null 
+  {
+    icon: Heart,
+    label: 'Favorites',
+    color: colors.brand.primary,
+    route: null,
   },
 ];
 
@@ -104,7 +104,7 @@ export default function HomeScreen() {
 
   const handleMenuPress = (route: string | null) => {
     if (route) {
-      router.push(route);
+      router.push(route as any);
     }
   };
 
@@ -121,7 +121,7 @@ export default function HomeScreen() {
       >
         <NewsSlider slides={NEWS_SLIDES} />
         <View style={styles.searchContainer}>
-          <SearchBar 
+          <SearchBar
             value={searchText}
             onChangeText={setSearchText}
             placeholder="Search destinations..."
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     padding: 16,
     backgroundColor: colors.background.secondary,
     marginHorizontal: 16,
-    marginTop: 16,
+    marginVertical: 16,
     borderRadius: 12,
   },
 });
