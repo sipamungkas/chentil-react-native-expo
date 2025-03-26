@@ -23,7 +23,7 @@ export function MenuGrid({ items, onItemPress }: MenuGridProps) {
           entering={FadeInDown.delay(index * 100)}
           style={styles.menuItem}
         >
-          <Pressable 
+          <Pressable
             style={[styles.menuButton, { backgroundColor: `${item.color}10` }]}
             onPress={() => onItemPress(item.route)}
           >
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-    paddingHorizontal: 20,
+    paddingHorizontal: 16,
     marginBottom: 24,
   },
   menuItem: {
@@ -62,4 +62,4 @@ const styles = StyleSheet.create({
     color: '#4A5568',
     textAlign: 'center',
   },
-}); 
+});

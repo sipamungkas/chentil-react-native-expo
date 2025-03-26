@@ -1,22 +1,16 @@
 import { View, Text, Image, StyleSheet } from 'react-native';
 
-interface MapSectionProps {
-  imageUrl: string;
-  title: string;
-  subtitle: string;
-}
-
-export function MapSection({ imageUrl, title, subtitle }: MapSectionProps) {
+export function MapSection() {
   return (
     <View style={styles.mapSection}>
+      <Text style={styles.mapTitle}>Explore Indonesia</Text>
       <Image
-        source={{ uri: imageUrl }}
+        source={require('@/assets/images/indonesia-map.png')}
         style={styles.mapImage}
       />
-      <View style={styles.mapOverlay}>
-        <Text style={styles.mapTitle}>{title}</Text>
-        <Text style={styles.mapSubtitle}>{subtitle}</Text>
-      </View>
+      {/* <View style={styles.mapOverlay}> */}
+      {/* <Text style={styles.mapSubtitle}>{subtitle}</Text> */}
+      {/* </View> */}
     </View>
   );
 }
@@ -27,7 +21,6 @@ const styles = StyleSheet.create({
     height: 160,
     marginHorizontal: 20,
     marginBottom: 24,
-    borderRadius: 16,
     overflow: 'hidden',
   },
   mapImage: {
@@ -44,7 +37,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.3)',
   },
   mapTitle: {
-    color: '#fff',
+    // color: '#fff',
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 4,
@@ -54,4 +47,4 @@ const styles = StyleSheet.create({
     fontSize: 14,
     opacity: 0.9,
   },
-}); 
+});

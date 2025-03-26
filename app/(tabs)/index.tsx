@@ -101,13 +101,11 @@ export default function HomeScreen() {
         showsVerticalScrollIndicator={false}
       >
         <NewsSlider slides={NEWS_SLIDES} />
-        <SearchBar onPress={() => router.push('/search')} />
+        <View style={{ padding: 16 }}>
+          <SearchBar onPress={() => router.push('/search')} />
+        </View>
         <MenuGrid items={MENU_ITEMS} onItemPress={handleMenuPress} />
-        <MapSection
-          imageUrl="https://images.unsplash.com/photo-1599739291060-4578e77dac5d?auto=format&fit=crop&q=80&w=1200"
-          title="Explore Indonesia"
-          subtitle="From Sabang to Merauke"
-        />
+        <MapSection />
         <TopPicks places={TOP_PICKS} onPlacePress={handlePlacePress} />
       </ScrollView>
       <FloatingActionButton onPress={() => router.push('/calendar')} />

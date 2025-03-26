@@ -8,7 +8,11 @@ interface SearchBarProps {
   placeholder?: string;
 }
 
-export function SearchBar({ value, onChangeText, placeholder = 'Search...' }: SearchBarProps) {
+export function SearchBar({
+  value,
+  onChangeText,
+  placeholder = 'Search...',
+}: SearchBarProps) {
   return (
     <View style={styles.container}>
       <Search size={20} color={colors.text.secondary} style={styles.icon} />
@@ -43,4 +47,4 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: colors.text.primary,
   },
-}); 
+});
