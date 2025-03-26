@@ -25,6 +25,7 @@ import {
 } from 'lucide-react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import { router } from 'expo-router';
+import { colors } from '@/theme/colors';
 
 const PROFILE_DATA = {
   name: 'Ragil Pamungkas',
@@ -161,7 +162,7 @@ export default function ProfileScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.background.primary,
   },
   scrollView: {
     flex: 1,

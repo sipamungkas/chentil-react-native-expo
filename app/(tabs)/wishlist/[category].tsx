@@ -1,8 +1,16 @@
-import { StyleSheet, View, Text, ScrollView, Image, Pressable } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
+  Image,
+  Pressable,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { ArrowLeft, MapPin, Star } from 'lucide-react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
+import { colors } from '@/theme/colors';
 
 const WISHLIST_ITEMS = {
   destination: [
@@ -10,14 +18,16 @@ const WISHLIST_ITEMS = {
       id: '1',
       name: 'Borobudur Temple',
       location: 'Magelang, Central Java',
-      image: 'https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?auto=format&fit=crop&q=80&w=800',
+      image:
+        'https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?auto=format&fit=crop&q=80&w=800',
       rating: 4.8,
     },
     {
       id: '2',
       name: 'Raja Ampat Islands',
       location: 'West Papua',
-      image: 'https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?auto=format&fit=crop&q=80&w=800',
+      image:
+        'https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?auto=format&fit=crop&q=80&w=800',
       rating: 4.9,
     },
   ],
@@ -26,7 +36,8 @@ const WISHLIST_ITEMS = {
       id: '1',
       name: 'Mount Rinjani Trek',
       location: 'Lombok',
-      image: 'https://images.unsplash.com/photo-1621769533938-13931cc09d92?auto=format&fit=crop&q=80&w=800',
+      image:
+        'https://images.unsplash.com/photo-1621769533938-13931cc09d92?auto=format&fit=crop&q=80&w=800',
       rating: 4.7,
     },
   ],
@@ -35,7 +46,8 @@ const WISHLIST_ITEMS = {
       id: '1',
       name: 'Rendang',
       location: 'West Sumatra',
-      image: 'https://images.unsplash.com/photo-1628534795735-0a0b6720828f?auto=format&fit=crop&q=80&w=800',
+      image:
+        'https://images.unsplash.com/photo-1628534795735-0a0b6720828f?auto=format&fit=crop&q=80&w=800',
       rating: 4.9,
     },
   ],
@@ -44,7 +56,8 @@ const WISHLIST_ITEMS = {
       id: '1',
       name: 'Kecak Fire Dance',
       location: 'Uluwatu, Bali',
-      image: 'https://images.unsplash.com/photo-1583309217394-d35d84b4c544?auto=format&fit=crop&q=80&w=800',
+      image:
+        'https://images.unsplash.com/photo-1583309217394-d35d84b4c544?auto=format&fit=crop&q=80&w=800',
       rating: 4.8,
     },
   ],
@@ -65,7 +78,10 @@ export default function WishlistCategoryScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        style={styles.scrollView}
+        showsVerticalScrollIndicator={false}
+      >
         <View style={styles.header}>
           <Pressable style={styles.backButton} onPress={() => router.back()}>
             <ArrowLeft size={24} color="#1A202C" />
@@ -105,7 +121,7 @@ export default function WishlistCategoryScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.background.primary,
   },
   scrollView: {
     flex: 1,
@@ -134,7 +150,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   itemCard: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.background.primary,
     borderRadius: 16,
     overflow: 'hidden',
     marginBottom: 16,

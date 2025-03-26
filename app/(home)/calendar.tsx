@@ -5,6 +5,7 @@ import { Calendar as CalendarIcon, Clock, MapPin } from 'lucide-react-native';
 import { Calendar } from 'react-native-calendars';
 import { useRouter } from 'expo-router';
 import Animated, { FadeInDown } from 'react-native-reanimated';
+import { colors } from '@/theme/colors';
 
 const EVENTS = {
   '2024-03-15': [
@@ -60,11 +61,13 @@ export default function CalendarScreen() {
   }
 
   const selectedEvents = EVENTS[selectedDate] || [];
-  const formattedDate = selectedDate ? new Date(selectedDate).toLocaleDateString('en-US', { 
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric'
-  }) : '';
+  const formattedDate = selectedDate
+    ? new Date(selectedDate).toLocaleDateString('en-US', {
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric',
+      })
+    : '';
 
   return (
     <SafeAreaView style={styles.container}>
@@ -114,13 +117,13 @@ export default function CalendarScreen() {
                   <CalendarIcon size={20} color="#FF4D8D" />
                   <Text style={styles.eventTitle}>{event.title}</Text>
                 </View>
-                
+
                 <View style={styles.eventDetails}>
                   <View style={styles.eventDetail}>
                     <Clock size={16} color="#4A5568" />
                     <Text style={styles.eventDetailText}>{event.time}</Text>
                   </View>
-                  
+
                   <View style={styles.eventDetail}>
                     <MapPin size={16} color="#4A5568" />
                     <Text style={styles.eventDetailText}>{event.location}</Text>
@@ -130,7 +133,9 @@ export default function CalendarScreen() {
             ))
           ) : (
             <Text style={styles.noEvents}>
-              {selectedDate ? 'No events on this date' : 'Select a date to view events'}
+              {selectedDate
+                ? 'No events on this date'
+                : 'Select a date to view events'}
             </Text>
           )}
         </View>
@@ -142,7 +147,7 @@ export default function CalendarScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.background.primary,
   },
   header: {
     padding: 20,
@@ -176,7 +181,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   eventCard: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.background.primary,
     borderRadius: 12,
     padding: 16,
     marginBottom: 12,

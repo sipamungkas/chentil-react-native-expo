@@ -1,45 +1,65 @@
-import { StyleSheet, View, Text, ScrollView, Image, Pressable } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
+  Image,
+  Pressable,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Search, Calendar } from 'lucide-react-native';
 import { useRouter } from 'expo-router';
 import Animated, { FadeInDown } from 'react-native-reanimated';
+import { colors } from '@/theme/colors';
 
 const CULTURAL_ITEMS = [
   {
     id: '1',
     name: 'Wayang Kulit',
     since: '8th Century',
-    image: 'https://images.unsplash.com/photo-1601959334721-760c1c2c4bf1?auto=format&fit=crop&q=80&w=800',
-    description: 'Traditional Javanese shadow puppet theatre, recognized by UNESCO as a Masterpiece of Oral and Intangible Heritage of Humanity.',
+    image:
+      'https://images.unsplash.com/photo-1601959334721-760c1c2c4bf1?auto=format&fit=crop&q=80&w=800',
+    description:
+      'Traditional Javanese shadow puppet theatre, recognized by UNESCO as a Masterpiece of Oral and Intangible Heritage of Humanity.',
     origin: 'Java',
-    significance: 'Tells stories from the Ramayana and Mahabharata epics, preserving ancient Hindu-Javanese culture.',
+    significance:
+      'Tells stories from the Ramayana and Mahabharata epics, preserving ancient Hindu-Javanese culture.',
   },
   {
     id: '2',
     name: 'Batik',
     since: '4th Century',
-    image: 'https://images.unsplash.com/photo-1584184924103-e310d9dc82fc?auto=format&fit=crop&q=80&w=800',
-    description: 'Ancient textile art using wax-resist dyeing, recognized by UNESCO as Intangible Cultural Heritage.',
+    image:
+      'https://images.unsplash.com/photo-1584184924103-e310d9dc82fc?auto=format&fit=crop&q=80&w=800',
+    description:
+      'Ancient textile art using wax-resist dyeing, recognized by UNESCO as Intangible Cultural Heritage.',
     origin: 'Java',
-    significance: 'Each pattern holds deep symbolic meaning, reflecting Indonesian philosophy and cultural values.',
+    significance:
+      'Each pattern holds deep symbolic meaning, reflecting Indonesian philosophy and cultural values.',
   },
   {
     id: '3',
     name: 'Gamelan',
     since: '9th Century',
-    image: 'https://images.unsplash.com/photo-1599796504338-161b9d3e1c40?auto=format&fit=crop&q=80&w=800',
-    description: 'Traditional ensemble music featuring predominantly percussive instruments.',
+    image:
+      'https://images.unsplash.com/photo-1599796504338-161b9d3e1c40?auto=format&fit=crop&q=80&w=800',
+    description:
+      'Traditional ensemble music featuring predominantly percussive instruments.',
     origin: 'Java and Bali',
-    significance: 'Essential to ritual, ceremony, dance, and drama throughout Indonesian culture.',
+    significance:
+      'Essential to ritual, ceremony, dance, and drama throughout Indonesian culture.',
   },
   {
     id: '4',
     name: 'Pencak Silat',
     since: '6th Century',
-    image: 'https://images.unsplash.com/photo-1599796508495-fea30f30ad55?auto=format&fit=crop&q=80&w=800',
-    description: 'Traditional martial art incorporating strikes, grappling, and weapons.',
+    image:
+      'https://images.unsplash.com/photo-1599796508495-fea30f30ad55?auto=format&fit=crop&q=80&w=800',
+    description:
+      'Traditional martial art incorporating strikes, grappling, and weapons.',
     origin: 'Indonesian Archipelago',
-    significance: 'Combines self-defense, art, sport, and spiritual development.',
+    significance:
+      'Combines self-defense, art, sport, and spiritual development.',
   },
 ];
 
@@ -48,10 +68,15 @@ export default function CultureScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        style={styles.scrollView}
+        showsVerticalScrollIndicator={false}
+      >
         <View style={styles.header}>
           <Text style={styles.title}>Cultural Heritage</Text>
-          <Text style={styles.subtitle}>Discover Indonesia's rich traditions</Text>
+          <Text style={styles.subtitle}>
+            Discover Indonesia's rich traditions
+          </Text>
         </View>
 
         <Pressable style={styles.searchBar}>
@@ -96,7 +121,7 @@ export default function CultureScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.background.primary,
   },
   scrollView: {
     flex: 1,
@@ -118,7 +143,7 @@ const styles = StyleSheet.create({
   searchBar: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#F7FAFC',
+    backgroundColor: colors.background.tertiary,
     marginHorizontal: 20,
     padding: 12,
     borderRadius: 12,
@@ -133,7 +158,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   card: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.background.primary,
     borderRadius: 16,
     overflow: 'hidden',
     marginBottom: 20,
@@ -167,7 +192,7 @@ const styles = StyleSheet.create({
   sinceContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#F7FAFC',
+    backgroundColor: colors.background.tertiary,
     paddingHorizontal: 8,
     paddingVertical: 4,
     borderRadius: 8,

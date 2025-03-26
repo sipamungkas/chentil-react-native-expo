@@ -3,56 +3,101 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { ChevronRight } from 'lucide-react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
+import { colors } from '@/theme/colors';
 
 const ISLANDS = [
   {
     id: 'sumatra',
     name: 'Sumatra',
-    description: 'The largest island entirely in Indonesia, known for its diverse wildlife, rainforests, and volcanic landscapes.',
-    provinces: ['Aceh', 'North Sumatra', 'West Sumatra', 'Riau', 'Jambi', 'Bengkulu', 'South Sumatra', 'Lampung']
+    description:
+      'The largest island entirely in Indonesia, known for its diverse wildlife, rainforests, and volcanic landscapes.',
+    provinces: [
+      'Aceh',
+      'North Sumatra',
+      'West Sumatra',
+      'Riau',
+      'Jambi',
+      'Bengkulu',
+      'South Sumatra',
+      'Lampung',
+    ],
   },
   {
     id: 'java',
     name: 'Java',
-    description: 'The economic and political center of Indonesia, featuring ancient temples, vibrant cities, and volcanic peaks.',
-    provinces: ['Jakarta', 'West Java', 'Central Java', 'East Java', 'Yogyakarta', 'Banten']
+    description:
+      'The economic and political center of Indonesia, featuring ancient temples, vibrant cities, and volcanic peaks.',
+    provinces: [
+      'Jakarta',
+      'West Java',
+      'Central Java',
+      'East Java',
+      'Yogyakarta',
+      'Banten',
+    ],
   },
   {
     id: 'bali',
     name: 'Bali',
-    description: 'The famous Island of the Gods, renowned for its beaches, temples, terraced rice fields, and cultural heritage.',
-    provinces: ['Bali']
+    description:
+      'The famous Island of the Gods, renowned for its beaches, temples, terraced rice fields, and cultural heritage.',
+    provinces: ['Bali'],
   },
   {
     id: 'nusa-tenggara',
     name: 'Nusa Tenggara',
-    description: 'A chain of islands featuring unique cultures, pristine beaches, and the famous Komodo dragons.',
-    provinces: ['West Nusa Tenggara', 'East Nusa Tenggara']
+    description:
+      'A chain of islands featuring unique cultures, pristine beaches, and the famous Komodo dragons.',
+    provinces: ['West Nusa Tenggara', 'East Nusa Tenggara'],
   },
   {
     id: 'kalimantan',
     name: 'Kalimantan',
-    description: 'The Indonesian portion of Borneo, home to ancient rainforests, diverse wildlife, and indigenous cultures.',
-    provinces: ['West Kalimantan', 'Central Kalimantan', 'South Kalimantan', 'East Kalimantan', 'North Kalimantan']
+    description:
+      'The Indonesian portion of Borneo, home to ancient rainforests, diverse wildlife, and indigenous cultures.',
+    provinces: [
+      'West Kalimantan',
+      'Central Kalimantan',
+      'South Kalimantan',
+      'East Kalimantan',
+      'North Kalimantan',
+    ],
   },
   {
     id: 'sulawesi',
     name: 'Sulawesi',
-    description: 'A uniquely shaped island known for its diverse marine life, traditional cultures, and mountainous landscapes.',
-    provinces: ['North Sulawesi', 'Central Sulawesi', 'South Sulawesi', 'Southeast Sulawesi', 'Gorontalo', 'West Sulawesi']
+    description:
+      'A uniquely shaped island known for its diverse marine life, traditional cultures, and mountainous landscapes.',
+    provinces: [
+      'North Sulawesi',
+      'Central Sulawesi',
+      'South Sulawesi',
+      'Southeast Sulawesi',
+      'Gorontalo',
+      'West Sulawesi',
+    ],
   },
   {
     id: 'maluku',
     name: 'Maluku Islands',
-    description: 'The original Spice Islands, featuring pristine beaches, rich marine life, and historical spice trade sites.',
-    provinces: ['Maluku', 'North Maluku']
+    description:
+      'The original Spice Islands, featuring pristine beaches, rich marine life, and historical spice trade sites.',
+    provinces: ['Maluku', 'North Maluku'],
   },
   {
     id: 'papua',
     name: 'Papua',
-    description: 'The eastern frontier of Indonesia, home to diverse indigenous cultures, unique wildlife, and the highest peaks in Oceania.',
-    provinces: ['Papua', 'West Papua', 'Highland Papua', 'South Papua', 'Central Papua', 'Southwest Papua']
-  }
+    description:
+      'The eastern frontier of Indonesia, home to diverse indigenous cultures, unique wildlife, and the highest peaks in Oceania.',
+    provinces: [
+      'Papua',
+      'West Papua',
+      'Highland Papua',
+      'South Papua',
+      'Central Papua',
+      'Southwest Papua',
+    ],
+  },
 ];
 
 export default function DestinationScreen() {
@@ -60,7 +105,10 @@ export default function DestinationScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        style={styles.scrollView}
+        showsVerticalScrollIndicator={false}
+      >
         <View style={styles.header}>
           <Text style={styles.title}>Indonesian Archipelago</Text>
           <Text style={styles.subtitle}>Explore the islands of Indonesia</Text>
@@ -79,7 +127,8 @@ export default function DestinationScreen() {
                 <View style={styles.islandInfo}>
                   <Text style={styles.islandName}>{island.name}</Text>
                   <Text style={styles.provinceCount}>
-                    {island.provinces.length} {island.provinces.length === 1 ? 'Province' : 'Provinces'}
+                    {island.provinces.length}{' '}
+                    {island.provinces.length === 1 ? 'Province' : 'Provinces'}
                   </Text>
                   <Text style={styles.islandDescription} numberOfLines={2}>
                     {island.description}
@@ -98,7 +147,7 @@ export default function DestinationScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.background.primary,
   },
   scrollView: {
     flex: 1,
@@ -123,7 +172,7 @@ const styles = StyleSheet.create({
   islandCard: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: colors.background.primary,
     borderRadius: 16,
     padding: 16,
     marginBottom: 16,

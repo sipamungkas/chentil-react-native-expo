@@ -1,16 +1,26 @@
-import { StyleSheet, View, Text, ScrollView, Image, Pressable } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
+  Image,
+  Pressable,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MapPin, Utensils, Palette } from 'lucide-react-native';
 import { useRouter } from 'expo-router';
 import Animated, { FadeInDown } from 'react-native-reanimated';
+import { colors } from '@/theme/colors';
 
 const RECOMMENDATIONS = [
   {
     id: '1',
     type: 'destination',
     title: 'Karimun Jawa',
-    description: 'A pristine archipelago featuring crystal clear waters, vibrant coral reefs, and white sandy beaches.',
-    image: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&q=80&w=800',
+    description:
+      'A pristine archipelago featuring crystal clear waters, vibrant coral reefs, and white sandy beaches.',
+    image:
+      'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&q=80&w=800',
     location: 'Central Java',
     route: '/destination/java/karimunjawa',
   },
@@ -18,8 +28,10 @@ const RECOMMENDATIONS = [
     id: '2',
     type: 'food',
     title: 'Sate Padang',
-    description: 'Traditional Minangkabau satay served with thick, spicy yellow sauce made from rice flour, turmeric, ginger, and various spices.',
-    image: 'https://images.unsplash.com/photo-1625938144755-652e08e08f79?auto=format&fit=crop&q=80&w=800',
+    description:
+      'Traditional Minangkabau satay served with thick, spicy yellow sauce made from rice flour, turmeric, ginger, and various spices.',
+    image:
+      'https://images.unsplash.com/photo-1625938144755-652e08e08f79?auto=format&fit=crop&q=80&w=800',
     location: 'West Sumatra',
     route: '/food-and-beverage/west-sumatra/sate-padang',
   },
@@ -27,8 +39,10 @@ const RECOMMENDATIONS = [
     id: '3',
     type: 'culture',
     title: 'Kecak Fire Dance',
-    description: 'A mesmerizing Balinese dance and music drama developed in the 1930s, known for its unique vocal chanting.',
-    image: 'https://images.unsplash.com/photo-1583309217394-d35d84b4c544?auto=format&fit=crop&q=80&w=800',
+    description:
+      'A mesmerizing Balinese dance and music drama developed in the 1930s, known for its unique vocal chanting.',
+    image:
+      'https://images.unsplash.com/photo-1583309217394-d35d84b4c544?auto=format&fit=crop&q=80&w=800',
     location: 'Bali',
     route: '/culture/bali/kecak',
   },
@@ -36,8 +50,10 @@ const RECOMMENDATIONS = [
     id: '4',
     type: 'destination',
     title: 'Raja Ampat',
-    description: 'A stunning archipelago comprising over 1,500 small islands, known for the richest marine biodiversity on Earth.',
-    image: 'https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?auto=format&fit=crop&q=80&w=800',
+    description:
+      'A stunning archipelago comprising over 1,500 small islands, known for the richest marine biodiversity on Earth.',
+    image:
+      'https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?auto=format&fit=crop&q=80&w=800',
     location: 'West Papua',
     route: '/destination/papua/raja-ampat',
   },
@@ -45,8 +61,10 @@ const RECOMMENDATIONS = [
     id: '5',
     type: 'food',
     title: 'Rendang',
-    description: 'A rich and tender coconut beef stew that\'s considered one of the world\'s most delicious foods.',
-    image: 'https://images.unsplash.com/photo-1628534795735-0a0b6720828f?auto=format&fit=crop&q=80&w=800',
+    description:
+      "A rich and tender coconut beef stew that's considered one of the world's most delicious foods.",
+    image:
+      'https://images.unsplash.com/photo-1628534795735-0a0b6720828f?auto=format&fit=crop&q=80&w=800',
     location: 'West Sumatra',
     route: '/food-and-beverage/west-sumatra/rendang',
   },
@@ -70,10 +88,15 @@ export default function RecommendationsScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        style={styles.scrollView}
+        showsVerticalScrollIndicator={false}
+      >
         <View style={styles.header}>
           <Text style={styles.title}>Recommended for You</Text>
-          <Text style={styles.subtitle}>Discover amazing places, food, and culture</Text>
+          <Text style={styles.subtitle}>
+            Discover amazing places, food, and culture
+          </Text>
         </View>
 
         <View style={styles.content}>
@@ -84,7 +107,7 @@ export default function RecommendationsScreen() {
             >
               <Pressable
                 style={styles.recommendationCard}
-                onPress={() => router.push(item.route)}
+                onPress={() => router.push(item.route as any)}
               >
                 <Image source={{ uri: item.image }} style={styles.itemImage} />
                 <View style={styles.itemInfo}>
@@ -115,7 +138,7 @@ export default function RecommendationsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.background.primary,
   },
   scrollView: {
     flex: 1,
@@ -139,7 +162,7 @@ const styles = StyleSheet.create({
   },
   recommendationCard: {
     flexDirection: 'row',
-    backgroundColor: '#fff',
+    backgroundColor: colors.background.primary,
     borderRadius: 16,
     overflow: 'hidden',
     marginBottom: 16,

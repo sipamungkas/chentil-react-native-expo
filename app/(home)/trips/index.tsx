@@ -1,8 +1,22 @@
 import { useState } from 'react';
-import { StyleSheet, View, Text, ScrollView, Pressable, Image } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
+  Pressable,
+  Image,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Plus, Calendar, MapPin, Users, ChevronRight } from 'lucide-react-native';
+import {
+  Plus,
+  Calendar,
+  MapPin,
+  Users,
+  ChevronRight,
+} from 'lucide-react-native';
 import { useRouter } from 'expo-router';
+import { colors } from '@/theme/colors';
 
 const SAMPLE_TRIPS = [
   {
@@ -12,8 +26,9 @@ const SAMPLE_TRIPS = [
     endDate: '2024-03-20',
     destinations: ['Ubud', 'Seminyak', 'Nusa Penida'],
     collaborators: 3,
-    coverImage: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&q=80&w=800',
-    status: 'upcoming'
+    coverImage:
+      'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&q=80&w=800',
+    status: 'upcoming',
   },
   {
     id: '2',
@@ -22,23 +37,28 @@ const SAMPLE_TRIPS = [
     endDate: '2024-04-15',
     destinations: ['Yogyakarta', 'Borobudur', 'Prambanan'],
     collaborators: 2,
-    coverImage: 'https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?auto=format&fit=crop&q=80&w=800',
-    status: 'draft'
-  }
+    coverImage:
+      'https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?auto=format&fit=crop&q=80&w=800',
+    status: 'draft',
+  },
 ];
 
 export default function TripsScreen() {
   const router = useRouter();
-  const [activeTab, setActiveTab] = useState<'upcoming' | 'past' | 'draft'>('upcoming');
+  const [activeTab, setActiveTab] = useState<'upcoming' | 'past' | 'draft'>(
+    'upcoming'
+  );
 
-  const filteredTrips = SAMPLE_TRIPS.filter(trip => trip.status === activeTab);
+  const filteredTrips = SAMPLE_TRIPS.filter(
+    (trip) => trip.status === activeTab
+  );
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
         <View style={styles.header}>
           <Text style={styles.title}>My Trips</Text>
-          <Pressable 
+          <Pressable
             style={styles.createButton}
             onPress={() => router.push('/trips/create')}
           >
@@ -54,7 +74,12 @@ export default function TripsScreen() {
               style={[styles.tab, activeTab === tab && styles.activeTab]}
               onPress={() => setActiveTab(tab)}
             >
-              <Text style={[styles.tabText, activeTab === tab && styles.activeTabText]}>
+              <Text
+                style={[
+                  styles.tabText,
+                  activeTab === tab && styles.activeTabText,
+                ]}
+              >
                 {tab.charAt(0).toUpperCase() + tab.slice(1)}
               </Text>
             </Pressable>
@@ -68,25 +93,29 @@ export default function TripsScreen() {
               style={styles.tripCard}
               onPress={() => router.push(`/trips/${trip.id}`)}
             >
-              <Image source={{ uri: trip.coverImage }} style={styles.tripImage} />
+              <Image
+                source={{ uri: trip.coverImage }}
+                style={styles.tripImage}
+              />
               <View style={styles.tripContent}>
                 <Text style={styles.tripName}>{trip.name}</Text>
-                
+
                 <View style={styles.tripDetails}>
                   <View style={styles.detailRow}>
                     <Calendar size={16} color="#4A5568" />
                     <Text style={styles.detailText}>
-                      {new Date(trip.startDate).toLocaleDateString()} - {new Date(trip.endDate).toLocaleDateString()}
+                      {new Date(trip.startDate).toLocaleDateString()} -{' '}
+                      {new Date(trip.endDate).toLocaleDateString()}
                     </Text>
                   </View>
-                  
+
                   <View style={styles.detailRow}>
                     <MapPin size={16} color="#4A5568" />
                     <Text style={styles.detailText}>
                       {trip.destinations.join(' • ')}
                     </Text>
                   </View>
-                  
+
                   <View style={styles.detailRow}>
                     <Users size={16} color="#4A5568" />
                     <Text style={styles.detailText}>
@@ -96,9 +125,14 @@ export default function TripsScreen() {
                 </View>
 
                 <View style={styles.cardFooter}>
-                  <View style={[styles.statusBadge, styles[`${trip.status}Badge`]]}>
-                    <Text style={[styles.statusText, styles[`${trip.status}Text`]]}>
-                      {trip.status.charAt(0).toUpperCase() + trip.status.slice(1)}
+                  <View
+                    style={[styles.statusBadge, styles[`${trip.status}Badge`]]}
+                  >
+                    <Text
+                      style={[styles.statusText, styles[`${trip.status}Text`]]}
+                    >
+                      {trip.status.charAt(0).toUpperCase() +
+                        trip.status.slice(1)}
                     </Text>
                   </View>
                   <ChevronRight size={20} color="#4A5568" />
@@ -115,7 +149,7 @@ export default function TripsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.background.primary,
   },
   scrollView: {
     flex: 1,
@@ -155,7 +189,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     marginRight: 12,
     borderRadius: 20,
-    backgroundColor: '#F7FAFC',
+    backgroundColor: colors.background.tertiary,
   },
   activeTab: {
     backgroundColor: '#FF6B6B',
@@ -172,7 +206,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   tripCard: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.background.primary,
     borderRadius: 16,
     marginBottom: 16,
     shadowColor: '#000',

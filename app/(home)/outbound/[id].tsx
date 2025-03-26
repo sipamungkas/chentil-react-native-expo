@@ -1,15 +1,32 @@
-import { StyleSheet, View, Text, ScrollView, Image, Pressable } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
+  Image,
+  Pressable,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { ArrowLeft, MapPin, Clock, Calendar, TriangleAlert as AlertTriangle, Users } from 'lucide-react-native';
+import {
+  ArrowLeft,
+  MapPin,
+  Clock,
+  Calendar,
+  TriangleAlert as AlertTriangle,
+  Users,
+} from 'lucide-react-native';
+import { colors } from '@/theme/colors';
 
 const OUTBOUND_ACTIVITIES = [
   {
     id: '1',
     type: 'Hiking',
     location: 'Jayawijaya, Papua',
-    image: 'https://images.unsplash.com/photo-1621769533938-13931cc09d92?auto=format&fit=crop&q=80&w=600',
-    description: 'Experience the thrill of climbing Puncak Jaya, the highest peak between the Himalayas and the Andes.',
+    image:
+      'https://images.unsplash.com/photo-1621769533938-13931cc09d92?auto=format&fit=crop&q=80&w=600',
+    description:
+      'Experience the thrill of climbing Puncak Jaya, the highest peak between the Himalayas and the Andes.',
     difficulty: 'Expert',
     duration: '7-10 days',
     bestSeason: 'June to August',
@@ -21,23 +38,25 @@ const OUTBOUND_ACTIVITIES = [
         'Previous high-altitude experience',
         'Technical climbing skills',
         'Excellent physical condition',
-        'Proper equipment and gear'
+        'Proper equipment and gear',
       ],
       included: [
         'Professional mountain guides',
         'Camping equipment',
         'Meals during trek',
         'Safety equipment',
-        'Permits and fees'
-      ]
-    }
+        'Permits and fees',
+      ],
+    },
   },
   {
     id: '2',
     type: 'Diving',
     location: 'Raja Ampat, West Papua',
-    image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&q=80&w=600',
-    description: "Explore the world's most diverse marine ecosystem with over 1,500 species of fish and 500 species of coral.",
+    image:
+      'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&q=80&w=600',
+    description:
+      "Explore the world's most diverse marine ecosystem with over 1,500 species of fish and 500 species of coral.",
     difficulty: 'Intermediate',
     duration: '3-5 days',
     bestSeason: 'October to April',
@@ -49,23 +68,25 @@ const OUTBOUND_ACTIVITIES = [
         'PADI Open Water certification',
         'Basic diving experience',
         'Swimming proficiency',
-        'Medical clearance'
+        'Medical clearance',
       ],
       included: [
         'Professional dive guides',
         'Diving equipment',
         'Boat transfers',
         'Accommodation',
-        'Meals'
-      ]
-    }
+        'Meals',
+      ],
+    },
   },
   {
     id: '3',
     type: 'Rock Climbing',
     location: 'Parang Mountain, Central Java',
-    image: 'https://images.unsplash.com/photo-1522163182402-834f871fd851?auto=format&fit=crop&q=80&w=600',
-    description: 'Challenge yourself on natural limestone cliffs with routes for all skill levels.',
+    image:
+      'https://images.unsplash.com/photo-1522163182402-834f871fd851?auto=format&fit=crop&q=80&w=600',
+    description:
+      'Challenge yourself on natural limestone cliffs with routes for all skill levels.',
     difficulty: 'Intermediate',
     duration: '1-2 days',
     bestSeason: 'May to September',
@@ -77,23 +98,25 @@ const OUTBOUND_ACTIVITIES = [
         'Basic climbing experience',
         'Good physical fitness',
         'No fear of heights',
-        'Basic safety knowledge'
+        'Basic safety knowledge',
       ],
       included: [
         'Climbing instructor',
         'Safety equipment',
         'Harness and ropes',
         'Basic training',
-        'First aid support'
-      ]
-    }
+        'First aid support',
+      ],
+    },
   },
   {
     id: '4',
     type: 'Surfing',
     location: 'Uluwatu, Bali',
-    image: 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&q=80&w=600',
-    description: "Ride world-class waves at one of Bali's most iconic surf spots.",
+    image:
+      'https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&q=80&w=600',
+    description:
+      "Ride world-class waves at one of Bali's most iconic surf spots.",
     difficulty: 'Advanced',
     duration: '1-3 days',
     bestSeason: 'April to October',
@@ -105,23 +128,25 @@ const OUTBOUND_ACTIVITIES = [
         'Advanced surfing skills',
         'Strong swimming ability',
         'Experience with reef breaks',
-        'Own surfboard recommended'
+        'Own surfboard recommended',
       ],
       included: [
         'Local surf guide',
         'Transport to spots',
         'Safety briefing',
         'Spot analysis',
-        'Emergency support'
-      ]
-    }
+        'Emergency support',
+      ],
+    },
   },
   {
     id: '5',
     type: 'Rafting',
     location: 'Ayung River, Bali',
-    image: 'https://images.unsplash.com/photo-1530866495561-507c9faab2ed?auto=format&fit=crop&q=80&w=600',
-    description: 'Navigate through class II and III rapids while enjoying scenic rainforest views.',
+    image:
+      'https://images.unsplash.com/photo-1530866495561-507c9faab2ed?auto=format&fit=crop&q=80&w=600',
+    description:
+      'Navigate through class II and III rapids while enjoying scenic rainforest views.',
     difficulty: 'Beginner',
     duration: '1 day',
     bestSeason: 'Year-round',
@@ -133,22 +158,23 @@ const OUTBOUND_ACTIVITIES = [
         'Basic swimming ability',
         'Minimum age 12',
         'Good health condition',
-        'Willingness to follow instructions'
+        'Willingness to follow instructions',
       ],
       included: [
         'Professional river guide',
         'Rafting equipment',
         'Safety gear',
         'Lunch',
-        'Insurance'
-      ]
-    }
+        'Insurance',
+      ],
+    },
   },
   {
     id: '6',
     type: 'Camping',
     location: 'Mount Rinjani, Lombok',
-    image: 'https://images.unsplash.com/photo-1504851149312-7a075b496cc7?auto=format&fit=crop&q=80&w=600',
+    image:
+      'https://images.unsplash.com/photo-1504851149312-7a075b496cc7?auto=format&fit=crop&q=80&w=600',
     description: "Camp under the stars at Indonesia's second-highest volcano.",
     difficulty: 'Intermediate',
     duration: '3-4 days',
@@ -161,30 +187,33 @@ const OUTBOUND_ACTIVITIES = [
         'Good physical fitness',
         'Basic hiking experience',
         'Proper hiking gear',
-        'Altitude tolerance'
+        'Altitude tolerance',
       ],
       included: [
         'Camping equipment',
         'Professional guide',
         'Porter service',
         'Meals',
-        'Permits'
-      ]
-    }
-  }
+        'Permits',
+      ],
+    },
+  },
 ];
 
 export default function OutboundDetailScreen() {
   const { id } = useLocalSearchParams();
   const router = useRouter();
-  const activity = OUTBOUND_ACTIVITIES.find(a => a.id === id);
+  const activity = OUTBOUND_ACTIVITIES.find((a) => a.id === id);
 
   if (!activity) {
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.errorContainer}>
           <Text style={styles.errorText}>Activity not found</Text>
-          <Pressable style={styles.backToListButton} onPress={() => router.back()}>
+          <Pressable
+            style={styles.backToListButton}
+            onPress={() => router.back()}
+          >
             <Text style={styles.backToListText}>Back to Activities</Text>
           </Pressable>
         </View>
@@ -237,15 +266,21 @@ export default function OutboundDetailScreen() {
             <View style={styles.detailsGrid}>
               <View style={styles.detailItem}>
                 <Text style={styles.detailLabel}>Elevation</Text>
-                <Text style={styles.detailValue}>{activity.details.elevation}</Text>
+                <Text style={styles.detailValue}>
+                  {activity.details.elevation}
+                </Text>
               </View>
               <View style={styles.detailItem}>
                 <Text style={styles.detailLabel}>Terrain</Text>
-                <Text style={styles.detailValue}>{activity.details.terrain}</Text>
+                <Text style={styles.detailValue}>
+                  {activity.details.terrain}
+                </Text>
               </View>
               <View style={styles.detailItem}>
                 <Text style={styles.detailLabel}>Group Size</Text>
-                <Text style={styles.detailValue}>{activity.details.groupSize}</Text>
+                <Text style={styles.detailValue}>
+                  {activity.details.groupSize}
+                </Text>
               </View>
             </View>
           </View>
@@ -284,7 +319,7 @@ export default function OutboundDetailScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.background.primary,
   },
   errorContainer: {
     flex: 1,
@@ -359,7 +394,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     padding: 16,
-    backgroundColor: '#F7FAFC',
+    backgroundColor: colors.background.tertiary,
     borderRadius: 12,
     marginHorizontal: 4,
   },

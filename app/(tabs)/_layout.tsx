@@ -1,19 +1,20 @@
 import { Tabs } from 'expo-router';
 import { Platform } from 'react-native';
 import { Heart, User, HomeIcon } from 'lucide-react-native';
+import { colors } from '@/theme/colors';
 
 const tabBarStyle = Platform.select({
   ios: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.background.primary,
     borderTopWidth: 0.5,
     borderTopColor: '#FFE4E8',
   },
   android: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.background.primary,
     elevation: 8,
   },
   default: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.background.primary,
     borderTopWidth: 0.5,
     borderTopColor: '#FFE4E8',
   },

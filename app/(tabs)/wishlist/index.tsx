@@ -1,12 +1,20 @@
-import { StyleSheet, View, Text, ScrollView, Pressable, Dimensions } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
+  Pressable,
+  Dimensions,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { Compass, Plane, Utensils, Palette } from 'lucide-react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
+import { colors } from '@/theme/colors';
 
 const { width } = Dimensions.get('window');
 const GRID_SPACING = 16;
-const CARD_WIDTH = (width - (GRID_SPACING * 4)) / 2;
+const CARD_WIDTH = (width - GRID_SPACING * 4) / 2;
 
 const CATEGORIES = [
   {
@@ -52,7 +60,10 @@ export default function WishlistScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        style={styles.scrollView}
+        showsVerticalScrollIndicator={false}
+      >
         <View style={styles.header}>
           <Text style={styles.title}>Wishlist</Text>
           <Text style={styles.subtitle}>Your saved items by category</Text>
@@ -68,14 +79,21 @@ export default function WishlistScreen() {
               <Pressable
                 style={[
                   styles.categoryCard,
-                  { backgroundColor: category.backgroundColor }
+                  { backgroundColor: category.backgroundColor },
                 ]}
                 onPress={() => router.push(`/wishlist/${category.id}`)}
               >
                 <category.icon size={32} color={category.color} />
                 <Text style={styles.categoryName}>{category.name}</Text>
-                <Text style={styles.categoryDescription}>{category.description}</Text>
-                <View style={[styles.countBadge, { backgroundColor: category.color }]}>
+                <Text style={styles.categoryDescription}>
+                  {category.description}
+                </Text>
+                <View
+                  style={[
+                    styles.countBadge,
+                    { backgroundColor: category.color },
+                  ]}
+                >
                   <Text style={styles.countText}>{category.count}</Text>
                 </View>
               </Pressable>
@@ -90,7 +108,7 @@ export default function WishlistScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.background.primary,
   },
   scrollView: {
     flex: 1,

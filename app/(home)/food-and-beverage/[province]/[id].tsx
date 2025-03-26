@@ -1,16 +1,33 @@
-import { StyleSheet, View, Text, ScrollView, Image, Pressable } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
+  Image,
+  Pressable,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { ArrowLeft, Clock, Flame, Utensils, CircleAlert as AlertCircle } from 'lucide-react-native';
+import {
+  ArrowLeft,
+  Clock,
+  Flame,
+  Utensils,
+  CircleAlert as AlertCircle,
+} from 'lucide-react-native';
+import { colors } from '@/theme/colors';
 
 const PROVINCE_FOODS = {
-  'aceh': {
+  aceh: {
     foods: {
       '1': {
         name: 'Mie Aceh',
-        description: 'Spicy noodle dish with a rich blend of spices, typically served with seafood or meat.',
-        fullDescription: 'Mie Aceh is a spicy noodle dish originating from Aceh province. The dish is made with thick yellow noodles served in a rich, spicy curry-like sauce. It can be prepared either "dry" (stir-fried) or "wet" (soup-like) and is typically garnished with seafood, such as shrimp or crab, or meat like beef or goat.',
-        image: 'https://images.unsplash.com/photo-1626804475297-41608ea09aeb?auto=format&fit=crop&q=80&w=800',
+        description:
+          'Spicy noodle dish with a rich blend of spices, typically served with seafood or meat.',
+        fullDescription:
+          'Mie Aceh is a spicy noodle dish originating from Aceh province. The dish is made with thick yellow noodles served in a rich, spicy curry-like sauce. It can be prepared either "dry" (stir-fried) or "wet" (soup-like) and is typically garnished with seafood, such as shrimp or crab, or meat like beef or goat.',
+        image:
+          'https://images.unsplash.com/photo-1626804475297-41608ea09aeb?auto=format&fit=crop&q=80&w=800',
         cookingTime: '30-45 minutes',
         spiceLevel: 'Hot',
         servingSize: '2-3 people',
@@ -19,27 +36,30 @@ const PROVINCE_FOODS = {
           'Shrimp or beef',
           'Curry spices',
           'Bean sprouts',
-          'Green onions'
+          'Green onions',
         ],
         preparation: [
           'Prepare the spice paste by grinding all spices together',
           'Stir-fry the spice paste until fragrant',
           'Add meat or seafood and cook until done',
           'Add noodles and vegetables',
-          'Serve hot with lime and crackers'
+          'Serve hot with lime and crackers',
         ],
         nutritionalInfo: {
           calories: '450-550 per serving',
           protein: 'High',
           spiciness: 'Very spicy',
-          vegetarianOption: 'Available'
-        }
+          vegetarianOption: 'Available',
+        },
       },
       '2': {
         name: 'Kuah Pliek U',
-        description: 'Traditional Acehnese curry made with fermented coconut pulp and various vegetables.',
-        fullDescription: 'Kuah Pliek U is a unique Acehnese dish made from pliek u (fermented coconut pulp), a traditional preservation method native to Aceh. This curry-like dish features a complex blend of spices and typically includes various vegetables. The fermented coconut gives it a distinctive, rich umami flavor that\'s unique to Acehnese cuisine.',
-        image: 'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&q=80&w=800',
+        description:
+          'Traditional Acehnese curry made with fermented coconut pulp and various vegetables.',
+        fullDescription:
+          "Kuah Pliek U is a unique Acehnese dish made from pliek u (fermented coconut pulp), a traditional preservation method native to Aceh. This curry-like dish features a complex blend of spices and typically includes various vegetables. The fermented coconut gives it a distinctive, rich umami flavor that's unique to Acehnese cuisine.",
+        image:
+          'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&q=80&w=800',
         cookingTime: '60-90 minutes',
         spiceLevel: 'Medium',
         servingSize: '4-6 people',
@@ -48,23 +68,23 @@ const PROVINCE_FOODS = {
           'Local vegetables',
           'Spices',
           'Coconut milk',
-          'Lemongrass'
+          'Lemongrass',
         ],
         preparation: [
           'Prepare the pliek u paste',
           'Cook spices and herbs until fragrant',
           'Add vegetables and coconut milk',
           'Simmer until vegetables are tender',
-          'Serve with rice'
+          'Serve with rice',
         ],
         nutritionalInfo: {
           calories: '300-400 per serving',
           protein: 'Medium',
           spiciness: 'Moderate',
-          vegetarianOption: 'Yes'
-        }
-      }
-    }
+          vegetarianOption: 'Yes',
+        },
+      },
+    },
   },
   // Add more provinces and their foods...
 };
@@ -72,8 +92,11 @@ const PROVINCE_FOODS = {
 export default function FoodDetailScreen() {
   const { province, id } = useLocalSearchParams();
   const router = useRouter();
-  
-  const food = PROVINCE_FOODS[province as keyof typeof PROVINCE_FOODS]?.foods[id as string];
+
+  const food =
+    PROVINCE_FOODS[province as keyof typeof PROVINCE_FOODS]?.foods[
+      id as string
+    ];
 
   if (!food) {
     return (
@@ -146,22 +169,30 @@ export default function FoodDetailScreen() {
               <View style={styles.nutritionItem}>
                 <AlertCircle size={16} color="#4A5568" />
                 <Text style={styles.nutritionLabel}>Calories:</Text>
-                <Text style={styles.nutritionValue}>{food.nutritionalInfo.calories}</Text>
+                <Text style={styles.nutritionValue}>
+                  {food.nutritionalInfo.calories}
+                </Text>
               </View>
               <View style={styles.nutritionItem}>
                 <AlertCircle size={16} color="#4A5568" />
                 <Text style={styles.nutritionLabel}>Protein:</Text>
-                <Text style={styles.nutritionValue}>{food.nutritionalInfo.protein}</Text>
+                <Text style={styles.nutritionValue}>
+                  {food.nutritionalInfo.protein}
+                </Text>
               </View>
               <View style={styles.nutritionItem}>
                 <AlertCircle size={16} color="#4A5568" />
                 <Text style={styles.nutritionLabel}>Spiciness:</Text>
-                <Text style={styles.nutritionValue}>{food.nutritionalInfo.spiciness}</Text>
+                <Text style={styles.nutritionValue}>
+                  {food.nutritionalInfo.spiciness}
+                </Text>
               </View>
               <View style={styles.nutritionItem}>
                 <AlertCircle size={16} color="#4A5568" />
                 <Text style={styles.nutritionLabel}>Vegetarian Option:</Text>
-                <Text style={styles.nutritionValue}>{food.nutritionalInfo.vegetarianOption}</Text>
+                <Text style={styles.nutritionValue}>
+                  {food.nutritionalInfo.vegetarianOption}
+                </Text>
               </View>
             </View>
           </View>
@@ -174,7 +205,7 @@ export default function FoodDetailScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.background.primary,
   },
   scrollView: {
     flex: 1,
@@ -276,7 +307,7 @@ const styles = StyleSheet.create({
     lineHeight: 24,
   },
   nutritionCard: {
-    backgroundColor: '#F7FAFC',
+    backgroundColor: colors.background.tertiary,
     borderRadius: 12,
     padding: 16,
   },

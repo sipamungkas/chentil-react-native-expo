@@ -1,6 +1,14 @@
-import { StyleSheet, View, Text, ScrollView, Image, Pressable } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
+  Image,
+  Pressable,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Trophy, Medal, Target, TrendingUp } from 'lucide-react-native';
+import { colors } from '@/theme/colors';
 
 const ACTIVE_CHALLENGES = [
   {
@@ -10,7 +18,8 @@ const ACTIVE_CHALLENGES = [
     progress: 3,
     total: 5,
     reward: '500 points',
-    image: 'https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?auto=format&fit=crop&q=80&w=600',
+    image:
+      'https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?auto=format&fit=crop&q=80&w=600',
     deadline: '15 days left',
   },
   {
@@ -20,7 +29,8 @@ const ACTIVE_CHALLENGES = [
     progress: 7,
     total: 10,
     reward: '300 points',
-    image: 'https://images.unsplash.com/photo-1533777857889-4be7c70b33f7?auto=format&fit=crop&q=80&w=600',
+    image:
+      'https://images.unsplash.com/photo-1533777857889-4be7c70b33f7?auto=format&fit=crop&q=80&w=600',
     deadline: '5 days left',
   },
   {
@@ -30,7 +40,8 @@ const ACTIVE_CHALLENGES = [
     progress: 1,
     total: 3,
     reward: '1000 points',
-    image: 'https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?auto=format&fit=crop&q=80&w=600',
+    image:
+      'https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?auto=format&fit=crop&q=80&w=600',
     deadline: '30 days left',
   },
 ];
@@ -70,18 +81,27 @@ export default function ChallengesScreen() {
 
           {ACTIVE_CHALLENGES.map((challenge) => (
             <Pressable key={challenge.id} style={styles.challengeCard}>
-              <Image source={{ uri: challenge.image }} style={styles.challengeImage} />
+              <Image
+                source={{ uri: challenge.image }}
+                style={styles.challengeImage}
+              />
               <View style={styles.challengeInfo}>
                 <Text style={styles.challengeName}>{challenge.name}</Text>
-                <Text style={styles.challengeDescription}>{challenge.description}</Text>
-                
+                <Text style={styles.challengeDescription}>
+                  {challenge.description}
+                </Text>
+
                 <View style={styles.progressContainer}>
                   <View style={styles.progressBar}>
-                    <View 
+                    <View
                       style={[
-                        styles.progressFill, 
-                        { width: `${(challenge.progress / challenge.total) * 100}%` }
-                      ]} 
+                        styles.progressFill,
+                        {
+                          width: `${
+                            (challenge.progress / challenge.total) * 100
+                          }%`,
+                        },
+                      ]}
                     />
                   </View>
                   <Text style={styles.progressText}>
@@ -108,7 +128,7 @@ export default function ChallengesScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.background.primary,
   },
   scrollView: {
     flex: 1,
@@ -135,7 +155,7 @@ const styles = StyleSheet.create({
   },
   statCard: {
     flex: 1,
-    backgroundColor: '#F7FAFC',
+    backgroundColor: colors.background.tertiary,
     borderRadius: 16,
     padding: 16,
     marginHorizontal: 4,
@@ -169,7 +189,7 @@ const styles = StyleSheet.create({
     color: '#1A202C',
   },
   challengeCard: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.background.primary,
     borderRadius: 16,
     marginBottom: 16,
     shadowColor: '#000',
@@ -207,7 +227,7 @@ const styles = StyleSheet.create({
   },
   progressBar: {
     height: 8,
-    backgroundColor: '#F7FAFC',
+    backgroundColor: colors.background.tertiary,
     borderRadius: 4,
     marginBottom: 8,
   },

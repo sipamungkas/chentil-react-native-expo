@@ -1,51 +1,67 @@
-import { StyleSheet, View, Text, ScrollView, Image, Pressable } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
+  Image,
+  Pressable,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { ArrowLeft, MapPin, Star } from 'lucide-react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
+import { colors } from '@/theme/colors';
 
 const DESTINATIONS = {
-  'sumatra': {
+  sumatra: {
     name: 'Sumatra',
     destinations: [
       {
         id: '1',
         name: 'Lake Toba',
         location: 'North Sumatra',
-        description: 'The world\'s largest volcanic lake, formed by a supervolcanic eruption.',
-        image: 'https://images.unsplash.com/photo-1596870230751-ebdfce98ec42?auto=format&fit=crop&q=80&w=800',
-        rating: 4.8
+        description:
+          "The world's largest volcanic lake, formed by a supervolcanic eruption.",
+        image:
+          'https://images.unsplash.com/photo-1596870230751-ebdfce98ec42?auto=format&fit=crop&q=80&w=800',
+        rating: 4.8,
       },
       {
         id: '2',
         name: 'Mentawai Islands',
         location: 'West Sumatra',
-        description: 'World-class surfing destination with pristine beaches and unique tribal culture.',
-        image: 'https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?auto=format&fit=crop&q=80&w=800',
-        rating: 4.7
-      }
-    ]
+        description:
+          'World-class surfing destination with pristine beaches and unique tribal culture.',
+        image:
+          'https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?auto=format&fit=crop&q=80&w=800',
+        rating: 4.7,
+      },
+    ],
   },
-  'java': {
+  java: {
     name: 'Java',
     destinations: [
       {
         id: '1',
         name: 'Borobudur Temple',
         location: 'Central Java',
-        description: 'The world\'s largest Buddhist temple, an ancient wonder of intricate stone carvings.',
-        image: 'https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?auto=format&fit=crop&q=80&w=800',
-        rating: 4.9
+        description:
+          "The world's largest Buddhist temple, an ancient wonder of intricate stone carvings.",
+        image:
+          'https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?auto=format&fit=crop&q=80&w=800',
+        rating: 4.9,
       },
       {
         id: '2',
         name: 'Mount Bromo',
         location: 'East Java',
-        description: 'An active volcano offering spectacular sunrise views and lunar-like landscapes.',
-        image: 'https://images.unsplash.com/photo-1589395595558-690008363e88?auto=format&fit=crop&q=80&w=800',
-        rating: 4.8
-      }
-    ]
+        description:
+          'An active volcano offering spectacular sunrise views and lunar-like landscapes.',
+        image:
+          'https://images.unsplash.com/photo-1589395595558-690008363e88?auto=format&fit=crop&q=80&w=800',
+        rating: 4.8,
+      },
+    ],
   },
   // Add more islands and their destinations...
 };
@@ -70,7 +86,10 @@ export default function IslandDestinationsScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        style={styles.scrollView}
+        showsVerticalScrollIndicator={false}
+      >
         <View style={styles.header}>
           <Pressable style={styles.backButton} onPress={() => router.back()}>
             <ArrowLeft size={24} color="#1A202C" />
@@ -87,21 +106,28 @@ export default function IslandDestinationsScreen() {
               style={styles.destinationCard}
             >
               <Pressable
-                onPress={() => router.push(`/destination/${island}/${destination.id}`)}
+                onPress={() =>
+                  router.push(`/destination/${island}/${destination.id}`)
+                }
               >
-                <Image source={{ uri: destination.image }} style={styles.destinationImage} />
+                <Image
+                  source={{ uri: destination.image }}
+                  style={styles.destinationImage}
+                />
                 <View style={styles.destinationInfo}>
                   <Text style={styles.destinationName}>{destination.name}</Text>
-                  
+
                   <View style={styles.locationRow}>
                     <MapPin size={16} color="#4A5568" />
-                    <Text style={styles.locationText}>{destination.location}</Text>
+                    <Text style={styles.locationText}>
+                      {destination.location}
+                    </Text>
                   </View>
-                  
+
                   <Text style={styles.destinationDescription} numberOfLines={2}>
                     {destination.description}
                   </Text>
-                  
+
                   <View style={styles.ratingContainer}>
                     <Star size={16} color="#FFB800" fill="#FFB800" />
                     <Text style={styles.ratingText}>{destination.rating}</Text>
@@ -119,7 +145,7 @@ export default function IslandDestinationsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.background.primary,
   },
   scrollView: {
     flex: 1,
@@ -160,7 +186,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   destinationCard: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.background.primary,
     borderRadius: 16,
     marginBottom: 20,
     overflow: 'hidden',

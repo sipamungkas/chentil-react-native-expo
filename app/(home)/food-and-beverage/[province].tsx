@@ -1,55 +1,76 @@
-import { StyleSheet, View, Text, ScrollView, Image, Pressable } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
+  Image,
+  Pressable,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { ArrowLeft, MapPin, Clock, Utensils } from 'lucide-react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
+import { colors } from '@/theme/colors';
 
 const PROVINCE_FOODS = {
-  'aceh': {
+  aceh: {
     name: 'Aceh',
     foods: [
       {
         id: '1',
         name: 'Mie Aceh',
-        description: 'Spicy noodle dish with a rich blend of spices, typically served with seafood or meat.',
-        image: 'https://images.unsplash.com/photo-1626804475297-41608ea09aeb?auto=format&fit=crop&q=80&w=800',
+        description:
+          'Spicy noodle dish with a rich blend of spices, typically served with seafood or meat.',
+        image:
+          'https://images.unsplash.com/photo-1626804475297-41608ea09aeb?auto=format&fit=crop&q=80&w=800',
         cookingTime: '30-45 minutes',
         spiceLevel: 'Hot',
-        mainIngredients: ['Thick yellow noodles', 'Shrimp', 'Beef', 'Curry spices']
+        mainIngredients: [
+          'Thick yellow noodles',
+          'Shrimp',
+          'Beef',
+          'Curry spices',
+        ],
       },
       {
         id: '2',
         name: 'Kuah Pliek U',
-        description: 'Traditional Acehnese curry made with fermented coconut pulp and various vegetables.',
-        image: 'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&q=80&w=800',
+        description:
+          'Traditional Acehnese curry made with fermented coconut pulp and various vegetables.',
+        image:
+          'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&q=80&w=800',
         cookingTime: '60-90 minutes',
         spiceLevel: 'Medium',
-        mainIngredients: ['Fermented coconut', 'Local vegetables', 'Spices']
-      }
-    ]
+        mainIngredients: ['Fermented coconut', 'Local vegetables', 'Spices'],
+      },
+    ],
   },
-  'bali': {
+  bali: {
     name: 'Bali',
     foods: [
       {
         id: '1',
         name: 'Babi Guling',
-        description: 'Balinese-style roast pork with traditional spices and herbs.',
-        image: 'https://images.unsplash.com/photo-1625938144755-652e08e359b7?auto=format&fit=crop&q=80&w=800',
+        description:
+          'Balinese-style roast pork with traditional spices and herbs.',
+        image:
+          'https://images.unsplash.com/photo-1625938144755-652e08e359b7?auto=format&fit=crop&q=80&w=800',
         cookingTime: '4-5 hours',
         spiceLevel: 'Medium',
-        mainIngredients: ['Pork', 'Turmeric', 'Lemongrass', 'Galangal']
+        mainIngredients: ['Pork', 'Turmeric', 'Lemongrass', 'Galangal'],
       },
       {
         id: '2',
         name: 'Bebek Betutu',
-        description: 'Slow-cooked duck with Balinese spices, wrapped in banana leaves.',
-        image: 'https://images.unsplash.com/photo-1567529726005-7fb5e8225349?auto=format&fit=crop&q=80&w=800',
+        description:
+          'Slow-cooked duck with Balinese spices, wrapped in banana leaves.',
+        image:
+          'https://images.unsplash.com/photo-1567529726005-7fb5e8225349?auto=format&fit=crop&q=80&w=800',
         cookingTime: '6-8 hours',
         spiceLevel: 'Medium-Hot',
-        mainIngredients: ['Duck', 'Balinese spice paste', 'Banana leaves']
-      }
-    ]
+        mainIngredients: ['Duck', 'Balinese spice paste', 'Banana leaves'],
+      },
+    ],
   },
   // Add more provinces and their foods...
 };
@@ -74,7 +95,10 @@ export default function ProvinceFoodScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        style={styles.scrollView}
+        showsVerticalScrollIndicator={false}
+      >
         <View style={styles.header}>
           <Pressable style={styles.backButton} onPress={() => router.back()}>
             <ArrowLeft size={24} color="#1A202C" />
@@ -91,7 +115,9 @@ export default function ProvinceFoodScreen() {
               style={styles.foodCard}
             >
               <Pressable
-                onPress={() => router.push(`/food-and-beverage/${province}/${food.id}`)}
+                onPress={() =>
+                  router.push(`/food-and-beverage/${province}/${food.id}`)
+                }
               >
                 <Image source={{ uri: food.image }} style={styles.foodImage} />
                 <View style={styles.foodInfo}>
@@ -99,13 +125,13 @@ export default function ProvinceFoodScreen() {
                   <Text style={styles.foodDescription} numberOfLines={2}>
                     {food.description}
                   </Text>
-                  
+
                   <View style={styles.foodDetails}>
                     <View style={styles.detailItem}>
                       <Clock size={16} color="#4A5568" />
                       <Text style={styles.detailText}>{food.cookingTime}</Text>
                     </View>
-                    
+
                     <View style={styles.detailItem}>
                       <Utensils size={16} color="#4A5568" />
                       <Text style={styles.detailText}>{food.spiceLevel}</Text>
@@ -124,7 +150,7 @@ export default function ProvinceFoodScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.background.primary,
   },
   scrollView: {
     flex: 1,
@@ -165,7 +191,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   foodCard: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.background.primary,
     borderRadius: 16,
     marginBottom: 20,
     overflow: 'hidden',

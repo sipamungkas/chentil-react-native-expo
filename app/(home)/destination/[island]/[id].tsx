@@ -1,156 +1,186 @@
 import { useLocalSearchParams } from 'expo-router';
-import { StyleSheet, View, Text, ScrollView, Image, Pressable } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
+  Image,
+  Pressable,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { MapPin, Clock, Calendar, Utensils, Users, ArrowLeft } from 'lucide-react-native';
+import {
+  MapPin,
+  Clock,
+  Calendar,
+  Utensils,
+  Users,
+  ArrowLeft,
+} from 'lucide-react-native';
 import { useRouter } from 'expo-router';
+import { colors } from '@/theme/colors';
 
 const DESTINATIONS = {
-  'java': {
+  java: {
     '1': {
       id: '1',
       name: 'Borobudur Temple',
       location: 'Magelang, Central Java',
-      description: 'The world\'s largest Buddhist temple, Borobudur is a 9th-century Mahayana Buddhist temple featuring intricate relief panels and Buddha statues across its many levels.',
-      image: 'https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?auto=format&fit=crop&q=80&w=1200',
+      description:
+        "The world's largest Buddhist temple, Borobudur is a 9th-century Mahayana Buddhist temple featuring intricate relief panels and Buddha statues across its many levels.",
+      image:
+        'https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?auto=format&fit=crop&q=80&w=1200',
       visitDuration: '3-4 hours',
       bestTime: 'Sunrise (4:30 AM - 6:30 AM)',
       entranceFee: 'Rp 350,000',
       culture: {
         title: 'Buddhist Heritage',
-        description: 'Built during the Sailendra Dynasty, Borobudur represents the blend of Indonesian indigenous ancestor worship and Buddhist concepts.',
+        description:
+          'Built during the Sailendra Dynasty, Borobudur represents the blend of Indonesian indigenous ancestor worship and Buddhist concepts.',
         traditions: [
           'Morning offerings by local monks',
           'Waisak festival celebrations',
-          'Traditional Javanese ceremonies'
-        ]
+          'Traditional Javanese ceremonies',
+        ],
       },
       localFood: [
         {
           name: 'Nasi Gudeg',
           description: 'Traditional Javanese dish made from young jackfruit',
           price: 'Rp 25,000 - 35,000',
-          image: 'https://images.unsplash.com/photo-1609519710989-3543e46f3f4f?auto=format&fit=crop&q=80&w=600'
+          image:
+            'https://images.unsplash.com/photo-1609519710989-3543e46f3f4f?auto=format&fit=crop&q=80&w=600',
         },
         {
           name: 'Bakpia',
           description: 'Sweet filled pastry, popular Yogyakarta snack',
           price: 'Rp 15,000 - 25,000',
-          image: 'https://images.unsplash.com/photo-1514517604298-cf80e0fb7f1e?auto=format&fit=crop&q=80&w=600'
-        }
+          image:
+            'https://images.unsplash.com/photo-1514517604298-cf80e0fb7f1e?auto=format&fit=crop&q=80&w=600',
+        },
       ],
       activities: [
         {
           name: 'Sunrise Tour',
-          description: 'Watch the sunrise over Mount Merapi from the temple top',
+          description:
+            'Watch the sunrise over Mount Merapi from the temple top',
           duration: '2 hours',
-          price: 'Rp 100,000'
+          price: 'Rp 100,000',
         },
         {
           name: 'Photography Session',
           description: 'Professional photo session among ancient ruins',
           duration: '1 hour',
-          price: 'Rp 200,000'
+          price: 'Rp 200,000',
         },
         {
           name: 'Cultural Workshop',
           description: 'Learn about temple history and Buddhist symbolism',
           duration: '1.5 hours',
-          price: 'Rp 150,000'
-        }
-      ]
+          price: 'Rp 150,000',
+        },
+      ],
     },
     '2': {
       id: '2',
       name: 'Mount Bromo',
       location: 'East Java',
-      description: 'An active volcano offering spectacular sunrise views and lunar-like landscapes.',
-      image: 'https://images.unsplash.com/photo-1589395595558-690008363e88?auto=format&fit=crop&q=80&w=1200',
+      description:
+        'An active volcano offering spectacular sunrise views and lunar-like landscapes.',
+      image:
+        'https://images.unsplash.com/photo-1589395595558-690008363e88?auto=format&fit=crop&q=80&w=1200',
       visitDuration: '2-3 hours',
       bestTime: 'Sunrise (3:30 AM - 6:00 AM)',
       entranceFee: 'Rp 220,000',
       culture: {
         title: 'Tengger Culture',
-        description: 'Home to the Tengger people who maintain their unique Hindu traditions and perform the annual Kasada ceremony.',
+        description:
+          'Home to the Tengger people who maintain their unique Hindu traditions and perform the annual Kasada ceremony.',
         traditions: [
           'Kasada ceremony offerings',
           'Traditional Tengger dances',
-          'Local spiritual rituals'
-        ]
+          'Local spiritual rituals',
+        ],
       },
       localFood: [
         {
           name: 'Tengger Soup',
           description: 'Traditional vegetable soup with local herbs',
           price: 'Rp 20,000 - 30,000',
-          image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&q=80&w=600'
-        }
+          image:
+            'https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&q=80&w=600',
+        },
       ],
       activities: [
         {
           name: 'Jeep Tour',
           description: 'Explore the Sea of Sand by jeep',
           duration: '3 hours',
-          price: 'Rp 350,000'
+          price: 'Rp 350,000',
         },
         {
           name: 'Hiking Tour',
           description: 'Trek to the volcano viewpoint',
           duration: '2 hours',
-          price: 'Rp 150,000'
-        }
-      ]
-    }
+          price: 'Rp 150,000',
+        },
+      ],
+    },
   },
-  'bali': {
+  bali: {
     '1': {
       id: '1',
       name: 'Tanah Lot Temple',
       location: 'Tabanan, Bali',
-      description: 'Ancient Hindu temple perched on a rocky outcrop in the sea, famous for its stunning sunset views.',
-      image: 'https://images.unsplash.com/photo-1604999333679-b86d54738315?auto=format&fit=crop&q=80&w=1200',
+      description:
+        'Ancient Hindu temple perched on a rocky outcrop in the sea, famous for its stunning sunset views.',
+      image:
+        'https://images.unsplash.com/photo-1604999333679-b86d54738315?auto=format&fit=crop&q=80&w=1200',
       visitDuration: '2-3 hours',
       bestTime: 'Sunset (5:00 PM - 6:30 PM)',
       entranceFee: 'Rp 60,000',
       culture: {
         title: 'Balinese Hindu Heritage',
-        description: 'One of Bali\'s most important sea temples, built to honor the sea gods of Balinese Hinduism.',
+        description:
+          "One of Bali's most important sea temples, built to honor the sea gods of Balinese Hinduism.",
         traditions: [
           'Daily temple ceremonies',
           'Traditional Kecak fire dance',
-          'Blessing rituals'
-        ]
+          'Blessing rituals',
+        ],
       },
       localFood: [
         {
           name: 'Sambal Matah',
           description: 'Traditional Balinese raw spicy relish',
           price: 'Rp 15,000 - 25,000',
-          image: 'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&q=80&w=600'
-        }
+          image:
+            'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&q=80&w=600',
+        },
       ],
       activities: [
         {
           name: 'Sunset Photography',
           description: 'Capture the magical sunset views',
           duration: '2 hours',
-          price: 'Rp 100,000'
+          price: 'Rp 100,000',
         },
         {
           name: 'Cultural Tour',
           description: 'Learn about temple history and legends',
           duration: '1.5 hours',
-          price: 'Rp 75,000'
-        }
-      ]
-    }
-  }
+          price: 'Rp 75,000',
+        },
+      ],
+    },
+  },
 };
 
 export default function DestinationDetail() {
   const { island, id } = useLocalSearchParams();
   const router = useRouter();
-  
-  const destination = DESTINATIONS[island as keyof typeof DESTINATIONS]?.[id as string];
+
+  const destination =
+    DESTINATIONS[island as keyof typeof DESTINATIONS]?.[id as string];
 
   if (!destination) {
     return (
@@ -170,7 +200,10 @@ export default function DestinationDetail() {
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
         <View style={styles.header}>
-          <Image source={{ uri: destination.image }} style={styles.headerImage} />
+          <Image
+            source={{ uri: destination.image }}
+            style={styles.headerImage}
+          />
           <Pressable style={styles.backButton} onPress={() => router.back()}>
             <ArrowLeft color="#fff" size={24} />
           </Pressable>
@@ -204,8 +237,12 @@ export default function DestinationDetail() {
 
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Cultural Heritage</Text>
-            <Text style={styles.culturalTitle}>{destination.culture.title}</Text>
-            <Text style={styles.culturalDescription}>{destination.culture.description}</Text>
+            <Text style={styles.culturalTitle}>
+              {destination.culture.title}
+            </Text>
+            <Text style={styles.culturalDescription}>
+              {destination.culture.description}
+            </Text>
             <View style={styles.traditionsList}>
               {destination.culture.traditions.map((tradition, index) => (
                 <View key={index} style={styles.traditionItem}>
@@ -218,13 +255,22 @@ export default function DestinationDetail() {
 
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Local Cuisine</Text>
-            <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.foodScroll}>
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              style={styles.foodScroll}
+            >
               {destination.localFood.map((food, index) => (
                 <View key={index} style={styles.foodCard}>
-                  <Image source={{ uri: food.image }} style={styles.foodImage} />
+                  <Image
+                    source={{ uri: food.image }}
+                    style={styles.foodImage}
+                  />
                   <View style={styles.foodInfo}>
                     <Text style={styles.foodName}>{food.name}</Text>
-                    <Text style={styles.foodDescription}>{food.description}</Text>
+                    <Text style={styles.foodDescription}>
+                      {food.description}
+                    </Text>
                     <Text style={styles.foodPrice}>{food.price}</Text>
                   </View>
                 </View>
@@ -240,10 +286,14 @@ export default function DestinationDetail() {
                   <Text style={styles.activityName}>{activity.name}</Text>
                   <Text style={styles.activityPrice}>{activity.price}</Text>
                 </View>
-                <Text style={styles.activityDescription}>{activity.description}</Text>
+                <Text style={styles.activityDescription}>
+                  {activity.description}
+                </Text>
                 <View style={styles.activityFooter}>
                   <Clock size={14} color="#4A5568" />
-                  <Text style={styles.activityDuration}>{activity.duration}</Text>
+                  <Text style={styles.activityDuration}>
+                    {activity.duration}
+                  </Text>
                 </View>
               </View>
             ))}
@@ -257,7 +307,7 @@ export default function DestinationDetail() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.background.primary,
   },
   errorContainer: {
     flex: 1,
@@ -328,7 +378,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     padding: 16,
-    backgroundColor: '#F7FAFC',
+    backgroundColor: colors.background.tertiary,
     borderRadius: 12,
     marginHorizontal: 4,
   },
@@ -394,7 +444,7 @@ const styles = StyleSheet.create({
   foodCard: {
     width: 240,
     marginRight: 16,
-    backgroundColor: '#fff',
+    backgroundColor: colors.background.primary,
     borderRadius: 12,
     shadowColor: '#000',
     shadowOffset: {
@@ -432,7 +482,7 @@ const styles = StyleSheet.create({
     color: '#FF6B6B',
   },
   activityCard: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.background.primary,
     borderRadius: 12,
     padding: 16,
     marginBottom: 12,

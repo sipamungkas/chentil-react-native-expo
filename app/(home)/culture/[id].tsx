@@ -1,17 +1,28 @@
-import { StyleSheet, View, Text, ScrollView, Image, Pressable } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
+  Image,
+  Pressable,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { ArrowLeft, Calendar, MapPin, Info } from 'lucide-react-native';
+import { colors } from '@/theme/colors';
 
 const CULTURAL_ITEMS = [
   {
     id: '1',
     name: 'Wayang Kulit',
     since: '8th Century',
-    image: 'https://images.unsplash.com/photo-1601959334721-760c1c2c4bf1?auto=format&fit=crop&q=80&w=800',
-    description: 'Traditional Javanese shadow puppet theatre, recognized by UNESCO as a Masterpiece of Oral and Intangible Heritage of Humanity.',
+    image:
+      'https://images.unsplash.com/photo-1601959334721-760c1c2c4bf1?auto=format&fit=crop&q=80&w=800',
+    description:
+      'Traditional Javanese shadow puppet theatre, recognized by UNESCO as a Masterpiece of Oral and Intangible Heritage of Humanity.',
     origin: 'Java',
-    significance: 'Tells stories from the Ramayana and Mahabharata epics, preserving ancient Hindu-Javanese culture.',
+    significance:
+      'Tells stories from the Ramayana and Mahabharata epics, preserving ancient Hindu-Javanese culture.',
     details: {
       performers: 'Dalang (puppet master)',
       duration: '6-8 hours',
@@ -20,24 +31,27 @@ const CULTURAL_ITEMS = [
         'Religious ceremonies',
         'Cultural festivals',
         'Royal court performances',
-        'Community gatherings'
+        'Community gatherings',
       ],
       characteristics: [
         'Intricate puppet designs',
         'Complex storytelling',
         'Live musical accompaniment',
-        'Philosophical teachings'
-      ]
-    }
+        'Philosophical teachings',
+      ],
+    },
   },
   {
     id: '2',
     name: 'Batik',
     since: '4th Century',
-    image: 'https://images.unsplash.com/photo-1584184924103-e310d9dc82fc?auto=format&fit=crop&q=80&w=800',
-    description: 'Ancient textile art using wax-resist dyeing, recognized by UNESCO as Intangible Cultural Heritage.',
+    image:
+      'https://images.unsplash.com/photo-1584184924103-e310d9dc82fc?auto=format&fit=crop&q=80&w=800',
+    description:
+      'Ancient textile art using wax-resist dyeing, recognized by UNESCO as Intangible Cultural Heritage.',
     origin: 'Java',
-    significance: 'Each pattern holds deep symbolic meaning, reflecting Indonesian philosophy and cultural values.',
+    significance:
+      'Each pattern holds deep symbolic meaning, reflecting Indonesian philosophy and cultural values.',
     details: {
       techniques: 'Wax-resist dyeing',
       materials: 'Cotton or silk fabric, wax, natural dyes',
@@ -45,80 +59,81 @@ const CULTURAL_ITEMS = [
         'Geometric designs',
         'Floral motifs',
         'Animal figures',
-        'Abstract patterns'
+        'Abstract patterns',
       ],
       symbolism: [
         'Royal heritage',
         'Social status',
         'Local traditions',
-        'Natural elements'
-      ]
-    }
+        'Natural elements',
+      ],
+    },
   },
   {
     id: '3',
     name: 'Gamelan',
     since: '9th Century',
-    image: 'https://images.unsplash.com/photo-1599796504338-161b9d3e1c40?auto=format&fit=crop&q=80&w=800',
-    description: 'Traditional ensemble music featuring predominantly percussive instruments.',
+    image:
+      'https://images.unsplash.com/photo-1599796504338-161b9d3e1c40?auto=format&fit=crop&q=80&w=800',
+    description:
+      'Traditional ensemble music featuring predominantly percussive instruments.',
     origin: 'Java and Bali',
-    significance: 'Essential to ritual, ceremony, dance, and drama throughout Indonesian culture.',
+    significance:
+      'Essential to ritual, ceremony, dance, and drama throughout Indonesian culture.',
     details: {
-      instruments: [
-        'Metallophones',
-        'Xylophones',
-        'Drums',
-        'Gongs'
-      ],
+      instruments: ['Metallophones', 'Xylophones', 'Drums', 'Gongs'],
       occasions: [
         'Temple ceremonies',
         'Royal events',
         'Shadow puppet shows',
-        'Dance performances'
+        'Dance performances',
       ],
       characteristics: [
         'Complex rhythmic patterns',
         'Collective performance',
         'Cyclical structure',
-        'Spiritual significance'
-      ]
-    }
+        'Spiritual significance',
+      ],
+    },
   },
   {
     id: '4',
     name: 'Pencak Silat',
     since: '6th Century',
-    image: 'https://images.unsplash.com/photo-1599796508495-fea30f30ad55?auto=format&fit=crop&q=80&w=800',
-    description: 'Traditional martial art incorporating strikes, grappling, and weapons.',
+    image:
+      'https://images.unsplash.com/photo-1599796508495-fea30f30ad55?auto=format&fit=crop&q=80&w=800',
+    description:
+      'Traditional martial art incorporating strikes, grappling, and weapons.',
     origin: 'Indonesian Archipelago',
-    significance: 'Combines self-defense, art, sport, and spiritual development.',
+    significance:
+      'Combines self-defense, art, sport, and spiritual development.',
     details: {
       elements: [
         'Physical training',
         'Mental discipline',
         'Spiritual development',
-        'Cultural preservation'
+        'Cultural preservation',
       ],
       techniques: [
         'Strikes and kicks',
         'Joint manipulation',
         'Weapon handling',
-        'Ground fighting'
+        'Ground fighting',
       ],
       principles: [
         'Balance and harmony',
         'Respect for tradition',
         'Mind-body connection',
-        'Cultural identity'
-      ]
-    }
-  }
+        'Cultural identity',
+      ],
+    },
+  },
 ];
 
 export default function CultureDetailScreen() {
   const { id } = useLocalSearchParams();
   const router = useRouter();
-  const culture = CULTURAL_ITEMS.find(c => c.id === id);
+  const culture = CULTURAL_ITEMS.find((c) => c.id === id);
 
   if (!culture) {
     return (
@@ -145,7 +160,7 @@ export default function CultureDetailScreen() {
 
         <View style={styles.content}>
           <Text style={styles.title}>{culture.name}</Text>
-          
+
           <View style={styles.infoGrid}>
             <View style={styles.infoItem}>
               <Calendar size={20} color="#48BB78" />
@@ -200,7 +215,7 @@ export default function CultureDetailScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.background.primary,
   },
   errorContainer: {
     flex: 1,
@@ -258,7 +273,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     padding: 16,
-    backgroundColor: '#F7FAFC',
+    backgroundColor: colors.background.tertiary,
     borderRadius: 12,
     marginHorizontal: 4,
   },

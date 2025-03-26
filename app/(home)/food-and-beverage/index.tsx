@@ -1,72 +1,93 @@
 import { useState } from 'react';
-import { StyleSheet, View, Text, ScrollView, Image, Pressable } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
+  Image,
+  Pressable,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Search, MapPin } from 'lucide-react-native';
 import { useRouter } from 'expo-router';
 import Animated, { FadeInDown } from 'react-native-reanimated';
+import { colors } from '@/theme/colors';
 
 const PROVINCES = [
   {
     id: 'aceh',
     name: 'Aceh',
     region: 'Sumatra',
-    image: 'https://images.unsplash.com/photo-1596870230751-ebdfce98ec42?auto=format&fit=crop&q=80&w=800',
-    description: 'Known for its rich, spicy cuisine influenced by Indian and Middle Eastern flavors.',
+    image:
+      'https://images.unsplash.com/photo-1596870230751-ebdfce98ec42?auto=format&fit=crop&q=80&w=800',
+    description:
+      'Known for its rich, spicy cuisine influenced by Indian and Middle Eastern flavors.',
   },
   {
     id: 'north-sumatra',
     name: 'North Sumatra',
     region: 'Sumatra',
-    image: 'https://images.unsplash.com/photo-1622644989768-7a2cfd464756?auto=format&fit=crop&q=80&w=800',
-    description: 'Home to the famous Batak cuisine, known for its bold and spicy flavors.',
+    image:
+      'https://images.unsplash.com/photo-1622644989768-7a2cfd464756?auto=format&fit=crop&q=80&w=800',
+    description:
+      'Home to the famous Batak cuisine, known for its bold and spicy flavors.',
   },
   {
     id: 'west-java',
     name: 'West Java',
     region: 'Java',
-    image: 'https://images.unsplash.com/photo-1505993597083-3bd19fb75e57?auto=format&fit=crop&q=80&w=800',
-    description: 'Sundanese cuisine is known for its fresh vegetables and sambal.',
+    image:
+      'https://images.unsplash.com/photo-1505993597083-3bd19fb75e57?auto=format&fit=crop&q=80&w=800',
+    description:
+      'Sundanese cuisine is known for its fresh vegetables and sambal.',
   },
   {
     id: 'central-java',
     name: 'Central Java',
     region: 'Java',
-    image: 'https://images.unsplash.com/photo-1583335026414-89cf12f83cb7?auto=format&fit=crop&q=80&w=800',
+    image:
+      'https://images.unsplash.com/photo-1583335026414-89cf12f83cb7?auto=format&fit=crop&q=80&w=800',
     description: 'Features royal Javanese cuisine and sweet dishes.',
   },
   {
     id: 'yogyakarta',
     name: 'Yogyakarta',
     region: 'Java',
-    image: 'https://images.unsplash.com/photo-1584093091778-e7f4e76e8063?auto=format&fit=crop&q=80&w=800',
+    image:
+      'https://images.unsplash.com/photo-1584093091778-e7f4e76e8063?auto=format&fit=crop&q=80&w=800',
     description: 'Known for its Gudeg and traditional royal cuisine.',
   },
   {
     id: 'east-java',
     name: 'East Java',
     region: 'Java',
-    image: 'https://images.unsplash.com/photo-1531706411987-55c5a91b6a9a?auto=format&fit=crop&q=80&w=800',
+    image:
+      'https://images.unsplash.com/photo-1531706411987-55c5a91b6a9a?auto=format&fit=crop&q=80&w=800',
     description: 'Famous for its sweet and spicy flavors.',
   },
   {
     id: 'bali',
     name: 'Bali',
     region: 'Lesser Sunda Islands',
-    image: 'https://images.unsplash.com/photo-1517861018043-ae1a7ff62c72?auto=format&fit=crop&q=80&w=800',
-    description: 'Rich in herbs and spices, featuring unique ceremonial dishes.',
+    image:
+      'https://images.unsplash.com/photo-1517861018043-ae1a7ff62c72?auto=format&fit=crop&q=80&w=800',
+    description:
+      'Rich in herbs and spices, featuring unique ceremonial dishes.',
   },
   {
     id: 'south-sulawesi',
     name: 'South Sulawesi',
     region: 'Sulawesi',
-    image: 'https://images.unsplash.com/photo-1626160938797-2549a8e5f4cb?auto=format&fit=crop&q=80&w=800',
+    image:
+      'https://images.unsplash.com/photo-1626160938797-2549a8e5f4cb?auto=format&fit=crop&q=80&w=800',
     description: 'Known for its seafood and Makassar cuisine.',
   },
   {
     id: 'papua',
     name: 'Papua',
     region: 'Papua',
-    image: 'https://images.unsplash.com/photo-1617194663454-aa9d11b77d8e?auto=format&fit=crop&q=80&w=800',
+    image:
+      'https://images.unsplash.com/photo-1617194663454-aa9d11b77d8e?auto=format&fit=crop&q=80&w=800',
     description: 'Features unique dishes using sago and local ingredients.',
   },
 ];
@@ -85,10 +106,15 @@ export default function FoodAndBeverageScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        style={styles.scrollView}
+        showsVerticalScrollIndicator={false}
+      >
         <View style={styles.header}>
           <Text style={styles.title}>Indonesian Cuisine</Text>
-          <Text style={styles.subtitle}>Explore traditional foods by region</Text>
+          <Text style={styles.subtitle}>
+            Explore traditional foods by region
+          </Text>
         </View>
 
         <Pressable style={styles.searchBar}>
@@ -97,39 +123,55 @@ export default function FoodAndBeverageScreen() {
         </Pressable>
 
         <View style={styles.content}>
-          {Object.entries(groupedProvinces).map(([region, provinces], regionIndex) => (
-            <Animated.View
-              key={region}
-              entering={FadeInDown.delay(regionIndex * 100)}
-            >
-              <Text style={styles.regionTitle}>{region}</Text>
-              {provinces.map((province, provinceIndex) => (
-                <Animated.View
-                  key={province.id}
-                  entering={FadeInDown.delay((regionIndex * 100) + (provinceIndex * 50))}
-                  style={styles.provinceCard}
-                >
-                  <Pressable
-                    onPress={() => router.push(`/food-and-beverage/${province.id}`)}
+          {Object.entries(groupedProvinces).map(
+            ([region, provinces], regionIndex) => (
+              <Animated.View
+                key={region}
+                entering={FadeInDown.delay(regionIndex * 100)}
+              >
+                <Text style={styles.regionTitle}>{region}</Text>
+                {provinces.map((province, provinceIndex) => (
+                  <Animated.View
+                    key={province.id}
+                    entering={FadeInDown.delay(
+                      regionIndex * 100 + provinceIndex * 50
+                    )}
+                    style={styles.provinceCard}
                   >
-                    <Image source={{ uri: province.image }} style={styles.provinceImage} />
-                    <View style={styles.provinceInfo}>
-                      <View style={styles.provinceHeader}>
-                        <Text style={styles.provinceName}>{province.name}</Text>
-                        <View style={styles.regionTag}>
-                          <MapPin size={12} color="#ED8936" />
-                          <Text style={styles.regionTagText}>{province.region}</Text>
+                    <Pressable
+                      onPress={() =>
+                        router.push(`/food-and-beverage/${province.id}`)
+                      }
+                    >
+                      <Image
+                        source={{ uri: province.image }}
+                        style={styles.provinceImage}
+                      />
+                      <View style={styles.provinceInfo}>
+                        <View style={styles.provinceHeader}>
+                          <Text style={styles.provinceName}>
+                            {province.name}
+                          </Text>
+                          <View style={styles.regionTag}>
+                            <MapPin size={12} color="#ED8936" />
+                            <Text style={styles.regionTagText}>
+                              {province.region}
+                            </Text>
+                          </View>
                         </View>
+                        <Text
+                          style={styles.provinceDescription}
+                          numberOfLines={2}
+                        >
+                          {province.description}
+                        </Text>
                       </View>
-                      <Text style={styles.provinceDescription} numberOfLines={2}>
-                        {province.description}
-                      </Text>
-                    </View>
-                  </Pressable>
-                </Animated.View>
-              ))}
-            </Animated.View>
-          ))}
+                    </Pressable>
+                  </Animated.View>
+                ))}
+              </Animated.View>
+            )
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -139,7 +181,7 @@ export default function FoodAndBeverageScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.background.primary,
   },
   scrollView: {
     flex: 1,
@@ -161,7 +203,7 @@ const styles = StyleSheet.create({
   searchBar: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#F7FAFC',
+    backgroundColor: colors.background.tertiary,
     marginHorizontal: 20,
     padding: 12,
     borderRadius: 12,
@@ -183,7 +225,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   provinceCard: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.background.primary,
     borderRadius: 16,
     overflow: 'hidden',
     marginBottom: 16,
