@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
   },
   itemImage: {
     width: 120,
-    height: 120,
+    height: 135,
   },
   itemInfo: {
     flex: 1,
