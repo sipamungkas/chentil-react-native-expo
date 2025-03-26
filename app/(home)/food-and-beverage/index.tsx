@@ -153,7 +153,7 @@ export default function FoodAndBeverageScreen() {
                             {province.name}
                           </Text>
                           <View style={styles.regionTag}>
-                            <MapPin size={12} color="#ED8936" />
+                            <MapPin size={12} color={colors.chentil.rosePink} />
                             <Text style={styles.regionTagText}>
                               {province.region}
                             </Text>

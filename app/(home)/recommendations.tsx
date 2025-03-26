@@ -76,11 +76,11 @@ export default function RecommendationsScreen() {
   const getIcon = (type: string) => {
     switch (type) {
       case 'destination':
-        return <MapPin size={16} color="#FF4D8D" />;
+        return <MapPin size={16} color={colors.chentil.rosePink} />;
       case 'food':
-        return <Utensils size={16} color="#FF4D8D" />;
+        return <Utensils size={16} color={colors.chentil.rosePink} />;
       case 'culture':
-        return <Palette size={16} color="#FF4D8D" />;
+        return <Palette size={16} color={colors.chentil.rosePink} />;
       default:
         return null;
     }
@@ -122,7 +122,7 @@ export default function RecommendationsScreen() {
                     {item.description}
                   </Text>
                   <View style={styles.locationContainer}>
-                    <MapPin size={14} color="#4A5568" />
+                    <MapPin size={14} color={colors.chentil.rosePink} />
                     <Text style={styles.locationText}>{item.location}</Text>
                   </View>
                 </View>
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
   itemTitle: {
     fontFamily: 'PlusJakartaSans-SemiBold',
     fontSize: 16,
-    color: '#1A202C',
+    color: colors.brand.primary,
     marginBottom: 4,
   },
   itemDescription: {
@@ -213,7 +213,7 @@ const styles = StyleSheet.create({
   locationText: {
     fontFamily: 'PlusJakartaSans-Regular',
     fontSize: 12,
-    color: '#4A5568',
+    color: colors.chentil.rosePink,
     marginLeft: 4,
   },
 });

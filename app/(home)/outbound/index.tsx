@@ -141,7 +141,7 @@ export default function OutboundScreen() {
               <View style={styles.activityInfo}>
                 <Text style={styles.activityType}>{activity.type}</Text>
                 <View style={styles.locationContainer}>
-                  <MapPin size={12} color="#4A5568" />
+                  <MapPin size={12} color={colors.chentil.rosePink} />
                   <Text style={styles.locationText}>{activity.location}</Text>
                 </View>
               </View>
@@ -212,6 +212,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,
+    flexGrow: 1,
   },
   activityImage: {
     width: '100%',
@@ -225,7 +226,7 @@ const styles = StyleSheet.create({
   activityType: {
     fontFamily: 'PlusJakartaSans-SemiBold',
     fontSize: 14,
-    color: '#1A202C',
+    color: colors.brand.primary,
     marginBottom: 4,
   },
   locationContainer: {
@@ -235,7 +236,7 @@ const styles = StyleSheet.create({
   locationText: {
     fontFamily: 'PlusJakartaSans-Regular',
     fontSize: 12,
-    color: '#4A5568',
+    color: colors.chentil.rosePink,
     marginLeft: 4,
   },
 });

@@ -163,17 +163,17 @@ export default function CultureDetailScreen() {
 
           <View style={styles.infoGrid}>
             <View style={styles.infoItem}>
-              <Calendar size={20} color="#48BB78" />
+              <Calendar size={20} color={colors.chentil.rosePink} />
               <Text style={styles.infoLabel}>Since</Text>
               <Text style={styles.infoValue}>{culture.since}</Text>
             </View>
             <View style={styles.infoItem}>
-              <MapPin size={20} color="#48BB78" />
+              <MapPin size={20} color={colors.chentil.rosePink} />
               <Text style={styles.infoLabel}>Origin</Text>
               <Text style={styles.infoValue}>{culture.origin}</Text>
             </View>
             <View style={styles.infoItem}>
-              <Info size={20} color="#48BB78" />
+              <Info size={20} color={colors.chentil.rosePink} />
               <Text style={styles.infoLabel}>UNESCO</Text>
               <Text style={styles.infoValue}>Protected</Text>
             </View>

@@ -102,7 +102,7 @@ export default function TripsScreen() {
 
                 <View style={styles.tripDetails}>
                   <View style={styles.detailRow}>
-                    <Calendar size={16} color="#4A5568" />
+                    <Calendar size={16} color={colors.chentil.rosePink} />
                     <Text style={styles.detailText}>
                       {new Date(trip.startDate).toLocaleDateString()} -{' '}
                       {new Date(trip.endDate).toLocaleDateString()}
@@ -110,14 +110,14 @@ export default function TripsScreen() {
                   </View>
 
                   <View style={styles.detailRow}>
-                    <MapPin size={16} color="#4A5568" />
+                    <MapPin size={16} color={colors.chentil.rosePink} />
                     <Text style={styles.detailText}>
                       {trip.destinations.join(' • ')}
                     </Text>
                   </View>
 
                   <View style={styles.detailRow}>
-                    <Users size={16} color="#4A5568" />
+                    <Users size={16} color={colors.chentil.rosePink} />
                     <Text style={styles.detailText}>
                       {trip.collaborators} people
                     </Text>
@@ -135,7 +135,7 @@ export default function TripsScreen() {
                         trip.status.slice(1)}
                     </Text>
                   </View>
-                  <ChevronRight size={20} color="#4A5568" />
+                  <ChevronRight size={20} color={colors.chentil.rosePink} />
                 </View>
               </View>
             </Pressable>

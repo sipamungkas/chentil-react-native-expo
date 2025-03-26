@@ -120,12 +120,12 @@ export default function CalendarScreen() {
 
                 <View style={styles.eventDetails}>
                   <View style={styles.eventDetail}>
-                    <Clock size={16} color="#4A5568" />
+                    <Clock size={16} color={colors.chentil.rosePink} />
                     <Text style={styles.eventDetailText}>{event.time}</Text>
                   </View>
 
                   <View style={styles.eventDetail}>
-                    <MapPin size={16} color="#4A5568" />
+                    <MapPin size={16} color={colors.chentil.rosePink} />
                     <Text style={styles.eventDetailText}>{event.location}</Text>
                   </View>
                 </View>

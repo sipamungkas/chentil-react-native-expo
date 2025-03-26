@@ -192,13 +192,13 @@ const styles = StyleSheet.create({
   islandName: {
     fontFamily: 'PlusJakartaSans-SemiBold',
     fontSize: 18,
-    color: '#1A202C',
+    color: colors.brand.primary,
     marginBottom: 4,
   },
   provinceCount: {
     fontFamily: 'PlusJakartaSans-Medium',
     fontSize: 12,
-    color: '#48BB78',
+    color: colors.brand.secondary,
     marginBottom: 8,
   },
   islandDescription: {

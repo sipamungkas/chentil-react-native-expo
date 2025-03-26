@@ -234,7 +234,7 @@ export default function OutboundDetailScreen() {
         <View style={styles.content}>
           <Text style={styles.title}>{activity.type}</Text>
           <View style={styles.locationRow}>
-            <MapPin size={16} color="#4A5568" />
+            <MapPin size={16} color={colors.chentil.rosePink} />
             <Text style={styles.locationText}>{activity.location}</Text>
           </View>
 
@@ -371,7 +371,7 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: 'PlusJakartaSans-Bold',
     fontSize: 28,
-    color: '#1A202C',
+    color: colors.brand.primary,
     marginBottom: 8,
   },
   locationRow: {
@@ -382,7 +382,7 @@ const styles = StyleSheet.create({
   locationText: {
     fontFamily: 'PlusJakartaSans-Medium',
     fontSize: 14,
-    color: '#4A5568',
+    color: colors.chentil.rosePink,
     marginLeft: 4,
   },
   infoGrid: {

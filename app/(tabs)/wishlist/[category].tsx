@@ -101,7 +101,7 @@ export default function WishlistCategoryScreen() {
                 <View style={styles.itemInfo}>
                   <Text style={styles.itemName}>{item.name}</Text>
                   <View style={styles.locationContainer}>
-                    <MapPin size={14} color="#4A5568" />
+                    <MapPin size={14} color={colors.chentil.rosePink} />
                     <Text style={styles.locationText}>{item.location}</Text>
                   </View>
                   <View style={styles.ratingContainer}>

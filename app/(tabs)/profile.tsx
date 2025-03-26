@@ -92,11 +92,11 @@ export default function ProfileScreen() {
           <View style={styles.profileInfo}>
             <Text style={styles.name}>{PROFILE_DATA.name}</Text>
             <View style={styles.locationRow}>
-              <MapPin size={14} color="#4A5568" />
+              <MapPin size={14} color={colors.chentil.rosePink} />
               <Text style={styles.location}>{PROFILE_DATA.location}</Text>
             </View>
             <View style={styles.joinDateRow}>
-              <Calendar size={14} color="#4A5568" />
+              <Calendar size={14} color={colors.chentil.rosePink} />
               <Text style={styles.joinDate}>{PROFILE_DATA.joinDate}</Text>
             </View>
           </View>
