@@ -1,14 +1,37 @@
 import { useState } from 'react';
-import { StyleSheet, View, Text, ScrollView, Image, Pressable } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
+  Image,
+  Pressable,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Settings, MapPin, Calendar, Star, ChevronRight, CreditCard as Edit3, Bell, Shield, CreditCard, CircleHelp as HelpCircle, LogOut } from 'lucide-react-native';
+import {
+  Settings,
+  MapPin,
+  Calendar,
+  Star,
+  ChevronRight,
+  CreditCard as Edit3,
+  Bell,
+  Shield,
+  CreditCard,
+  CircleHelp as HelpCircle,
+  LogOut,
+  Trophy,
+  Plane,
+} from 'lucide-react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
+import { router } from 'expo-router';
 
 const PROFILE_DATA = {
   name: 'Ragil Pamungkas',
   location: 'Jakarta, Indonesia',
   joinDate: 'Member since 2023',
-  avatar: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&q=80&w=200',
+  avatar:
+    'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&q=80&w=200',
   stats: [
     { label: 'Trips', value: '12' },
     { label: 'Reviews', value: '28' },
@@ -21,14 +44,19 @@ const MENU_SECTIONS = [
     title: 'Account Settings',
     items: [
       { icon: Edit3, label: 'Edit Profile', color: '#FF4D8D' },
-      { icon: Bell, label: 'Notifications', color: '#FF4D8D' },
       { icon: Shield, label: 'Privacy & Security', color: '#FF4D8D' },
     ],
   },
   {
     title: 'Preferences',
     items: [
-      { icon: CreditCard, label: 'Payment Methods', color: '#4299E1' },
+      {
+        icon: Trophy,
+        label: 'Challenges',
+        color: '#4299E1',
+        route: '/challenges',
+      },
+      { icon: Plane, label: 'Trips', color: '#4299E1', route: 'trips' },
       { icon: HelpCircle, label: 'Help & Support', color: '#4299E1' },
       { icon: LogOut, label: 'Log Out', color: '#E53E3E' },
     ],
@@ -40,7 +68,10 @@ export default function ProfileScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        style={styles.scrollView}
+        showsVerticalScrollIndicator={false}
+      >
         {/* Header */}
         <View style={styles.header}>
           <View style={styles.headerTop}>
@@ -52,7 +83,7 @@ export default function ProfileScreen() {
         </View>
 
         {/* Profile Card */}
-        <Animated.View 
+        <Animated.View
           entering={FadeInDown.duration(600)}
           style={styles.profileCard}
         >
@@ -73,9 +104,9 @@ export default function ProfileScreen() {
         {/* Stats */}
         <View style={styles.statsContainer}>
           {PROFILE_DATA.stats.map((stat, index) => (
-            <Animated.View 
+            <Animated.View
               key={stat.label}
-              entering={FadeInDown.delay(300 + (index * 100))}
+              entering={FadeInDown.delay(300 + index * 100)}
               style={styles.statItem}
             >
               <Text style={styles.statValue}>{stat.value}</Text>
@@ -86,26 +117,31 @@ export default function ProfileScreen() {
 
         {/* Menu Sections */}
         {MENU_SECTIONS.map((section, sectionIndex) => (
-          <Animated.View 
+          <Animated.View
             key={section.title}
-            entering={FadeInDown.delay(600 + (sectionIndex * 100))}
+            entering={FadeInDown.delay(600 + sectionIndex * 100)}
             style={styles.menuSection}
           >
             <Text style={styles.menuTitle}>{section.title}</Text>
             {section.items.map((item, itemIndex) => (
-              <Pressable 
+              <Pressable
                 key={item.label}
                 style={styles.menuItem}
                 onPress={() => {
+                  if (item.route) {
+                    router.push(item.route as '/challenges' | '/trips');
+                  }
                   // Handle menu item press
                 }}
               >
                 <View style={styles.menuItemLeft}>
                   <item.icon size={20} color={item.color} />
-                  <Text style={[
-                    styles.menuItemText,
-                    item.label === 'Log Out' && styles.logoutText
-                  ]}>
+                  <Text
+                    style={[
+                      styles.menuItemText,
+                      item.label === 'Log Out' && styles.logoutText,
+                    ]}
+                  >
                     {item.label}
                   </Text>
                 </View>
@@ -212,6 +248,7 @@ const styles = StyleSheet.create({
   },
   menuSection: {
     padding: 20,
+    paddingBottom: 0,
   },
   menuTitle: {
     fontFamily: 'PlusJakartaSans-SemiBold',
