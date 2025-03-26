@@ -1,6 +1,6 @@
 import { Tabs } from 'expo-router';
 import { Platform } from 'react-native';
-import { Chrome as Home, Heart, User, Plane, Star } from 'lucide-react-native';
+import { Heart, User, HomeIcon } from 'lucide-react-native';
 
 const tabBarStyle = Platform.select({
   ios: {
@@ -37,7 +37,9 @@ export default function TabLayout() {
         name="index"
         options={{
           title: 'Home',
-          tabBarIcon: ({ color, size }) => <Home size={size} color={color} />,
+          tabBarIcon: ({ color, size }) => (
+            <HomeIcon size={size} color={color} />
+          ),
         }}
       />
       <Tabs.Screen
