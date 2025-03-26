@@ -74,8 +74,8 @@ const MENU_ITEMS = [
   {
     icon: Heart,
     label: 'Favorites',
-    color: colors.brand.primary,
-    route: null,
+    color: colors.chentil.ruby,
+    route: '/favorites' as const,
   },
 ];
 
