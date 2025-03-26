@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet } from 'react-native';
-import { colors } from '../theme/colors';
+import { colors } from '../app/theme/colors';
 
 interface ScreenHeaderProps {
   greeting?: string;

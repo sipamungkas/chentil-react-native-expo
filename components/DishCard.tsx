@@ -1,38 +1,41 @@
 import { View, Text, Image, Pressable, StyleSheet } from 'react-native';
-import { Calendar, MapPin, Users } from 'lucide-react-native';
-import { colors } from '../theme/colors';
+import { Star } from 'lucide-react-native';
+import { colors } from '../app/theme/colors';
 
-interface Event {
+interface Dish {
   id: string;
   name: string;
-  date: string;
-  location: string;
+  restaurant: string;
+  rating: number;
+  price: string;
   image: string;
-  attendees: number;
   category: string;
 }
 
-interface EventCardProps {
-  event: Event;
-  onJoin: (id: string) => void;
+interface DishCardProps {
+  dish: Dish;
+  onPress: (id: string) => void;
 }
 
-export function EventCard({ event, onJoin }: EventCardProps) {
+export function DishCard({ dish, onPress }: DishCardProps) {
   return (
-    <Pressable style={styles.card} onPress={() => onJoin(event.id)}>
-      <Image source={{ uri: event.image }} style={styles.image} />
+    <Pressable style={styles.card} onPress={() => onPress(dish.id)}>
+      <Image source={{ uri: dish.image }} style={styles.image} />
       <View style={styles.content}>
         <View style={styles.header}>
           <View>
-            <Text style={styles.category}>{event.category}</Text>
-            <Text style={styles.name}>{event.name}</Text>
-            <Text style={styles.location}>{event.location}</Text>
+            <Text style={styles.category}>{dish.category}</Text>
+            <Text style={styles.name}>{dish.name}</Text>
+            <Text style={styles.restaurant}>{dish.restaurant}</Text>
           </View>
-          <View style={styles.attendeesContainer}>
-            <Text style={styles.attendees}>{event.attendees} attendees</Text>
+          <View style={styles.priceContainer}>
+            <Text style={styles.price}>{dish.price}</Text>
           </View>
         </View>
-        <Text style={styles.date}>{event.date}</Text>
+        <View style={styles.ratingContainer}>
+          <Star size={16} color={colors.brand.accent} fill={colors.brand.accent} />
+          <Text style={styles.rating}>{dish.rating}</Text>
+        </View>
       </View>
     </Pressable>
   );
@@ -77,24 +80,30 @@ const styles = StyleSheet.create({
     color: colors.text.primary,
     marginBottom: 4,
   },
-  location: {
+  restaurant: {
     fontSize: 14,
     color: colors.text.secondary,
   },
-  attendeesContainer: {
+  priceContainer: {
     backgroundColor: colors.background.tertiary,
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 20,
   },
-  attendees: {
+  price: {
     fontSize: 14,
     fontWeight: '600',
     color: colors.text.primary,
   },
-  date: {
-    fontSize: 14,
-    color: colors.text.secondary,
+  ratingContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
     marginTop: 12,
+  },
+  rating: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: colors.text.primary,
+    marginLeft: 4,
   },
 }); 

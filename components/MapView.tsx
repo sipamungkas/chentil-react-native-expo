@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Platform } from 'react-native';
-import { colors } from '../theme/colors';
+import { colors } from '../app/theme/colors';
 
 // Only import MapView and Marker when not on web
 const { default: RNMapView, Marker } = Platform.select({

@@ -3,9 +3,9 @@ import { useState } from 'react';
 import { useRouter } from 'expo-router';
 import { colors } from '../theme/colors';
 
-import { ScreenHeader } from '../components/ScreenHeader';
-import { SearchBar } from '../components/SearchBar';
-import { EventCard } from '../components/EventCard';
+import { ScreenHeader } from '../../components/ScreenHeader';
+import { SearchBar } from '../../components/SearchBar';
+import { EventCard } from '../../components/EventCard';
 
 const UPCOMING_EVENTS = [
   {
