@@ -6,7 +6,7 @@ import Animated, { FadeInDown } from 'react-native-reanimated';
 
 const { width } = Dimensions.get('window');
 const GRID_SPACING = 16;
-const CARD_WIDTH = (width - (GRID_SPACING * 3)) / 2;
+const CARD_WIDTH = (width - (GRID_SPACING * 4)) / 2;
 
 const CATEGORIES = [
   {

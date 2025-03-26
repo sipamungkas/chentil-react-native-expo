@@ -69,7 +69,7 @@ const OUTBOUND_ACTIVITIES = [
 ];
 
 const { width } = Dimensions.get('window');
-const COLUMN_COUNT = 3;
+const COLUMN_COUNT = 2;
 const GRID_PADDING = 20;
 const GRID_SPACING = 12;
 const ITEM_WIDTH = (width - (GRID_PADDING * 2) - (GRID_SPACING * (COLUMN_COUNT - 1))) / COLUMN_COUNT;
