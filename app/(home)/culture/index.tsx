@@ -66,6 +66,12 @@ const CULTURAL_ITEMS = [
 
 export default function CultureScreen() {
   const router = useRouter();
+  const onPress = (params: any) => {
+    router.push({
+      pathname: '/detail',
+      params,
+    });
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -88,13 +94,14 @@ export default function CultureScreen() {
         <View style={styles.content}>
           {CULTURAL_ITEMS.map((item, index) => (
             <ItemCard
+              id={item.id}
               key={item.id}
               entering={FadeInDown.delay(index * 100)}
               name={item.name}
               description={item.description}
               image={item.image}
               since={item.since}
-              onPress={() => {}}
+              onPress={() => onPress(item)}
             />
             // <Animated.View
             //   key={item.id}

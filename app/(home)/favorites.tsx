@@ -4,150 +4,101 @@ import { useRouter } from 'expo-router';
 import { colors } from '@/theme/colors';
 import { PlaceCard } from '@/components/PlaceCard';
 import { ScreenHeader } from '@/components/ScreenHeader';
+import { ItemCard } from '@/components/ItemCard';
+import { FadeInDown } from 'react-native-reanimated';
 
 // Example favorite items (in a real app, this would come from a state management system)
-const FAVORITE_ITEMS = {
-  destinations: [
-    {
-      id: '1',
-      name: 'Borobudur Temple',
-      location: 'Magelang, Central Java',
-      image: 'https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?auto=format&fit=crop&q=80&w=600',
-      rating: 4.8,
-    },
-  ],
-  outbound: [
-    {
-      id: '2',
-      name: 'Raja Ampat Islands',
-      location: 'West Papua',
-      image: 'https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?auto=format&fit=crop&q=80&w=600',
-      rating: 4.9,
-    },
-  ],
-  culture: [
-    {
-      id: '3',
-      name: 'Ramayana Ballet',
-      location: 'Prambanan, Yogyakarta',
-      image: 'https://images.unsplash.com/photo-1601959334795-2b7c04021807?auto=format&fit=crop&q=80&w=600',
-      rating: 4.7,
-    },
-    {
-      id: '4',
-      name: 'Batik Workshop',
-      location: 'Solo, Central Java',
-      image: 'https://images.unsplash.com/photo-1580916954804-2a85797cf50f?auto=format&fit=crop&q=80&w=600',
-      rating: 4.6,
-    }
-  ],
-  foodAndBeverage: [
-    {
-      id: '5',
-      name: 'Nasi Goreng Kambing',
-      location: 'Kebon Sirih, Jakarta',
-      image: 'https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&q=80&w=600',
-      rating: 4.8,
-    },
-    {
-      id: '6',
-      name: 'Sate Lilit',
-      location: 'Sanur, Bali',
-      image: 'https://images.unsplash.com/photo-1555126634-323283e090fa?auto=format&fit=crop&q=80&w=600',
-      rating: 4.7,
-    },
-    {
-      id: '7',
-      name: 'Rendang House',
-      location: 'Padang, West Sumatra',
-      image: 'https://images.unsplash.com/photo-1606491956689-2ea866880c84?auto=format&fit=crop&q=80&w=600',
-      rating: 4.9,
-    }
-  ],
-};
+const favorites = [
+  {
+    id: '1',
+    name: 'Borobudur Temple',
+    location: 'Magelang, Central Java',
+    image:
+      'https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?auto=format&fit=crop&q=80&w=600',
+    rating: 4.8,
+  },
+  {
+    id: '2',
+    name: 'Raja Ampat Islands',
+    location: 'West Papua',
+    image:
+      'https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?auto=format&fit=crop&q=80&w=600',
+    rating: 4.9,
+  },
+  {
+    id: '3',
+    name: 'Ramayana Ballet',
+    location: 'Prambanan, Yogyakarta',
+    image:
+      'https://images.unsplash.com/photo-1601959334795-2b7c04021807?auto=format&fit=crop&q=80&w=600',
+    rating: 4.7,
+  },
+  {
+    id: '4',
+    name: 'Batik Workshop',
+    location: 'Solo, Central Java',
+    image:
+      'https://images.unsplash.com/photo-1580916954804-2a85797cf50f?auto=format&fit=crop&q=80&w=600',
+    rating: 4.6,
+  },
+  {
+    id: '5',
+    name: 'Nasi Goreng Kambing',
+    location: 'Kebon Sirih, Jakarta',
+    image:
+      'https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&q=80&w=600',
+    rating: 4.8,
+  },
+  {
+    id: '6',
+    name: 'Sate Lilit',
+    location: 'Sanur, Bali',
+    image:
+      'https://images.unsplash.com/photo-1555126634-323283e090fa?auto=format&fit=crop&q=80&w=600',
+    rating: 4.7,
+  },
+  {
+    id: '7',
+    name: 'Rendang House',
+    location: 'Padang, West Sumatra',
+    image:
+      'https://images.unsplash.com/photo-1606491956689-2ea866880c84?auto=format&fit=crop&q=80&w=600',
+    rating: 4.9,
+  },
+];
 
 export default function FavoritesScreen() {
   const router = useRouter();
 
-  const handlePlacePress = (id: string) => {
-    router.push(`/destination/${id}` as const);
+  const onPress = (params: any) => {
+    router.push({
+      pathname: '/detail',
+      params,
+    });
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
-        <ScreenHeader 
-          title="Favorites" 
-          subtitle="Your saved places and experiences" 
+        <ScreenHeader
+          title="Favorites"
+          subtitle="Your saved places and experiences"
         />
+        <View style={styles.section}>
+          {/* Destinations Section */}
 
-        {/* Destinations Section */}
-        {FAVORITE_ITEMS.destinations.length > 0 && (
-          <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Destinations</Text>
-            {FAVORITE_ITEMS.destinations.map((item) => (
-              <PlaceCard
-                key={item.id}
-                place={item}
-                onPress={handlePlacePress}
-              />
-            ))}
-          </View>
-        )}
-
-        {/* Outbound Section */}
-        {FAVORITE_ITEMS.outbound.length > 0 && (
-          <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Outbound</Text>
-            {FAVORITE_ITEMS.outbound.map((item) => (
-              <PlaceCard
-                key={item.id}
-                place={item}
-                onPress={handlePlacePress}
-              />
-            ))}
-          </View>
-        )}
-
-        {/* Culture Section */}
-        {FAVORITE_ITEMS.culture.length > 0 && (
-          <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Culture</Text>
-            {FAVORITE_ITEMS.culture.map((item) => (
-              <PlaceCard
-                key={item.id}
-                place={item}
-                onPress={handlePlacePress}
-              />
-            ))}
-          </View>
-        )}
-
-        {/* Food & Beverage Section */}
-        {FAVORITE_ITEMS.foodAndBeverage.length > 0 && (
-          <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Food & Beverage</Text>
-            {FAVORITE_ITEMS.foodAndBeverage.map((item) => (
-              <PlaceCard
-                key={item.id}
-                place={item}
-                onPress={handlePlacePress}
-              />
-            ))}
-          </View>
-        )}
-
-        {/* Empty State */}
-        {Object.values(FAVORITE_ITEMS).every(arr => arr.length === 0) && (
-          <View style={styles.emptyState}>
-            <Text style={styles.emptyStateText}>
-              You haven't added any favorites yet.
-            </Text>
-            <Text style={styles.emptyStateSubtext}>
-              Start exploring and save your favorite places!
-            </Text>
-          </View>
-        )}
+          {favorites.map((item, index) => (
+            <ItemCard
+              id={item.id}
+              key={item.id}
+              name={item.name}
+              location={item.location}
+              entering={FadeInDown.delay(200 * index)}
+              onPress={() => onPress(item)}
+              image={item.image}
+            />
+          ))}
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -189,4 +140,4 @@ const styles = StyleSheet.create({
     color: colors.text.secondary,
     textAlign: 'center',
   },
-}); 
+});

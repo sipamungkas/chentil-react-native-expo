@@ -1,5 +1,17 @@
-import { View, Text, ScrollView, Image, StyleSheet, Dimensions, NativeSyntheticEvent, NativeScrollEvent } from 'react-native';
+import {
+  View,
+  Text,
+  ScrollView,
+  Image,
+  StyleSheet,
+  Dimensions,
+  NativeSyntheticEvent,
+  NativeScrollEvent,
+  Pressable,
+} from 'react-native';
 import { useState, useRef } from 'react';
+import Animated from 'react-native-reanimated';
+import { router } from 'expo-router';
 
 interface NewsSlide {
   id: string;
@@ -24,6 +36,13 @@ export function NewsSlider({ slides }: NewsSliderProps) {
     setActiveSlide(currentIndex);
   };
 
+  const onPress = (params: any) => {
+    router.push({
+      pathname: '/detail',
+      params,
+    });
+  };
+
   return (
     <View style={styles.sliderContainer}>
       <ScrollView
@@ -35,12 +54,21 @@ export function NewsSlider({ slides }: NewsSliderProps) {
         scrollEventThrottle={16}
       >
         {slides.map((slide) => (
-          <View key={slide.id} style={[styles.slideContainer, { width }]}>
-            <Image source={{ uri: slide.image }} style={styles.slideImage} />
-            <View style={styles.slideOverlay}>
-              <Text style={styles.slideTitle}>{slide.title}</Text>
+          <Pressable
+            key={slide.id}
+            onPress={() => onPress({ ...slide, name: slide.title })}
+          >
+            <View style={[styles.slideContainer, { width }]}>
+              <Animated.Image
+                sharedTransitionTag={slide.id}
+                source={{ uri: slide.image }}
+                style={styles.slideImage}
+              />
+              <View style={styles.slideOverlay}>
+                <Text style={styles.slideTitle}>{slide.title}</Text>
+              </View>
             </View>
-          </View>
+          </Pressable>
         ))}
       </ScrollView>
       <View style={styles.pagination}>
@@ -103,4 +131,4 @@ const styles = StyleSheet.create({
   paginationDotActive: {
     backgroundColor: '#fff',
   },
-}); 
+});

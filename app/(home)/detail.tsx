@@ -7,6 +7,7 @@ import {
   Heart,
   BookmarkPlus,
   Map,
+  ChevronLeft,
 } from 'lucide-react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -22,11 +23,25 @@ interface DetailScreenProps {
 }
 
 export default function DetailScreen() {
-  const { id, image, name, description, location, since } =
+  const { id, image, name, description, location, since, date } =
     useLocalSearchParams();
   const router = useRouter();
   const [isFavorite, setIsFavorite] = useState(false);
   const [isWishlisted, setIsWishlisted] = useState(false);
+
+  const formatDate = (dateString: string) => {
+    try {
+      const date = new Date(dateString);
+      return new Intl.DateTimeFormat('id-ID', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      }).format(date);
+    } catch (error) {
+      return dateString;
+    }
+  };
 
   const handleMapPress = () => {
     router.push('/map');
@@ -34,6 +49,10 @@ export default function DetailScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Pressable style={styles.backButton} onPress={() => router.back()}>
+        <ChevronLeft size={24} color={colors.text.primary} />
+      </Pressable>
+
       <ScrollView bounces={false} showsVerticalScrollIndicator={false}>
         <Animated.Image
           sharedTransitionTag={id as string}
@@ -55,6 +74,13 @@ export default function DetailScreen() {
             <View style={styles.infoRow}>
               <Calendar size={16} color={colors.chentil.rosePink} />
               <Text style={styles.infoText}>Since {since}</Text>
+            </View>
+          )}
+
+          {date && (
+            <View style={styles.infoRow}>
+              <Calendar size={16} color={colors.chentil.rosePink} />
+              <Text style={styles.infoText}>{formatDate(date as string)}</Text>
             </View>
           )}
 
@@ -153,6 +179,7 @@ const styles = StyleSheet.create({
     color: colors.text.primary,
     lineHeight: 24,
     marginVertical: 16,
+    textAlign: 'justify',
   },
   actionButtons: {
     gap: 12,
@@ -192,5 +219,25 @@ const styles = StyleSheet.create({
     fontFamily: 'PlusJakartaSans-SemiBold',
     fontSize: 16,
     color: colors.background.primary,
+  },
+  backButton: {
+    position: 'absolute',
+    top: 44,
+    left: 16,
+    zIndex: 10,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.15,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
 });

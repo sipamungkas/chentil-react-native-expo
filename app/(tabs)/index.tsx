@@ -25,18 +25,24 @@ const NEWS_SLIDES = [
     title: 'Explore Borobudur Temple',
     image:
       'https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?auto=format&fit=crop&q=80&w=1200',
+    date: '2024-03-15',
+    description: "Embark on a journey through time at Borobudur Temple, the world's largest Buddhist temple complex and a UNESCO World Heritage site. Built in the 8th and 9th centuries during the Sailendra Dynasty, this architectural masterpiece stands as a testament to Indonesia's rich cultural heritage. The temple's nine stacked platforms, adorned with 2,672 relief panels and 504 Buddha statues, tell an epic story of Buddhist cosmology and teachings. At sunrise, witness the magical moment when the first light bathes the temple's stone surfaces, creating an ethereal atmosphere as mist rises from the surrounding Menoreh Hills. The temple's strategic location, encircled by four volcanoes - Merapi, Merbabu, Sumbing, and Sindoro - adds to its mystical allure. Recent archaeological studies have revealed new insights into the temple's construction techniques, where over 2 million stone blocks were precisely cut and assembled without mortar. The temple's restoration, completed in 1983, stands as one of the world's most ambitious archaeological projects, ensuring that future generations can experience this remarkable monument to human creativity and spiritual devotion.",
   },
   {
     id: '2',
     title: 'Beautiful Beaches of Bali',
     image:
       'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&q=80&w=1200',
+    date: '2024-04-20',
+    description: "Discover the enchanting coastline of Bali, where each beach tells its own unique story. From the dramatic cliffs of Uluwatu to the gentle shores of Nusa Dua, Bali's beaches offer an incredible diversity of experiences. The island's southern peninsula features pristine white-sand beaches with world-class surf breaks, while hidden coves along the eastern coast reveal black sand beaches formed by ancient volcanic activity. Explore the famous Kuta Beach, where spectacular sunsets paint the sky in brilliant hues every evening, or venture to the more secluded Bingin Beach, where traditional fishing boats dot the horizon at dawn. The beach culture here is deeply intertwined with local traditions, as evidenced by the daily offerings placed on the sand and the ancient temples that stand guard over the coastline. Modern beach clubs and traditional warungs coexist harmoniously, offering visitors both luxury and authentic experiences. The marine life is equally impressive, with vibrant coral reefs home to over 500 species of reef-building corals and countless tropical fish species. Recent conservation efforts have established marine protected areas, ensuring these coastal ecosystems remain pristine for future generations to enjoy.",
   },
   {
     id: '3',
     title: 'Raja Ampat Adventures',
     image:
       'https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?auto=format&fit=crop&q=80&w=1200',
+    date: '2024-05-10',
+    description: "Venture into Raja Ampat, the crown jewel of marine biodiversity, where an underwater paradise awaits in the heart of the Coral Triangle. This archipelago of over 1,500 islands represents the pinnacle of marine biodiversity, hosting more than 1,300 fish species, 700 mollusk species, and 75% of the world's known coral species. The name Raja Ampat, meaning 'Four Kings,' derives from an ancient legend of four royal siblings who ruled these mystical waters. Above water, limestone karst islands create a dramatic landscape of hidden lagoons, pristine beaches, and dense jungle canopies where rare birds of paradise perform their elaborate courtship dances. The crystal-clear waters offer visibility up to 30 meters, revealing an underwater landscape of vast coral gardens, steep walls, and caves teeming with marine life. Local communities maintain traditional sustainable fishing practices, living in harmony with their environment as they have for generations. Recent scientific expeditions continue to discover new species in these waters, highlighting Raja Ampat's importance as a living laboratory for marine biodiversity. Conservation initiatives, supported by eco-tourism, help protect this unique ecosystem while providing sustainable livelihoods for local communities.",
   },
 ];
 
