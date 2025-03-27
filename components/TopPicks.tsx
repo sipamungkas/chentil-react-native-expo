@@ -26,14 +26,22 @@ export function TopPicks({ places, onPlacePress }: TopPicksProps) {
           style={styles.card}
           onPress={() => onPlacePress(place.id)}
         >
-          <Image source={{ uri: place.image }} style={styles.image} contentFit="cover" />
+          <Image
+            source={{ uri: place.image }}
+            style={styles.image}
+            contentFit="cover"
+          />
           <View style={styles.content}>
             <Text style={styles.name}>{place.name}</Text>
             <Text style={styles.location}>{place.location}</Text>
-            <View style={styles.ratingContainer}>
-              <Star size={16} color={colors.chentil.watermelon} fill={colors.chentil.watermelon} />
+            {/* <View style={styles.ratingContainer}>
+              <Star
+                size={16}
+                color={colors.chentil.watermelon}
+                fill={colors.chentil.watermelon}
+              />
               <Text style={styles.rating}>{place.rating}</Text>
-            </View>
+            </View> */}
           </View>
         </TouchableOpacity>
       ))}
@@ -57,6 +65,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     marginBottom: 16,
     overflow: 'hidden',
+    elevation: 1,
   },
   image: {
     width: 120,
@@ -69,7 +78,7 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: colors.text.primary,
+    color: colors.brand.primary,
     marginBottom: 4,
   },
   location: {
@@ -86,4 +95,4 @@ const styles = StyleSheet.create({
     color: colors.text.primary,
     marginLeft: 4,
   },
-}); 
+});
