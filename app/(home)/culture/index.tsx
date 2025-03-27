@@ -11,6 +11,7 @@ import { Search, Calendar } from 'lucide-react-native';
 import { useRouter } from 'expo-router';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import { colors } from '@/theme/colors';
+import { ItemCard } from '@/components/ItemCard';
 
 const CULTURAL_ITEMS = [
   {
@@ -86,31 +87,40 @@ export default function CultureScreen() {
 
         <View style={styles.content}>
           {CULTURAL_ITEMS.map((item, index) => (
-            <Animated.View
+            <ItemCard
               key={item.id}
               entering={FadeInDown.delay(index * 100)}
-              style={styles.card}
-            >
-              <Image source={{ uri: item.image }} style={styles.image} />
-              <View style={styles.cardContent}>
-                <View style={styles.cardHeader}>
-                  <Text style={styles.cultureName}>{item.name}</Text>
-                  <View style={styles.sinceContainer}>
-                    <Calendar size={14} color="#4A5568" />
-                    <Text style={styles.sinceText}>Since {item.since}</Text>
-                  </View>
-                </View>
-                <Text style={styles.description} numberOfLines={2}>
-                  {item.description}
-                </Text>
-                <Pressable
-                  style={styles.learnMoreButton}
-                  onPress={() => router.push(`/culture/${item.id}`)}
-                >
-                  <Text style={styles.learnMoreText}>Learn More</Text>
-                </Pressable>
-              </View>
-            </Animated.View>
+              name={item.name}
+              description={item.description}
+              image={item.image}
+              since={item.since}
+              onPress={() => {}}
+            />
+            // <Animated.View
+            //   key={item.id}
+            //   entering={FadeInDown.delay(index * 100)}
+            //   style={styles.card}
+            // >
+            //   <Image source={{ uri: item.image }} style={styles.image} />
+            //   <View style={styles.cardContent}>
+            //     <View style={styles.cardHeader}>
+            //       <Text style={styles.cultureName}>{item.name}</Text>
+            //       <View style={styles.sinceContainer}>
+            //         <Calendar size={14} color="#4A5568" />
+            //         <Text style={styles.sinceText}>Since {item.since}</Text>
+            //       </View>
+            //     </View>
+            //     <Text style={styles.description} numberOfLines={2}>
+            //       {item.description}
+            //     </Text>
+            //     <Pressable
+            //       style={styles.learnMoreButton}
+            //       onPress={() => router.push(`/culture/${item.id}`)}
+            //     >
+            //       <Text style={styles.learnMoreText}>Learn More</Text>
+            //     </Pressable>
+            //   </View>
+            // </Animated.View>
           ))}
         </View>
       </ScrollView>
@@ -156,70 +166,5 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: 20,
-  },
-  card: {
-    backgroundColor: colors.background.primary,
-    borderRadius: 16,
-    overflow: 'hidden',
-    marginBottom: 20,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 3,
-  },
-  image: {
-    width: '100%',
-    height: 200,
-  },
-  cardContent: {
-    padding: 16,
-  },
-  cardHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 8,
-  },
-  cultureName: {
-    fontFamily: 'PlusJakartaSans-SemiBold',
-    fontSize: 18,
-    color: '#1A202C',
-  },
-  sinceContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: colors.background.tertiary,
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 8,
-  },
-  sinceText: {
-    fontFamily: 'PlusJakartaSans-Medium',
-    fontSize: 12,
-    color: '#4A5568',
-    marginLeft: 4,
-  },
-  description: {
-    fontFamily: 'PlusJakartaSans-Regular',
-    fontSize: 14,
-    color: '#4A5568',
-    lineHeight: 20,
-    marginBottom: 12,
-  },
-  learnMoreButton: {
-    backgroundColor: '#48BB78',
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    borderRadius: 8,
-    alignSelf: 'flex-start',
-  },
-  learnMoreText: {
-    fontFamily: 'PlusJakartaSans-SemiBold',
-    fontSize: 14,
-    color: '#fff',
   },
 });

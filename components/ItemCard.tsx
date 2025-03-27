@@ -1,17 +1,21 @@
 import { colors } from '@/theme/colors';
 import { Image } from 'expo-image';
 import { View, Text, StyleSheet } from 'react-native';
-import { MapPin } from 'lucide-react-native';
+import { Calendar, MapPin } from 'lucide-react-native';
 import { GestureResponderEvent, Pressable } from 'react-native';
 import Animated from 'react-native-reanimated';
-import type { EntryExitAnimationFunction, FadeInDown } from 'react-native-reanimated';
+import type {
+  EntryExitAnimationFunction,
+  FadeInDown,
+} from 'react-native-reanimated';
 
 export interface ItemCardProps {
   entering: EntryExitAnimationFunction | undefined | FadeInDown;
   onPress: ((event: GestureResponderEvent) => void) | null | undefined;
   image: string;
   name: string;
-  location?: string;
+  location?: string; //use it on destination or something that need location
+  since?: string; //use it on culture
   description: string;
 }
 
@@ -22,6 +26,7 @@ export function ItemCard({
   name,
   location,
   description,
+  since,
 }: ItemCardProps) {
   return (
     <Animated.View entering={entering} style={styles.card}>
@@ -34,6 +39,12 @@ export function ItemCard({
             <View style={styles.locationRow}>
               <MapPin size={16} color="#4A5568" />
               <Text style={styles.locationText}>{location}</Text>
+            </View>
+          )}
+          {since && (
+            <View style={styles.locationRow}>
+              <Calendar size={14} color="#4A5568" />
+              <Text style={styles.sinceText}>Since {since}</Text>
             </View>
           )}
 
@@ -73,7 +84,7 @@ const styles = StyleSheet.create({
   name: {
     fontFamily: 'PlusJakartaSans-SemiBold',
     fontSize: 18,
-    color: '#1A202C',
+    color: colors.brand.primary,
     marginBottom: 8,
   },
   locationRow: {
@@ -85,12 +96,26 @@ const styles = StyleSheet.create({
     fontFamily: 'PlusJakartaSans-Medium',
     fontSize: 14,
     color: '#4A5568',
-    marginLeft: 8,
+    marginLeft: 4,
+  },
+  sinceContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: colors.background.tertiary,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 8,
+  },
+  sinceText: {
+    fontFamily: 'PlusJakartaSans-Medium',
+    fontSize: 12,
+    color: '#4A5568',
+    marginLeft: 4,
   },
   description: {
     fontFamily: 'PlusJakartaSans-Regular',
     fontSize: 14,
-    color: '#4A5568',
+    color: colors.text.primary,
     lineHeight: 20,
     marginBottom: 12,
   },
