@@ -1,6 +1,7 @@
 import { View, Text, Pressable, StyleSheet } from 'react-native';
 import { LucideIcon } from 'lucide-react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
+import { colors } from '@/theme/colors';
 
 interface MenuItem {
   icon: LucideIcon;
@@ -59,7 +60,8 @@ const styles = StyleSheet.create({
   },
   menuLabel: {
     fontSize: 12,
-    color: '#4A5568',
+    color: colors.chentil.punch,
     textAlign: 'center',
+    fontFamily: 'PlusJakartaSans-Regular',
   },
 });
