@@ -16,7 +16,7 @@ export interface ItemCardProps {
   name: string;
   location?: string; //use it on destination or something that need location
   since?: string; //use it on culture
-  description: string;
+  description?: string;
 }
 
 export function ItemCard({
@@ -37,20 +37,22 @@ export function ItemCard({
 
           {location && (
             <View style={styles.locationRow}>
-              <MapPin size={16} color="#4A5568" />
+              <MapPin size={16} color={colors.chentil.rosePink} />
               <Text style={styles.locationText}>{location}</Text>
             </View>
           )}
           {since && (
             <View style={styles.locationRow}>
-              <Calendar size={14} color="#4A5568" />
+              <Calendar size={14} color={colors.chentil.rosePink} />
               <Text style={styles.sinceText}>Since {since}</Text>
             </View>
           )}
 
-          <Text style={styles.description} numberOfLines={2}>
-            {description}
-          </Text>
+          {description && (
+            <Text style={styles.description} numberOfLines={2}>
+              {description}
+            </Text>
+          )}
         </View>
       </Pressable>
     </Animated.View>
