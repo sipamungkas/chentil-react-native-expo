@@ -4,6 +4,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { Calendar, MapPin } from 'lucide-react-native';
 import { GestureResponderEvent, Pressable } from 'react-native';
 import Animated from 'react-native-reanimated';
+import { useRouter } from 'expo-router';
 import type {
   EntryExitAnimationFunction,
   FadeInDown,
@@ -11,22 +12,24 @@ import type {
 
 export interface ItemCardProps {
   entering: EntryExitAnimationFunction | undefined | FadeInDown;
-  onPress: ((event: GestureResponderEvent) => void) | null | undefined;
+  id: string;
   image: string;
   name: string;
   location?: string; //use it on destination or something that need location
   since?: string; //use it on culture
   description?: string;
+  onPress?: ((event: GestureResponderEvent) => void) | null | undefined;
 }
 
 export function ItemCard({
   entering,
-  onPress,
+  id,
   image,
   name,
   location,
   description,
   since,
+  onPress,
 }: ItemCardProps) {
   return (
     <Animated.View entering={entering} style={styles.card}>

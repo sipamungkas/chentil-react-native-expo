@@ -71,6 +71,12 @@ export default function IslandDestinationsScreen() {
   const { island } = useLocalSearchParams();
   const router = useRouter();
   const islandData = DESTINATIONS[island as keyof typeof DESTINATIONS];
+  const onPress = (params) => {
+    router.push({
+      pathname: '/detail',
+      params,
+    });
+  };
 
   if (!islandData) {
     return (
@@ -102,12 +108,13 @@ export default function IslandDestinationsScreen() {
         <View style={styles.content}>
           {islandData.destinations.map((destination, index) => (
             <ItemCard
+              id={destination.id}
               key={destination.id}
               entering={FadeInDown.delay(index * 200)}
               name={destination.name}
               description={destination.description}
               image={destination.image}
-              onPress={() => {}}
+              onPress={() => onPress({ ...destination })}
               location={destination.location}
             />
           ))}
