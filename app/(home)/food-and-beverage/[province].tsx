@@ -11,6 +11,7 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { ArrowLeft, MapPin, Clock, Utensils } from 'lucide-react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import { colors } from '@/theme/colors';
+import { ItemCard } from '@/components/ItemCard';
 
 const PROVINCE_FOODS = {
   aceh: {
@@ -109,37 +110,45 @@ export default function ProvinceFoodScreen() {
 
         <View style={styles.content}>
           {provinceData.foods.map((food, index) => (
-            <Animated.View
+            <ItemCard
               key={food.id}
-              entering={FadeInDown.delay(index * 200)}
-              style={styles.foodCard}
-            >
-              <Pressable
-                onPress={() =>
-                  router.push(`/food-and-beverage/${province}/${food.id}`)
-                }
-              >
-                <Image source={{ uri: food.image }} style={styles.foodImage} />
-                <View style={styles.foodInfo}>
-                  <Text style={styles.foodName}>{food.name}</Text>
-                  <Text style={styles.foodDescription} numberOfLines={2}>
-                    {food.description}
-                  </Text>
+              entering={FadeInDown.delay(index * 100)}
+              name={food.name}
+              description={food.description}
+              onPress={() => {}}
+              image={food.image}
+            />
+            // <Animated.View
+            //   key={food.id}
+            //   entering={FadeInDown.delay(index * 200)}
+            //   style={styles.foodCard}
+            // >
+            //   <Pressable
+            //     onPress={() =>
+            //       router.push(`/food-and-beverage/${province}/${food.id}`)
+            //     }
+            //   >
+            //     <Image source={{ uri: food.image }} style={styles.foodImage} />
+            //     <View style={styles.foodInfo}>
+            //       <Text style={styles.foodName}>{food.name}</Text>
+            //       <Text style={styles.foodDescription} numberOfLines={2}>
+            //         {food.description}
+            //       </Text>
 
-                  <View style={styles.foodDetails}>
-                    <View style={styles.detailItem}>
-                      <Clock size={16} color="#4A5568" />
-                      <Text style={styles.detailText}>{food.cookingTime}</Text>
-                    </View>
+            //       <View style={styles.foodDetails}>
+            //         <View style={styles.detailItem}>
+            //           <Clock size={16} color="#4A5568" />
+            //           <Text style={styles.detailText}>{food.cookingTime}</Text>
+            //         </View>
 
-                    <View style={styles.detailItem}>
-                      <Utensils size={16} color="#4A5568" />
-                      <Text style={styles.detailText}>{food.spiceLevel}</Text>
-                    </View>
-                  </View>
-                </View>
-              </Pressable>
-            </Animated.View>
+            //         <View style={styles.detailItem}>
+            //           <Utensils size={16} color="#4A5568" />
+            //           <Text style={styles.detailText}>{food.spiceLevel}</Text>
+            //         </View>
+            //       </View>
+            //     </View>
+            //   </Pressable>
+            // </Animated.View>
           ))}
         </View>
       </ScrollView>
