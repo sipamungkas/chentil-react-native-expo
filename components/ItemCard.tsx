@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { Calendar, MapPin } from 'lucide-react-native';
 import { GestureResponderEvent, Pressable } from 'react-native';
 import Animated from 'react-native-reanimated';
-import { useRouter } from 'expo-router';
+
 import type {
   EntryExitAnimationFunction,
   FadeInDown,
@@ -34,7 +34,11 @@ export function ItemCard({
   return (
     <Animated.View entering={entering} style={styles.card}>
       <Pressable onPress={onPress}>
-        <Image source={{ uri: image }} style={styles.image} />
+        <Animated.Image
+          sharedTransitionTag={id}
+          source={{ uri: image }}
+          style={styles.image}
+        />
         <View style={styles.info}>
           <Text style={styles.name}>{name}</Text>
 

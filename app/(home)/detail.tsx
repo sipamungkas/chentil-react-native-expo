@@ -11,6 +11,7 @@ import {
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useState } from 'react';
+import Animated from 'react-native-reanimated';
 
 interface DetailScreenProps {
   image: string;
@@ -21,7 +22,8 @@ interface DetailScreenProps {
 }
 
 export default function DetailScreen() {
-  const { image, name, description, location, since } = useLocalSearchParams();
+  const { id, image, name, description, location, since } =
+    useLocalSearchParams();
   const router = useRouter();
   const [isFavorite, setIsFavorite] = useState(false);
   const [isWishlisted, setIsWishlisted] = useState(false);
@@ -33,7 +35,11 @@ export default function DetailScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView bounces={false} showsVerticalScrollIndicator={false}>
-        <Image source={{ uri: image }} style={styles.image} />
+        <Animated.Image
+          sharedTransitionTag={id as string}
+          source={{ uri: image as string }}
+          style={styles.image}
+        />
 
         <View style={styles.content}>
           <Text style={styles.name}>{name}</Text>
