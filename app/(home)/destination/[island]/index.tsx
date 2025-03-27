@@ -11,6 +11,7 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { ArrowLeft, MapPin, Star } from 'lucide-react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import { colors } from '@/theme/colors';
+import { ItemCard } from '@/components/ItemCard';
 
 const DESTINATIONS = {
   sumatra: {
@@ -100,41 +101,15 @@ export default function IslandDestinationsScreen() {
 
         <View style={styles.content}>
           {islandData.destinations.map((destination, index) => (
-            <Animated.View
+            <ItemCard
               key={destination.id}
               entering={FadeInDown.delay(index * 200)}
-              style={styles.destinationCard}
-            >
-              <Pressable
-                onPress={() =>
-                  router.push(`/destination/${island}/${destination.id}`)
-                }
-              >
-                <Image
-                  source={{ uri: destination.image }}
-                  style={styles.destinationImage}
-                />
-                <View style={styles.destinationInfo}>
-                  <Text style={styles.destinationName}>{destination.name}</Text>
-
-                  <View style={styles.locationRow}>
-                    <MapPin size={16} color="#4A5568" />
-                    <Text style={styles.locationText}>
-                      {destination.location}
-                    </Text>
-                  </View>
-
-                  <Text style={styles.destinationDescription} numberOfLines={2}>
-                    {destination.description}
-                  </Text>
-
-                  <View style={styles.ratingContainer}>
-                    <Star size={16} color="#FFB800" fill="#FFB800" />
-                    <Text style={styles.ratingText}>{destination.rating}</Text>
-                  </View>
-                </View>
-              </Pressable>
-            </Animated.View>
+              name={destination.name}
+              description={destination.description}
+              image={destination.image}
+              onPress={() => {}}
+              location={destination.location}
+            />
           ))}
         </View>
       </ScrollView>
@@ -184,63 +159,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#1A202C',
     marginBottom: 16,
-  },
-  destinationCard: {
-    backgroundColor: colors.background.primary,
-    borderRadius: 16,
-    marginBottom: 20,
-    overflow: 'hidden',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 3,
-  },
-  destinationImage: {
-    width: '100%',
-    height: 200,
-    borderTopLeftRadius: 16,
-    borderTopRightRadius: 16,
-  },
-  destinationInfo: {
-    padding: 16,
-  },
-  destinationName: {
-    fontFamily: 'PlusJakartaSans-SemiBold',
-    fontSize: 18,
-    color: '#1A202C',
-    marginBottom: 8,
-  },
-  locationRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 8,
-  },
-  locationText: {
-    fontFamily: 'PlusJakartaSans-Medium',
-    fontSize: 14,
-    color: '#4A5568',
-    marginLeft: 8,
-  },
-  destinationDescription: {
-    fontFamily: 'PlusJakartaSans-Regular',
-    fontSize: 14,
-    color: '#4A5568',
-    lineHeight: 20,
-    marginBottom: 12,
-  },
-  ratingContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  ratingText: {
-    fontFamily: 'PlusJakartaSans-SemiBold',
-    fontSize: 14,
-    color: '#1A202C',
-    marginLeft: 8,
   },
   backButtonText: {
     fontFamily: 'PlusJakartaSans-SemiBold',
