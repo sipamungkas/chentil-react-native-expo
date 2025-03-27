@@ -86,6 +86,13 @@ export default function RecommendationsScreen() {
     }
   };
 
+  const onPress = (params: any) => {
+    router.push({
+      pathname: '/detail',
+      params,
+    });
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView
@@ -107,7 +114,7 @@ export default function RecommendationsScreen() {
             >
               <Pressable
                 style={styles.recommendationCard}
-                onPress={() => router.push(item.route as any)}
+                onPress={() => onPress(item)}
               >
                 <Image source={{ uri: item.image }} style={styles.itemImage} />
                 <View style={styles.itemInfo}>

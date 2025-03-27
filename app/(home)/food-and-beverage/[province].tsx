@@ -80,6 +80,12 @@ export default function ProvinceFoodScreen() {
   const { province } = useLocalSearchParams();
   const router = useRouter();
   const provinceData = PROVINCE_FOODS[province as keyof typeof PROVINCE_FOODS];
+  const onPress = (params: any) => {
+    router.push({
+      pathname: '/detail',
+      params,
+    });
+  };
 
   if (!provinceData) {
     return (
@@ -115,40 +121,10 @@ export default function ProvinceFoodScreen() {
               entering={FadeInDown.delay(index * 100)}
               name={food.name}
               description={food.description}
-              onPress={() => {}}
+              onPress={() => onPress(food)}
               image={food.image}
+              id={food.id}
             />
-            // <Animated.View
-            //   key={food.id}
-            //   entering={FadeInDown.delay(index * 200)}
-            //   style={styles.foodCard}
-            // >
-            //   <Pressable
-            //     onPress={() =>
-            //       router.push(`/food-and-beverage/${province}/${food.id}`)
-            //     }
-            //   >
-            //     <Image source={{ uri: food.image }} style={styles.foodImage} />
-            //     <View style={styles.foodInfo}>
-            //       <Text style={styles.foodName}>{food.name}</Text>
-            //       <Text style={styles.foodDescription} numberOfLines={2}>
-            //         {food.description}
-            //       </Text>
-
-            //       <View style={styles.foodDetails}>
-            //         <View style={styles.detailItem}>
-            //           <Clock size={16} color="#4A5568" />
-            //           <Text style={styles.detailText}>{food.cookingTime}</Text>
-            //         </View>
-
-            //         <View style={styles.detailItem}>
-            //           <Utensils size={16} color="#4A5568" />
-            //           <Text style={styles.detailText}>{food.spiceLevel}</Text>
-            //         </View>
-            //       </View>
-            //     </View>
-            //   </Pressable>
-            // </Animated.View>
           ))}
         </View>
       </ScrollView>

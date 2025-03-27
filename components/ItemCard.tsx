@@ -42,20 +42,20 @@ export function ItemCard({
         <View style={styles.info}>
           <Text style={styles.name}>{name}</Text>
 
-          {location && (
+          {location!! && (
             <View style={styles.locationRow}>
               <MapPin size={16} color={colors.chentil.rosePink} />
               <Text style={styles.locationText}>{location}</Text>
             </View>
           )}
-          {since && (
+          {since!! && (
             <View style={styles.locationRow}>
               <Calendar size={14} color={colors.chentil.rosePink} />
               <Text style={styles.sinceText}>Since {since}</Text>
             </View>
           )}
 
-          {description && (
+          {description!! && (
             <Text style={styles.description} numberOfLines={2}>
               {description}
             </Text>
