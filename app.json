@@ -31,7 +31,13 @@
       "typedRoutes": true
     },
     "android": {
-      "package": "com.sipamungkas.chentil"
+      "package": "com.sipamungkas.chentil",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon/ic_launcher_foreground.png",
+        "monchromeImage": "./assets/icon/ic_launcher_monochrome.png",
+        "backgroundImage": "./assets/icon/ic_launcher_background.png",
+        "backgroundColor": "#DF5188"
+      }
     }
   }
 }
