@@ -80,9 +80,9 @@ export default function CalendarScreen() {
         <Calendar
           style={styles.calendar}
           theme={{
-            backgroundColor: '#ffffff',
-            calendarBackground: '#ffffff',
-            textSectionTitleColor: '#1A202C',
+            backgroundColor: '#fff',
+            calendarBackground: '#fff',
+            textSectionTitleColor: colors.brand.secondary,
             selectedDayBackgroundColor: '#FF4D8D',
             selectedDayTextColor: '#ffffff',
             todayTextColor: '#FF4D8D',
@@ -91,7 +91,7 @@ export default function CalendarScreen() {
             dotColor: '#FF4D8D',
             selectedDotColor: '#ffffff',
             arrowColor: '#FF4D8D',
-            monthTextColor: '#1A202C',
+            monthTextColor: colors.brand.primary,
             textDayFontFamily: 'PlusJakartaSans-Medium',
             textMonthFontFamily: 'PlusJakartaSans-Bold',
             textDayHeaderFontFamily: 'PlusJakartaSans-Medium',
@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
   calendar: {
     marginBottom: 20,
     borderBottomWidth: 1,
-    borderBottomColor: '#E2E8F0',
+    borderBottomColor: colors.border.medium,
   },
   eventsSection: {
     padding: 20,
