@@ -1,15 +1,24 @@
 {
   "expo": {
-    "name": "chentil",
+    "name": "Chentil",
     "slug": "chentil",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/icon/ic_launcher.png",
     "scheme": "com.sipamungkas",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
+    "android": {
+      "package": "com.sipamungkas.chentil",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon/ic_launcher_foreground.png",
+        "monchromeImage": "./assets/icon/ic_launcher_monochrome.png",
+        "backgroundImage": "./assets/icon/ic_launcher_background.png"
+      }
+    },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.sipamungkas.chentil"
     },
     "web": {
       "bundler": "metro",
@@ -21,7 +30,7 @@
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#DF5188",
+          "backgroundColor": "#241C1C",
           "image": "./assets/splash-icon.png",
           "imageWidth": 200
         }
@@ -29,15 +38,6 @@
     ],
     "experiments": {
       "typedRoutes": true
-    },
-    "android": {
-      "package": "com.sipamungkas.chentil",
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/icon/ic_launcher_foreground.png",
-        "monchromeImage": "./assets/icon/ic_launcher_monochrome.png",
-        "backgroundImage": "./assets/icon/ic_launcher_background.png",
-        "backgroundColor": "#DF5188"
-      }
     }
   }
 }
