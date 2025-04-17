@@ -13,14 +13,13 @@ import {
 import { Link } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
-import { useAuth } from '../context/auth';
 import { colors } from '@/theme/colors';
+import { useAuthStore } from '@/store/auth';
 
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const { signIn } = useAuth();
+  const { signIn, isLoading } = useAuthStore();
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -28,13 +27,10 @@ export default function LoginScreen() {
       return;
     }
 
-    setIsLoading(true);
     try {
       await signIn(email, password);
     } catch (error) {
       Alert.alert('Error', error instanceof Error ? error.message : 'Failed to sign in');
-    } finally {
-      setIsLoading(false);
     }
   };
 

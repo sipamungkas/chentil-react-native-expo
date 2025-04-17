@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Stack } from 'expo-router';
+import { Stack, router } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import {
   useFonts,
@@ -9,8 +9,8 @@ import {
   PlusJakartaSans_700Bold,
 } from '@expo-google-fonts/plus-jakarta-sans';
 import { useFrameworkReady } from '@/hooks/useFrameworkReady';
-import { SplashScreen } from 'expo-router';
-import { AuthProvider } from './context/auth';
+import { SplashScreen, useRootNavigationState } from 'expo-router';
+import { useAuthStore } from '@/store/auth';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -24,23 +24,32 @@ export default function RootLayout() {
     'PlusJakartaSans-Bold': PlusJakartaSans_700Bold,
   });
 
+  const user = useAuthStore((state) => state.user);
+  console.log({ user });
+
   useEffect(() => {
     if (fontsLoaded || fontError) {
       SplashScreen.hideAsync();
+      if (!user) {
+        router.replace('/(auth)/login');
+      } else {
+        router.replace('/(tabs)');
+      }
     }
-  }, [fontsLoaded, fontError]);
+  }, [fontsLoaded, fontError, user]);
+
+  // useEffect(() => {
+  //   // Check authentication status and redirect accordingly
+  // }, [user]);
 
   if (!fontsLoaded && !fontError) {
     return null;
   }
 
   return (
-    <AuthProvider>
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="(auth)" />
-        <Stack.Screen name="(app)" />
-      </Stack>
-      <StatusBar style="auto" />
-    </AuthProvider>
+    <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="(auth)" />
+      <Stack.Screen name="(tabs)" />
+    </Stack>
   );
 }

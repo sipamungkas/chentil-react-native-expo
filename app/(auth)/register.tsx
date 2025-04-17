@@ -13,16 +13,15 @@ import {
 import { Link } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
-import { useAuth } from '../context/auth';
 import { colors } from '@/theme/colors';
+import { useAuthStore } from '@/store/auth';
 
 export default function RegisterScreen() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const { signUp } = useAuth();
+  const { signUp, isLoading } = useAuthStore();
 
   const handleRegister = async () => {
     if (!name || !email || !password || !confirmPassword) {
@@ -35,13 +34,10 @@ export default function RegisterScreen() {
       return;
     }
 
-    setIsLoading(true);
     try {
       await signUp(name, email, password);
     } catch (error) {
       Alert.alert('Error', error instanceof Error ? error.message : 'Failed to create account');
-    } finally {
-      setIsLoading(false);
     }
   };
 
