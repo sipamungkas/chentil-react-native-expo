@@ -5,14 +5,11 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"],
-      "@/store/*": ["app/store/*"],
-      "@/theme/*": ["theme/*"]
+      "@/store/*": ["src/store/*"],
+      "@/theme/*": ["theme/*"],
+      "@/api/*": ["src/api/*"],
+      "@/types/*": ["src/types/*"]
     }
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    ".expo/types/**/*.ts",
-    "expo-env.d.ts"
-  ]
+  "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"]
 }

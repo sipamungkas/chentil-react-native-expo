@@ -10,7 +10,7 @@ import {
 } from '@expo-google-fonts/plus-jakarta-sans';
 import { useFrameworkReady } from '@/hooks/useFrameworkReady';
 import { SplashScreen, useRootNavigationState } from 'expo-router';
-import { useAuthStore } from '@/store/auth';
+import { useAuthStore } from '@/store/authStore';
 
 SplashScreen.preventAutoHideAsync();
 

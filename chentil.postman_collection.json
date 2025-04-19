@@ -1,0 +1,2598 @@
+{
+	"info": {
+		"_postman_id": "d6744b12-95fc-4538-8e2e-d1812045b363",
+		"name": "chentil",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6708077"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"test@sipamungkas.com\",\n    \"password\": \"qwerty123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"test@sipamungkas.com\",\n    \"password\": \"qwerty123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/login",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.4.1"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 17 Apr 2025 15:20:04 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"message\": \"User logged in successfully\",\n    \"data\": {\n        \"user\": {\n            \"id\": 1,\n            \"name\": \"Ragil Pamungkas\",\n            \"email\": \"test@sipamungkas.com\",\n            \"role\": \"admin\",\n            \"email_verified_at\": \"2025-04-14T16:17:06.000000Z\",\n            \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n            \"updated_at\": \"2025-04-14T16:17:06.000000Z\"\n        },\n        \"token\": \"2|ifntzO8M9JvyZAiiICuMT4QYsb6tElm5ecySmixYb05ad88f\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "2|ifntzO8M9JvyZAiiICuMT4QYsb6tElm5ecySmixYb05ad88f",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/logout",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"logout"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/api/logout",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"logout"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.4.1"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 17 Apr 2025 16:36:23 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"message\": \"Successfully logged out\"\n}"
+						}
+					]
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Ragil Test2\",\n    \"email\": \"test2@sipamungkas.com\",\n    \"password\": \"qwerty123\",\n    \"password_confirmation\":\"qwerty123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/register",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "201 Created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\":\"Ragil Test2\",\n    \"email\": \"test2@sipamungkas.com\",\n    \"password\": \"qwerty123\",\n    \"password_confirmation\":\"qwerty123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/register",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.4.1"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 17 Apr 2025 16:18:53 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"message\": \"User registered successfully\",\n    \"data\": {\n        \"user\": {\n            \"name\": \"Ragil Test2\",\n            \"email\": \"test2@sipamungkas.com\",\n            \"updated_at\": \"2025-04-17T16:18:53.000000Z\",\n            \"created_at\": \"2025-04-17T16:18:53.000000Z\",\n            \"id\": 2\n        },\n        \"token\": \"3|mtLO538QoovW6Le6ELJYAcp3lDPYpJdiK9ByqlY2c923524c\"\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "contents",
+			"item": [
+				{
+					"name": "destinations",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "4|yKYDwuSxhfTCrQxAAp34zkUT8ppyz8gsze2kM0Ge0967d379",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/destinations?per_page=10&island_id=1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"destinations"
+							],
+							"query": [
+								{
+									"key": "per_page",
+									"value": "10"
+								},
+								{
+									"key": "island_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/api/destinations?per_page=10&island_id=1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"destinations"
+									],
+									"query": [
+										{
+											"key": "per_page",
+											"value": "10"
+										},
+										{
+											"key": "island_id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.4.1"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 17 Apr 2025 17:21:38 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 3,\n            \"title\": \"Danau Toba\",\n            \"description\": \"A beautiful destination in Indonesia featuring natural wonders and cultural heritage.\",\n            \"category\": \"destination\",\n            \"province_id\": 1,\n            \"regency_id\": 20,\n            \"district_id\": 3,\n            \"image\": \"contents/destination-3.jpg\",\n            \"recommendation\": false,\n            \"since_century\": null,\n            \"established_year\": null,\n            \"latitude\": null,\n            \"longitude\": null,\n            \"is_visible\": true,\n            \"order\": 0,\n            \"created_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"updated_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"district\": {\n                \"id\": 3,\n                \"code\": \"1101021\",\n                \"regency_id\": 1,\n                \"name\": \"TEUPAH BARAT\",\n                \"created_at\": \"2025-04-14T16:17:07.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:07.000000Z\"\n            },\n            \"province\": {\n                \"id\": 1,\n                \"code\": \"11\",\n                \"name\": \"ACEH\",\n                \"island_id\": 1,\n                \"description\": null,\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-17T17:20:57.000000Z\",\n                \"island\": {\n                    \"id\": 1,\n                    \"name\": \"Sumatra\",\n                    \"description\": \"The sixth largest island in the world, known for its diverse wildlife, rainforests, and rich cultural heritage.\",\n                    \"image\": \"islands/island-1.jpg\",\n                    \"created_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"updated_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"provinces_count\": 4\n                }\n            },\n            \"regency\": {\n                \"id\": 20,\n                \"code\": \"1172\",\n                \"province_id\": 1,\n                \"name\": \"KOTA SABANG\",\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:06.000000Z\"\n            }\n        },\n        {\n            \"id\": 6,\n            \"title\": \"Pulau Komodo\",\n            \"description\": \"A beautiful destination in Indonesia featuring natural wonders and cultural heritage.\",\n            \"category\": \"destination\",\n            \"province_id\": 2,\n            \"regency_id\": 20,\n            \"district_id\": 17,\n            \"image\": \"contents/destination-6.jpg\",\n            \"recommendation\": false,\n            \"since_century\": null,\n            \"established_year\": null,\n            \"latitude\": null,\n            \"longitude\": null,\n            \"is_visible\": true,\n            \"order\": 0,\n            \"created_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"updated_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"district\": {\n                \"id\": 17,\n                \"code\": \"1102031\",\n                \"regency_id\": 2,\n                \"name\": \"GUNUNG MERIAH\",\n                \"created_at\": \"2025-04-14T16:17:07.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:07.000000Z\"\n            },\n            \"province\": {\n                \"id\": 2,\n                \"code\": \"12\",\n                \"name\": \"SUMATERA UTARA\",\n                \"island_id\": 1,\n                \"description\": null,\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-17T17:21:05.000000Z\",\n                \"island\": {\n                    \"id\": 1,\n                    \"name\": \"Sumatra\",\n                    \"description\": \"The sixth largest island in the world, known for its diverse wildlife, rainforests, and rich cultural heritage.\",\n                    \"image\": \"islands/island-1.jpg\",\n                    \"created_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"updated_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"provinces_count\": 4\n                }\n            },\n            \"regency\": {\n                \"id\": 20,\n                \"code\": \"1172\",\n                \"province_id\": 1,\n                \"name\": \"KOTA SABANG\",\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:06.000000Z\"\n            }\n        },\n        {\n            \"id\": 8,\n            \"title\": \"Taman Nasional Bunaken\",\n            \"description\": \"A beautiful destination in Indonesia featuring natural wonders and cultural heritage.\",\n            \"category\": \"destination\",\n            \"province_id\": 6,\n            \"regency_id\": 17,\n            \"district_id\": 10,\n            \"image\": \"contents/destination-8.jpg\",\n            \"recommendation\": false,\n            \"since_century\": null,\n            \"established_year\": null,\n            \"latitude\": null,\n            \"longitude\": null,\n            \"is_visible\": true,\n            \"order\": 0,\n            \"created_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"updated_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"district\": {\n                \"id\": 10,\n                \"code\": \"1101051\",\n                \"regency_id\": 1,\n                \"name\": \"ALAFAN\",\n                \"created_at\": \"2025-04-14T16:17:07.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:07.000000Z\"\n            },\n            \"province\": {\n                \"id\": 6,\n                \"code\": \"16\",\n                \"name\": \"SUMATERA SELATAN\",\n                \"island_id\": 1,\n                \"description\": null,\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-17T17:21:12.000000Z\",\n                \"island\": {\n                    \"id\": 1,\n                    \"name\": \"Sumatra\",\n                    \"description\": \"The sixth largest island in the world, known for its diverse wildlife, rainforests, and rich cultural heritage.\",\n                    \"image\": \"islands/island-1.jpg\",\n                    \"created_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"updated_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"provinces_count\": 4\n                }\n            },\n            \"regency\": {\n                \"id\": 17,\n                \"code\": \"1117\",\n                \"province_id\": 1,\n                \"name\": \"KABUPATEN BENER MERIAH\",\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:06.000000Z\"\n            }\n        },\n        {\n            \"id\": 12,\n            \"title\": \"Tana Toraja\",\n            \"description\": \"A beautiful destination in Indonesia featuring natural wonders and cultural heritage.\",\n            \"category\": \"destination\",\n            \"province_id\": 1,\n            \"regency_id\": 2,\n            \"district_id\": 25,\n            \"image\": \"contents/destination-12.jpg\",\n            \"recommendation\": false,\n            \"since_century\": null,\n            \"established_year\": null,\n            \"latitude\": null,\n            \"longitude\": null,\n            \"is_visible\": true,\n            \"order\": 0,\n            \"created_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"updated_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"district\": {\n                \"id\": 25,\n                \"code\": \"1103020\",\n                \"regency_id\": 3,\n                \"name\": \"BAKONGAN\",\n                \"created_at\": \"2025-04-14T16:17:07.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:07.000000Z\"\n            },\n            \"province\": {\n                \"id\": 1,\n                \"code\": \"11\",\n                \"name\": \"ACEH\",\n                \"island_id\": 1,\n                \"description\": null,\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-17T17:20:57.000000Z\",\n                \"island\": {\n                    \"id\": 1,\n                    \"name\": \"Sumatra\",\n                    \"description\": \"The sixth largest island in the world, known for its diverse wildlife, rainforests, and rich cultural heritage.\",\n                    \"image\": \"islands/island-1.jpg\",\n                    \"created_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"updated_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"provinces_count\": 4\n                }\n            },\n            \"regency\": {\n                \"id\": 2,\n                \"code\": \"1102\",\n                \"province_id\": 1,\n                \"name\": \"KABUPATEN ACEH SINGKIL\",\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:06.000000Z\"\n            }\n        },\n        {\n            \"id\": 13,\n            \"title\": \"Pulau Belitung\",\n            \"description\": \"A beautiful destination in Indonesia featuring natural wonders and cultural heritage.\",\n            \"category\": \"destination\",\n            \"province_id\": 2,\n            \"regency_id\": 9,\n            \"district_id\": 25,\n            \"image\": \"contents/destination-13.jpg\",\n            \"recommendation\": false,\n            \"since_century\": null,\n            \"established_year\": null,\n            \"latitude\": null,\n            \"longitude\": null,\n            \"is_visible\": true,\n            \"order\": 0,\n            \"created_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"updated_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"district\": {\n                \"id\": 25,\n                \"code\": \"1103020\",\n                \"regency_id\": 3,\n                \"name\": \"BAKONGAN\",\n                \"created_at\": \"2025-04-14T16:17:07.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:07.000000Z\"\n            },\n            \"province\": {\n                \"id\": 2,\n                \"code\": \"12\",\n                \"name\": \"SUMATERA UTARA\",\n                \"island_id\": 1,\n                \"description\": null,\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-17T17:21:05.000000Z\",\n                \"island\": {\n                    \"id\": 1,\n                    \"name\": \"Sumatra\",\n                    \"description\": \"The sixth largest island in the world, known for its diverse wildlife, rainforests, and rich cultural heritage.\",\n                    \"image\": \"islands/island-1.jpg\",\n                    \"created_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"updated_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"provinces_count\": 4\n                }\n            },\n            \"regency\": {\n                \"id\": 9,\n                \"code\": \"1109\",\n                \"province_id\": 1,\n                \"name\": \"KABUPATEN PIDIE\",\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:06.000000Z\"\n            }\n        },\n        {\n            \"id\": 14,\n            \"title\": \"Gunung Rinjani\",\n            \"description\": \"A beautiful destination in Indonesia featuring natural wonders and cultural heritage.\",\n            \"category\": \"destination\",\n            \"province_id\": 2,\n            \"regency_id\": 20,\n            \"district_id\": 6,\n            \"image\": \"contents/destination-14.jpg\",\n            \"recommendation\": false,\n            \"since_century\": null,\n            \"established_year\": null,\n            \"latitude\": null,\n            \"longitude\": null,\n            \"is_visible\": true,\n            \"order\": 0,\n            \"created_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"updated_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"district\": {\n                \"id\": 6,\n                \"code\": \"1101031\",\n                \"regency_id\": 1,\n                \"name\": \"TELUK DALAM\",\n                \"created_at\": \"2025-04-14T16:17:07.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:07.000000Z\"\n            },\n            \"province\": {\n                \"id\": 2,\n                \"code\": \"12\",\n                \"name\": \"SUMATERA UTARA\",\n                \"island_id\": 1,\n                \"description\": null,\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-17T17:21:05.000000Z\",\n                \"island\": {\n                    \"id\": 1,\n                    \"name\": \"Sumatra\",\n                    \"description\": \"The sixth largest island in the world, known for its diverse wildlife, rainforests, and rich cultural heritage.\",\n                    \"image\": \"islands/island-1.jpg\",\n                    \"created_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"updated_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"provinces_count\": 4\n                }\n            },\n            \"regency\": {\n                \"id\": 20,\n                \"code\": \"1172\",\n                \"province_id\": 1,\n                \"name\": \"KOTA SABANG\",\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:06.000000Z\"\n            }\n        },\n        {\n            \"id\": 15,\n            \"title\": \"Kepulauan Derawan\",\n            \"description\": \"A beautiful destination in Indonesia featuring natural wonders and cultural heritage.\",\n            \"category\": \"destination\",\n            \"province_id\": 2,\n            \"regency_id\": 2,\n            \"district_id\": 28,\n            \"image\": \"contents/destination-15.jpg\",\n            \"recommendation\": false,\n            \"since_century\": null,\n            \"established_year\": null,\n            \"latitude\": null,\n            \"longitude\": null,\n            \"is_visible\": true,\n            \"order\": 0,\n            \"created_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"updated_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"district\": {\n                \"id\": 28,\n                \"code\": \"1103030\",\n                \"regency_id\": 3,\n                \"name\": \"KLUET SELATAN\",\n                \"created_at\": \"2025-04-14T16:17:07.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:07.000000Z\"\n            },\n            \"province\": {\n                \"id\": 2,\n                \"code\": \"12\",\n                \"name\": \"SUMATERA UTARA\",\n                \"island_id\": 1,\n                \"description\": null,\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-17T17:21:05.000000Z\",\n                \"island\": {\n                    \"id\": 1,\n                    \"name\": \"Sumatra\",\n                    \"description\": \"The sixth largest island in the world, known for its diverse wildlife, rainforests, and rich cultural heritage.\",\n                    \"image\": \"islands/island-1.jpg\",\n                    \"created_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"updated_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"provinces_count\": 4\n                }\n            },\n            \"regency\": {\n                \"id\": 2,\n                \"code\": \"1102\",\n                \"province_id\": 1,\n                \"name\": \"KABUPATEN ACEH SINGKIL\",\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:06.000000Z\"\n            }\n        }\n    ],\n    \"links\": {\n        \"first\": \"http://localhost:8000/api/destinations?page=1\",\n        \"last\": \"http://localhost:8000/api/destinations?page=1\",\n        \"prev\": null,\n        \"next\": null\n    },\n    \"meta\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"last_page\": 1,\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"&laquo; Previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http://localhost:8000/api/destinations?page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"Next &raquo;\",\n                \"active\": false\n            }\n        ],\n        \"path\": \"http://localhost:8000/api/destinations\",\n        \"per_page\": 10,\n        \"to\": 7,\n        \"total\": 7\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "top-favorites",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "4|yKYDwuSxhfTCrQxAAp34zkUT8ppyz8gsze2kM0Ge0967d379",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/top-favorites",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"top-favorites"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/api/top-favorites",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"top-favorites"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.4.1"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 18 Apr 2025 04:02:43 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"title\": \"Pantai Kuta\",\n            \"description\": \"A beautiful destination in Indonesia featuring natural wonders and cultural heritage.\",\n            \"category\": \"destination\",\n            \"province_id\": 8,\n            \"regency_id\": 14,\n            \"district_id\": 7,\n            \"image\": \"contents/destination-1.jpg\",\n            \"recommendation\": false,\n            \"since_century\": null,\n            \"established_year\": null,\n            \"latitude\": null,\n            \"longitude\": null,\n            \"is_visible\": true,\n            \"order\": 0,\n            \"created_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"updated_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"favorited_by_count\": 1,\n            \"district\": {\n                \"id\": 7,\n                \"code\": \"1101032\",\n                \"regency_id\": 1,\n                \"name\": \"SIMEULUE CUT\",\n                \"created_at\": \"2025-04-14T16:17:07.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:07.000000Z\"\n            },\n            \"province\": {\n                \"id\": 8,\n                \"code\": \"18\",\n                \"name\": \"LAMPUNG\",\n                \"island_id\": null,\n                \"description\": null,\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"island\": []\n            },\n            \"regency\": {\n                \"id\": 14,\n                \"code\": \"1114\",\n                \"province_id\": 1,\n                \"name\": \"KABUPATEN ACEH TAMIANG\",\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:06.000000Z\"\n            }\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "outbounds",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "4|yKYDwuSxhfTCrQxAAp34zkUT8ppyz8gsze2kM0Ge0967d379",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/outbounds?per_page=10&island_id=1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"outbounds"
+							],
+							"query": [
+								{
+									"key": "per_page",
+									"value": "10"
+								},
+								{
+									"key": "island_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/api/outbounds?per_page=10&island_id=1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"outbounds"
+									],
+									"query": [
+										{
+											"key": "per_page",
+											"value": "10"
+										},
+										{
+											"key": "island_id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.4.1"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 17 Apr 2025 17:22:45 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 16,\n            \"title\": \"Tokyo Adventure\",\n            \"description\": \"An exciting outbound trip package to explore international destinations.\",\n            \"category\": \"outbound\",\n            \"province_id\": 2,\n            \"regency_id\": 3,\n            \"district_id\": 12,\n            \"image\": \"contents/outbound-1.jpg\",\n            \"recommendation\": false,\n            \"since_century\": null,\n            \"established_year\": null,\n            \"latitude\": null,\n            \"longitude\": null,\n            \"is_visible\": true,\n            \"order\": 0,\n            \"created_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"updated_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"district\": {\n                \"id\": 12,\n                \"code\": \"1102011\",\n                \"regency_id\": 2,\n                \"name\": \"PULAU BANYAK BARAT\",\n                \"created_at\": \"2025-04-14T16:17:07.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:07.000000Z\"\n            },\n            \"province\": {\n                \"id\": 2,\n                \"code\": \"12\",\n                \"name\": \"SUMATERA UTARA\",\n                \"island_id\": 1,\n                \"description\": null,\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-17T17:21:05.000000Z\",\n                \"island\": {\n                    \"id\": 1,\n                    \"name\": \"Sumatra\",\n                    \"description\": \"The sixth largest island in the world, known for its diverse wildlife, rainforests, and rich cultural heritage.\",\n                    \"image\": \"islands/island-1.jpg\",\n                    \"created_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"updated_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"provinces_count\": 4\n                }\n            },\n            \"regency\": {\n                \"id\": 3,\n                \"code\": \"1103\",\n                \"province_id\": 1,\n                \"name\": \"KABUPATEN ACEH SELATAN\",\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:06.000000Z\"\n            }\n        },\n        {\n            \"id\": 18,\n            \"title\": \"Singapore Explorer\",\n            \"description\": \"An exciting outbound trip package to explore international destinations.\",\n            \"category\": \"outbound\",\n            \"province_id\": 1,\n            \"regency_id\": 14,\n            \"district_id\": 20,\n            \"image\": \"contents/outbound-3.jpg\",\n            \"recommendation\": false,\n            \"since_century\": null,\n            \"established_year\": null,\n            \"latitude\": null,\n            \"longitude\": null,\n            \"is_visible\": true,\n            \"order\": 0,\n            \"created_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"updated_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"district\": {\n                \"id\": 20,\n                \"code\": \"1102042\",\n                \"regency_id\": 2,\n                \"name\": \"SINGKOHOR\",\n                \"created_at\": \"2025-04-14T16:17:07.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:07.000000Z\"\n            },\n            \"province\": {\n                \"id\": 1,\n                \"code\": \"11\",\n                \"name\": \"ACEH\",\n                \"island_id\": 1,\n                \"description\": null,\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-17T17:20:57.000000Z\",\n                \"island\": {\n                    \"id\": 1,\n                    \"name\": \"Sumatra\",\n                    \"description\": \"The sixth largest island in the world, known for its diverse wildlife, rainforests, and rich cultural heritage.\",\n                    \"image\": \"islands/island-1.jpg\",\n                    \"created_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"updated_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"provinces_count\": 4\n                }\n            },\n            \"regency\": {\n                \"id\": 14,\n                \"code\": \"1114\",\n                \"province_id\": 1,\n                \"name\": \"KABUPATEN ACEH TAMIANG\",\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:06.000000Z\"\n            }\n        },\n        {\n            \"id\": 21,\n            \"title\": \"Hong Kong Journey\",\n            \"description\": \"An exciting outbound trip package to explore international destinations.\",\n            \"category\": \"outbound\",\n            \"province_id\": 1,\n            \"regency_id\": 11,\n            \"district_id\": 21,\n            \"image\": \"contents/outbound-6.jpg\",\n            \"recommendation\": false,\n            \"since_century\": null,\n            \"established_year\": null,\n            \"latitude\": null,\n            \"longitude\": null,\n            \"is_visible\": true,\n            \"order\": 0,\n            \"created_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"updated_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"district\": {\n                \"id\": 21,\n                \"code\": \"1102043\",\n                \"regency_id\": 2,\n                \"name\": \"KOTA BAHARU\",\n                \"created_at\": \"2025-04-14T16:17:07.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:07.000000Z\"\n            },\n            \"province\": {\n                \"id\": 1,\n                \"code\": \"11\",\n                \"name\": \"ACEH\",\n                \"island_id\": 1,\n                \"description\": null,\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-17T17:20:57.000000Z\",\n                \"island\": {\n                    \"id\": 1,\n                    \"name\": \"Sumatra\",\n                    \"description\": \"The sixth largest island in the world, known for its diverse wildlife, rainforests, and rich cultural heritage.\",\n                    \"image\": \"islands/island-1.jpg\",\n                    \"created_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"updated_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"provinces_count\": 4\n                }\n            },\n            \"regency\": {\n                \"id\": 11,\n                \"code\": \"1111\",\n                \"province_id\": 1,\n                \"name\": \"KABUPATEN ACEH UTARA\",\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:06.000000Z\"\n            }\n        },\n        {\n            \"id\": 23,\n            \"title\": \"Istanbul Tour\",\n            \"description\": \"An exciting outbound trip package to explore international destinations.\",\n            \"category\": \"outbound\",\n            \"province_id\": 1,\n            \"regency_id\": 5,\n            \"district_id\": 7,\n            \"image\": \"contents/outbound-8.jpg\",\n            \"recommendation\": false,\n            \"since_century\": null,\n            \"established_year\": null,\n            \"latitude\": null,\n            \"longitude\": null,\n            \"is_visible\": true,\n            \"order\": 0,\n            \"created_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"updated_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"district\": {\n                \"id\": 7,\n                \"code\": \"1101032\",\n                \"regency_id\": 1,\n                \"name\": \"SIMEULUE CUT\",\n                \"created_at\": \"2025-04-14T16:17:07.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:07.000000Z\"\n            },\n            \"province\": {\n                \"id\": 1,\n                \"code\": \"11\",\n                \"name\": \"ACEH\",\n                \"island_id\": 1,\n                \"description\": null,\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-17T17:20:57.000000Z\",\n                \"island\": {\n                    \"id\": 1,\n                    \"name\": \"Sumatra\",\n                    \"description\": \"The sixth largest island in the world, known for its diverse wildlife, rainforests, and rich cultural heritage.\",\n                    \"image\": \"islands/island-1.jpg\",\n                    \"created_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"updated_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"provinces_count\": 4\n                }\n            },\n            \"regency\": {\n                \"id\": 5,\n                \"code\": \"1105\",\n                \"province_id\": 1,\n                \"name\": \"KABUPATEN ACEH TIMUR\",\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:06.000000Z\"\n            }\n        },\n        {\n            \"id\": 26,\n            \"title\": \"New York Adventure\",\n            \"description\": \"An exciting outbound trip package to explore international destinations.\",\n            \"category\": \"outbound\",\n            \"province_id\": 2,\n            \"regency_id\": 5,\n            \"district_id\": 24,\n            \"image\": \"contents/outbound-11.jpg\",\n            \"recommendation\": false,\n            \"since_century\": null,\n            \"established_year\": null,\n            \"latitude\": null,\n            \"longitude\": null,\n            \"is_visible\": true,\n            \"order\": 0,\n            \"created_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"updated_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"district\": {\n                \"id\": 24,\n                \"code\": \"1103012\",\n                \"regency_id\": 3,\n                \"name\": \"TRUMON TENGAH\",\n                \"created_at\": \"2025-04-14T16:17:07.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:07.000000Z\"\n            },\n            \"province\": {\n                \"id\": 2,\n                \"code\": \"12\",\n                \"name\": \"SUMATERA UTARA\",\n                \"island_id\": 1,\n                \"description\": null,\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-17T17:21:05.000000Z\",\n                \"island\": {\n                    \"id\": 1,\n                    \"name\": \"Sumatra\",\n                    \"description\": \"The sixth largest island in the world, known for its diverse wildlife, rainforests, and rich cultural heritage.\",\n                    \"image\": \"islands/island-1.jpg\",\n                    \"created_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"updated_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"provinces_count\": 4\n                }\n            },\n            \"regency\": {\n                \"id\": 5,\n                \"code\": \"1105\",\n                \"province_id\": 1,\n                \"name\": \"KABUPATEN ACEH TIMUR\",\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:06.000000Z\"\n            }\n        },\n        {\n            \"id\": 29,\n            \"title\": \"Barcelona Tour\",\n            \"description\": \"An exciting outbound trip package to explore international destinations.\",\n            \"category\": \"outbound\",\n            \"province_id\": 3,\n            \"regency_id\": 3,\n            \"district_id\": 14,\n            \"image\": \"contents/outbound-14.jpg\",\n            \"recommendation\": false,\n            \"since_century\": null,\n            \"established_year\": null,\n            \"latitude\": null,\n            \"longitude\": null,\n            \"is_visible\": true,\n            \"order\": 0,\n            \"created_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"updated_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"district\": {\n                \"id\": 14,\n                \"code\": \"1102021\",\n                \"regency_id\": 2,\n                \"name\": \"SINGKIL UTARA\",\n                \"created_at\": \"2025-04-14T16:17:07.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:07.000000Z\"\n            },\n            \"province\": {\n                \"id\": 3,\n                \"code\": \"13\",\n                \"name\": \"SUMATERA BARAT\",\n                \"island_id\": 1,\n                \"description\": null,\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-17T17:21:07.000000Z\",\n                \"island\": {\n                    \"id\": 1,\n                    \"name\": \"Sumatra\",\n                    \"description\": \"The sixth largest island in the world, known for its diverse wildlife, rainforests, and rich cultural heritage.\",\n                    \"image\": \"islands/island-1.jpg\",\n                    \"created_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"updated_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"provinces_count\": 4\n                }\n            },\n            \"regency\": {\n                \"id\": 3,\n                \"code\": \"1103\",\n                \"province_id\": 1,\n                \"name\": \"KABUPATEN ACEH SELATAN\",\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:06.000000Z\"\n            }\n        },\n        {\n            \"id\": 30,\n            \"title\": \"Venice Journey\",\n            \"description\": \"An exciting outbound trip package to explore international destinations.\",\n            \"category\": \"outbound\",\n            \"province_id\": 6,\n            \"regency_id\": 3,\n            \"district_id\": 2,\n            \"image\": \"contents/outbound-15.jpg\",\n            \"recommendation\": false,\n            \"since_century\": null,\n            \"established_year\": null,\n            \"latitude\": null,\n            \"longitude\": null,\n            \"is_visible\": true,\n            \"order\": 0,\n            \"created_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"updated_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"district\": {\n                \"id\": 2,\n                \"code\": \"1101020\",\n                \"regency_id\": 1,\n                \"name\": \"SIMEULUE TIMUR\",\n                \"created_at\": \"2025-04-14T16:17:07.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:07.000000Z\"\n            },\n            \"province\": {\n                \"id\": 6,\n                \"code\": \"16\",\n                \"name\": \"SUMATERA SELATAN\",\n                \"island_id\": 1,\n                \"description\": null,\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-17T17:21:12.000000Z\",\n                \"island\": {\n                    \"id\": 1,\n                    \"name\": \"Sumatra\",\n                    \"description\": \"The sixth largest island in the world, known for its diverse wildlife, rainforests, and rich cultural heritage.\",\n                    \"image\": \"islands/island-1.jpg\",\n                    \"created_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"updated_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"provinces_count\": 4\n                }\n            },\n            \"regency\": {\n                \"id\": 3,\n                \"code\": \"1103\",\n                \"province_id\": 1,\n                \"name\": \"KABUPATEN ACEH SELATAN\",\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:06.000000Z\"\n            }\n        }\n    ],\n    \"links\": {\n        \"first\": \"http://localhost:8000/api/outbounds?page=1\",\n        \"last\": \"http://localhost:8000/api/outbounds?page=1\",\n        \"prev\": null,\n        \"next\": null\n    },\n    \"meta\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"last_page\": 1,\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"&laquo; Previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http://localhost:8000/api/outbounds?page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"Next &raquo;\",\n                \"active\": false\n            }\n        ],\n        \"path\": \"http://localhost:8000/api/outbounds\",\n        \"per_page\": 10,\n        \"to\": 7,\n        \"total\": 7\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "cultures",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "4|yKYDwuSxhfTCrQxAAp34zkUT8ppyz8gsze2kM0Ge0967d379",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/cultures?per_page=10&island_id=1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"cultures"
+							],
+							"query": [
+								{
+									"key": "per_page",
+									"value": "10"
+								},
+								{
+									"key": "island_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/api/cultures?per_page=10&island_id=1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"cultures"
+									],
+									"query": [
+										{
+											"key": "per_page",
+											"value": "10"
+										},
+										{
+											"key": "island_id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.4.1"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 17 Apr 2025 17:23:07 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 32,\n            \"title\": \"Wayang Kulit\",\n            \"description\": \"Traditional Indonesian cultural performance and heritage.\",\n            \"category\": \"culture\",\n            \"province_id\": 1,\n            \"regency_id\": 14,\n            \"district_id\": 3,\n            \"image\": \"contents/culture-2.jpg\",\n            \"recommendation\": false,\n            \"since_century\": null,\n            \"established_year\": null,\n            \"latitude\": null,\n            \"longitude\": null,\n            \"is_visible\": true,\n            \"order\": 0,\n            \"created_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"updated_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"district\": {\n                \"id\": 3,\n                \"code\": \"1101021\",\n                \"regency_id\": 1,\n                \"name\": \"TEUPAH BARAT\",\n                \"created_at\": \"2025-04-14T16:17:07.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:07.000000Z\"\n            },\n            \"province\": {\n                \"id\": 1,\n                \"code\": \"11\",\n                \"name\": \"ACEH\",\n                \"island_id\": 1,\n                \"description\": null,\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-17T17:20:57.000000Z\",\n                \"island\": {\n                    \"id\": 1,\n                    \"name\": \"Sumatra\",\n                    \"description\": \"The sixth largest island in the world, known for its diverse wildlife, rainforests, and rich cultural heritage.\",\n                    \"image\": \"islands/island-1.jpg\",\n                    \"created_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"updated_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"provinces_count\": 4\n                }\n            },\n            \"regency\": {\n                \"id\": 14,\n                \"code\": \"1114\",\n                \"province_id\": 1,\n                \"name\": \"KABUPATEN ACEH TAMIANG\",\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:06.000000Z\"\n            }\n        },\n        {\n            \"id\": 36,\n            \"title\": \"Gamelan Music\",\n            \"description\": \"Traditional Indonesian cultural performance and heritage.\",\n            \"category\": \"culture\",\n            \"province_id\": 6,\n            \"regency_id\": 14,\n            \"district_id\": 27,\n            \"image\": \"contents/culture-6.jpg\",\n            \"recommendation\": false,\n            \"since_century\": null,\n            \"established_year\": null,\n            \"latitude\": null,\n            \"longitude\": null,\n            \"is_visible\": true,\n            \"order\": 0,\n            \"created_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"updated_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"district\": {\n                \"id\": 27,\n                \"code\": \"1103022\",\n                \"regency_id\": 3,\n                \"name\": \"KOTA BAHAGIA\",\n                \"created_at\": \"2025-04-14T16:17:07.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:07.000000Z\"\n            },\n            \"province\": {\n                \"id\": 6,\n                \"code\": \"16\",\n                \"name\": \"SUMATERA SELATAN\",\n                \"island_id\": 1,\n                \"description\": null,\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-17T17:21:12.000000Z\",\n                \"island\": {\n                    \"id\": 1,\n                    \"name\": \"Sumatra\",\n                    \"description\": \"The sixth largest island in the world, known for its diverse wildlife, rainforests, and rich cultural heritage.\",\n                    \"image\": \"islands/island-1.jpg\",\n                    \"created_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"updated_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"provinces_count\": 4\n                }\n            },\n            \"regency\": {\n                \"id\": 14,\n                \"code\": \"1114\",\n                \"province_id\": 1,\n                \"name\": \"KABUPATEN ACEH TAMIANG\",\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:06.000000Z\"\n            }\n        },\n        {\n            \"id\": 37,\n            \"title\": \"Pencak Silat\",\n            \"description\": \"Traditional Indonesian cultural performance and heritage.\",\n            \"category\": \"culture\",\n            \"province_id\": 6,\n            \"regency_id\": 10,\n            \"district_id\": 7,\n            \"image\": \"contents/culture-7.jpg\",\n            \"recommendation\": false,\n            \"since_century\": null,\n            \"established_year\": null,\n            \"latitude\": null,\n            \"longitude\": null,\n            \"is_visible\": true,\n            \"order\": 0,\n            \"created_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"updated_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"district\": {\n                \"id\": 7,\n                \"code\": \"1101032\",\n                \"regency_id\": 1,\n                \"name\": \"SIMEULUE CUT\",\n                \"created_at\": \"2025-04-14T16:17:07.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:07.000000Z\"\n            },\n            \"province\": {\n                \"id\": 6,\n                \"code\": \"16\",\n                \"name\": \"SUMATERA SELATAN\",\n                \"island_id\": 1,\n                \"description\": null,\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-17T17:21:12.000000Z\",\n                \"island\": {\n                    \"id\": 1,\n                    \"name\": \"Sumatra\",\n                    \"description\": \"The sixth largest island in the world, known for its diverse wildlife, rainforests, and rich cultural heritage.\",\n                    \"image\": \"islands/island-1.jpg\",\n                    \"created_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"updated_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"provinces_count\": 4\n                }\n            },\n            \"regency\": {\n                \"id\": 10,\n                \"code\": \"1110\",\n                \"province_id\": 1,\n                \"name\": \"KABUPATEN BIREUEN\",\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:06.000000Z\"\n            }\n        },\n        {\n            \"id\": 38,\n            \"title\": \"Angklung Performance\",\n            \"description\": \"Traditional Indonesian cultural performance and heritage.\",\n            \"category\": \"culture\",\n            \"province_id\": 6,\n            \"regency_id\": 10,\n            \"district_id\": 22,\n            \"image\": \"contents/culture-8.jpg\",\n            \"recommendation\": false,\n            \"since_century\": null,\n            \"established_year\": null,\n            \"latitude\": null,\n            \"longitude\": null,\n            \"is_visible\": true,\n            \"order\": 0,\n            \"created_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"updated_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"district\": {\n                \"id\": 22,\n                \"code\": \"1103010\",\n                \"regency_id\": 3,\n                \"name\": \"TRUMON\",\n                \"created_at\": \"2025-04-14T16:17:07.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:07.000000Z\"\n            },\n            \"province\": {\n                \"id\": 6,\n                \"code\": \"16\",\n                \"name\": \"SUMATERA SELATAN\",\n                \"island_id\": 1,\n                \"description\": null,\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-17T17:21:12.000000Z\",\n                \"island\": {\n                    \"id\": 1,\n                    \"name\": \"Sumatra\",\n                    \"description\": \"The sixth largest island in the world, known for its diverse wildlife, rainforests, and rich cultural heritage.\",\n                    \"image\": \"islands/island-1.jpg\",\n                    \"created_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"updated_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"provinces_count\": 4\n                }\n            },\n            \"regency\": {\n                \"id\": 10,\n                \"code\": \"1110\",\n                \"province_id\": 1,\n                \"name\": \"KABUPATEN BIREUEN\",\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:06.000000Z\"\n            }\n        },\n        {\n            \"id\": 39,\n            \"title\": \"Tari Pendet\",\n            \"description\": \"Traditional Indonesian cultural performance and heritage.\",\n            \"category\": \"culture\",\n            \"province_id\": 1,\n            \"regency_id\": 9,\n            \"district_id\": 24,\n            \"image\": \"contents/culture-9.jpg\",\n            \"recommendation\": false,\n            \"since_century\": null,\n            \"established_year\": null,\n            \"latitude\": null,\n            \"longitude\": null,\n            \"is_visible\": true,\n            \"order\": 0,\n            \"created_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"updated_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"district\": {\n                \"id\": 24,\n                \"code\": \"1103012\",\n                \"regency_id\": 3,\n                \"name\": \"TRUMON TENGAH\",\n                \"created_at\": \"2025-04-14T16:17:07.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:07.000000Z\"\n            },\n            \"province\": {\n                \"id\": 1,\n                \"code\": \"11\",\n                \"name\": \"ACEH\",\n                \"island_id\": 1,\n                \"description\": null,\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-17T17:20:57.000000Z\",\n                \"island\": {\n                    \"id\": 1,\n                    \"name\": \"Sumatra\",\n                    \"description\": \"The sixth largest island in the world, known for its diverse wildlife, rainforests, and rich cultural heritage.\",\n                    \"image\": \"islands/island-1.jpg\",\n                    \"created_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"updated_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"provinces_count\": 4\n                }\n            },\n            \"regency\": {\n                \"id\": 9,\n                \"code\": \"1109\",\n                \"province_id\": 1,\n                \"name\": \"KABUPATEN PIDIE\",\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:06.000000Z\"\n            }\n        },\n        {\n            \"id\": 41,\n            \"title\": \"Tari Piring\",\n            \"description\": \"Traditional Indonesian cultural performance and heritage.\",\n            \"category\": \"culture\",\n            \"province_id\": 3,\n            \"regency_id\": 4,\n            \"district_id\": 30,\n            \"image\": \"contents/culture-11.jpg\",\n            \"recommendation\": false,\n            \"since_century\": null,\n            \"established_year\": null,\n            \"latitude\": null,\n            \"longitude\": null,\n            \"is_visible\": true,\n            \"order\": 0,\n            \"created_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"updated_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"district\": {\n                \"id\": 30,\n                \"code\": \"1103040\",\n                \"regency_id\": 3,\n                \"name\": \"KLUET UTARA\",\n                \"created_at\": \"2025-04-14T16:17:07.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:07.000000Z\"\n            },\n            \"province\": {\n                \"id\": 3,\n                \"code\": \"13\",\n                \"name\": \"SUMATERA BARAT\",\n                \"island_id\": 1,\n                \"description\": null,\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-17T17:21:07.000000Z\",\n                \"island\": {\n                    \"id\": 1,\n                    \"name\": \"Sumatra\",\n                    \"description\": \"The sixth largest island in the world, known for its diverse wildlife, rainforests, and rich cultural heritage.\",\n                    \"image\": \"islands/island-1.jpg\",\n                    \"created_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"updated_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"provinces_count\": 4\n                }\n            },\n            \"regency\": {\n                \"id\": 4,\n                \"code\": \"1104\",\n                \"province_id\": 1,\n                \"name\": \"KABUPATEN ACEH TENGGARA\",\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:06.000000Z\"\n            }\n        },\n        {\n            \"id\": 44,\n            \"title\": \"Ondel-ondel\",\n            \"description\": \"Traditional Indonesian cultural performance and heritage.\",\n            \"category\": \"culture\",\n            \"province_id\": 6,\n            \"regency_id\": 14,\n            \"district_id\": 16,\n            \"image\": \"contents/culture-14.jpg\",\n            \"recommendation\": false,\n            \"since_century\": null,\n            \"established_year\": null,\n            \"latitude\": null,\n            \"longitude\": null,\n            \"is_visible\": true,\n            \"order\": 0,\n            \"created_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"updated_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"district\": {\n                \"id\": 16,\n                \"code\": \"1102030\",\n                \"regency_id\": 2,\n                \"name\": \"SIMPANG KANAN\",\n                \"created_at\": \"2025-04-14T16:17:07.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:07.000000Z\"\n            },\n            \"province\": {\n                \"id\": 6,\n                \"code\": \"16\",\n                \"name\": \"SUMATERA SELATAN\",\n                \"island_id\": 1,\n                \"description\": null,\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-17T17:21:12.000000Z\",\n                \"island\": {\n                    \"id\": 1,\n                    \"name\": \"Sumatra\",\n                    \"description\": \"The sixth largest island in the world, known for its diverse wildlife, rainforests, and rich cultural heritage.\",\n                    \"image\": \"islands/island-1.jpg\",\n                    \"created_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"updated_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"provinces_count\": 4\n                }\n            },\n            \"regency\": {\n                \"id\": 14,\n                \"code\": \"1114\",\n                \"province_id\": 1,\n                \"name\": \"KABUPATEN ACEH TAMIANG\",\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:06.000000Z\"\n            }\n        },\n        {\n            \"id\": 45,\n            \"title\": \"Tari Legong\",\n            \"description\": \"Traditional Indonesian cultural performance and heritage.\",\n            \"category\": \"culture\",\n            \"province_id\": 6,\n            \"regency_id\": 10,\n            \"district_id\": 22,\n            \"image\": \"contents/culture-15.jpg\",\n            \"recommendation\": false,\n            \"since_century\": null,\n            \"established_year\": null,\n            \"latitude\": null,\n            \"longitude\": null,\n            \"is_visible\": true,\n            \"order\": 0,\n            \"created_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"updated_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"district\": {\n                \"id\": 22,\n                \"code\": \"1103010\",\n                \"regency_id\": 3,\n                \"name\": \"TRUMON\",\n                \"created_at\": \"2025-04-14T16:17:07.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:07.000000Z\"\n            },\n            \"province\": {\n                \"id\": 6,\n                \"code\": \"16\",\n                \"name\": \"SUMATERA SELATAN\",\n                \"island_id\": 1,\n                \"description\": null,\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-17T17:21:12.000000Z\",\n                \"island\": {\n                    \"id\": 1,\n                    \"name\": \"Sumatra\",\n                    \"description\": \"The sixth largest island in the world, known for its diverse wildlife, rainforests, and rich cultural heritage.\",\n                    \"image\": \"islands/island-1.jpg\",\n                    \"created_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"updated_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"provinces_count\": 4\n                }\n            },\n            \"regency\": {\n                \"id\": 10,\n                \"code\": \"1110\",\n                \"province_id\": 1,\n                \"name\": \"KABUPATEN BIREUEN\",\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:06.000000Z\"\n            }\n        }\n    ],\n    \"links\": {\n        \"first\": \"http://localhost:8000/api/cultures?page=1\",\n        \"last\": \"http://localhost:8000/api/cultures?page=1\",\n        \"prev\": null,\n        \"next\": null\n    },\n    \"meta\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"last_page\": 1,\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"&laquo; Previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http://localhost:8000/api/cultures?page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"Next &raquo;\",\n                \"active\": false\n            }\n        ],\n        \"path\": \"http://localhost:8000/api/cultures\",\n        \"per_page\": 10,\n        \"to\": 8,\n        \"total\": 8\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "food-and-beverages",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "4|yKYDwuSxhfTCrQxAAp34zkUT8ppyz8gsze2kM0Ge0967d379",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/food-and-beverages?per_page=10&island_id=1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"food-and-beverages"
+							],
+							"query": [
+								{
+									"key": "per_page",
+									"value": "10"
+								},
+								{
+									"key": "island_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/api/food-and-beverages?per_page=10&island_id=1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"food-and-beverages"
+									],
+									"query": [
+										{
+											"key": "per_page",
+											"value": "10"
+										},
+										{
+											"key": "island_id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.4.1"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 17 Apr 2025 17:23:36 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 46,\n            \"title\": \"Nasi Goreng\",\n            \"description\": \"Delicious Indonesian culinary specialties and traditional dishes.\",\n            \"category\": \"fnb\",\n            \"province_id\": 1,\n            \"regency_id\": 16,\n            \"district_id\": 22,\n            \"image\": \"contents/food-1.jpg\",\n            \"recommendation\": false,\n            \"since_century\": null,\n            \"established_year\": null,\n            \"latitude\": null,\n            \"longitude\": null,\n            \"is_visible\": true,\n            \"order\": 0,\n            \"created_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"updated_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"district\": {\n                \"id\": 22,\n                \"code\": \"1103010\",\n                \"regency_id\": 3,\n                \"name\": \"TRUMON\",\n                \"created_at\": \"2025-04-14T16:17:07.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:07.000000Z\"\n            },\n            \"province\": {\n                \"id\": 1,\n                \"code\": \"11\",\n                \"name\": \"ACEH\",\n                \"island_id\": 1,\n                \"description\": null,\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-17T17:20:57.000000Z\",\n                \"island\": {\n                    \"id\": 1,\n                    \"name\": \"Sumatra\",\n                    \"description\": \"The sixth largest island in the world, known for its diverse wildlife, rainforests, and rich cultural heritage.\",\n                    \"image\": \"islands/island-1.jpg\",\n                    \"created_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"updated_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"provinces_count\": 4\n                }\n            },\n            \"regency\": {\n                \"id\": 16,\n                \"code\": \"1116\",\n                \"province_id\": 1,\n                \"name\": \"KABUPATEN ACEH JAYA\",\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:06.000000Z\"\n            }\n        },\n        {\n            \"id\": 47,\n            \"title\": \"Rendang\",\n            \"description\": \"Delicious Indonesian culinary specialties and traditional dishes.\",\n            \"category\": \"fnb\",\n            \"province_id\": 2,\n            \"regency_id\": 13,\n            \"district_id\": 20,\n            \"image\": \"contents/food-2.jpg\",\n            \"recommendation\": false,\n            \"since_century\": null,\n            \"established_year\": null,\n            \"latitude\": null,\n            \"longitude\": null,\n            \"is_visible\": true,\n            \"order\": 0,\n            \"created_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"updated_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"district\": {\n                \"id\": 20,\n                \"code\": \"1102042\",\n                \"regency_id\": 2,\n                \"name\": \"SINGKOHOR\",\n                \"created_at\": \"2025-04-14T16:17:07.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:07.000000Z\"\n            },\n            \"province\": {\n                \"id\": 2,\n                \"code\": \"12\",\n                \"name\": \"SUMATERA UTARA\",\n                \"island_id\": 1,\n                \"description\": null,\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-17T17:21:05.000000Z\",\n                \"island\": {\n                    \"id\": 1,\n                    \"name\": \"Sumatra\",\n                    \"description\": \"The sixth largest island in the world, known for its diverse wildlife, rainforests, and rich cultural heritage.\",\n                    \"image\": \"islands/island-1.jpg\",\n                    \"created_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"updated_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"provinces_count\": 4\n                }\n            },\n            \"regency\": {\n                \"id\": 13,\n                \"code\": \"1113\",\n                \"province_id\": 1,\n                \"name\": \"KABUPATEN GAYO LUES\",\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:06.000000Z\"\n            }\n        },\n        {\n            \"id\": 49,\n            \"title\": \"Gado-gado\",\n            \"description\": \"Delicious Indonesian culinary specialties and traditional dishes.\",\n            \"category\": \"fnb\",\n            \"province_id\": 2,\n            \"regency_id\": 10,\n            \"district_id\": 2,\n            \"image\": \"contents/food-4.jpg\",\n            \"recommendation\": false,\n            \"since_century\": null,\n            \"established_year\": null,\n            \"latitude\": null,\n            \"longitude\": null,\n            \"is_visible\": true,\n            \"order\": 0,\n            \"created_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"updated_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"district\": {\n                \"id\": 2,\n                \"code\": \"1101020\",\n                \"regency_id\": 1,\n                \"name\": \"SIMEULUE TIMUR\",\n                \"created_at\": \"2025-04-14T16:17:07.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:07.000000Z\"\n            },\n            \"province\": {\n                \"id\": 2,\n                \"code\": \"12\",\n                \"name\": \"SUMATERA UTARA\",\n                \"island_id\": 1,\n                \"description\": null,\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-17T17:21:05.000000Z\",\n                \"island\": {\n                    \"id\": 1,\n                    \"name\": \"Sumatra\",\n                    \"description\": \"The sixth largest island in the world, known for its diverse wildlife, rainforests, and rich cultural heritage.\",\n                    \"image\": \"islands/island-1.jpg\",\n                    \"created_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"updated_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"provinces_count\": 4\n                }\n            },\n            \"regency\": {\n                \"id\": 10,\n                \"code\": \"1110\",\n                \"province_id\": 1,\n                \"name\": \"KABUPATEN BIREUEN\",\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:06.000000Z\"\n            }\n        },\n        {\n            \"id\": 50,\n            \"title\": \"Soto Ayam\",\n            \"description\": \"Delicious Indonesian culinary specialties and traditional dishes.\",\n            \"category\": \"fnb\",\n            \"province_id\": 6,\n            \"regency_id\": 8,\n            \"district_id\": 14,\n            \"image\": \"contents/food-5.jpg\",\n            \"recommendation\": false,\n            \"since_century\": null,\n            \"established_year\": null,\n            \"latitude\": null,\n            \"longitude\": null,\n            \"is_visible\": true,\n            \"order\": 0,\n            \"created_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"updated_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"district\": {\n                \"id\": 14,\n                \"code\": \"1102021\",\n                \"regency_id\": 2,\n                \"name\": \"SINGKIL UTARA\",\n                \"created_at\": \"2025-04-14T16:17:07.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:07.000000Z\"\n            },\n            \"province\": {\n                \"id\": 6,\n                \"code\": \"16\",\n                \"name\": \"SUMATERA SELATAN\",\n                \"island_id\": 1,\n                \"description\": null,\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-17T17:21:12.000000Z\",\n                \"island\": {\n                    \"id\": 1,\n                    \"name\": \"Sumatra\",\n                    \"description\": \"The sixth largest island in the world, known for its diverse wildlife, rainforests, and rich cultural heritage.\",\n                    \"image\": \"islands/island-1.jpg\",\n                    \"created_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"updated_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"provinces_count\": 4\n                }\n            },\n            \"regency\": {\n                \"id\": 8,\n                \"code\": \"1108\",\n                \"province_id\": 1,\n                \"name\": \"KABUPATEN ACEH BESAR\",\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:06.000000Z\"\n            }\n        },\n        {\n            \"id\": 53,\n            \"title\": \"Nasi Uduk\",\n            \"description\": \"Delicious Indonesian culinary specialties and traditional dishes.\",\n            \"category\": \"fnb\",\n            \"province_id\": 6,\n            \"regency_id\": 20,\n            \"district_id\": 16,\n            \"image\": \"contents/food-8.jpg\",\n            \"recommendation\": false,\n            \"since_century\": null,\n            \"established_year\": null,\n            \"latitude\": null,\n            \"longitude\": null,\n            \"is_visible\": true,\n            \"order\": 0,\n            \"created_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"updated_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"district\": {\n                \"id\": 16,\n                \"code\": \"1102030\",\n                \"regency_id\": 2,\n                \"name\": \"SIMPANG KANAN\",\n                \"created_at\": \"2025-04-14T16:17:07.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:07.000000Z\"\n            },\n            \"province\": {\n                \"id\": 6,\n                \"code\": \"16\",\n                \"name\": \"SUMATERA SELATAN\",\n                \"island_id\": 1,\n                \"description\": null,\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-17T17:21:12.000000Z\",\n                \"island\": {\n                    \"id\": 1,\n                    \"name\": \"Sumatra\",\n                    \"description\": \"The sixth largest island in the world, known for its diverse wildlife, rainforests, and rich cultural heritage.\",\n                    \"image\": \"islands/island-1.jpg\",\n                    \"created_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"updated_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"provinces_count\": 4\n                }\n            },\n            \"regency\": {\n                \"id\": 20,\n                \"code\": \"1172\",\n                \"province_id\": 1,\n                \"name\": \"KOTA SABANG\",\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:06.000000Z\"\n            }\n        },\n        {\n            \"id\": 54,\n            \"title\": \"Sop Buntut\",\n            \"description\": \"Delicious Indonesian culinary specialties and traditional dishes.\",\n            \"category\": \"fnb\",\n            \"province_id\": 1,\n            \"regency_id\": 15,\n            \"district_id\": 15,\n            \"image\": \"contents/food-9.jpg\",\n            \"recommendation\": false,\n            \"since_century\": null,\n            \"established_year\": null,\n            \"latitude\": null,\n            \"longitude\": null,\n            \"is_visible\": true,\n            \"order\": 0,\n            \"created_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"updated_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"district\": {\n                \"id\": 15,\n                \"code\": \"1102022\",\n                \"regency_id\": 2,\n                \"name\": \"KUALA BARU\",\n                \"created_at\": \"2025-04-14T16:17:07.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:07.000000Z\"\n            },\n            \"province\": {\n                \"id\": 1,\n                \"code\": \"11\",\n                \"name\": \"ACEH\",\n                \"island_id\": 1,\n                \"description\": null,\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-17T17:20:57.000000Z\",\n                \"island\": {\n                    \"id\": 1,\n                    \"name\": \"Sumatra\",\n                    \"description\": \"The sixth largest island in the world, known for its diverse wildlife, rainforests, and rich cultural heritage.\",\n                    \"image\": \"islands/island-1.jpg\",\n                    \"created_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"updated_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"provinces_count\": 4\n                }\n            },\n            \"regency\": {\n                \"id\": 15,\n                \"code\": \"1115\",\n                \"province_id\": 1,\n                \"name\": \"KABUPATEN NAGAN RAYA\",\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:06.000000Z\"\n            }\n        },\n        {\n            \"id\": 56,\n            \"title\": \"Ayam Betutu\",\n            \"description\": \"Delicious Indonesian culinary specialties and traditional dishes.\",\n            \"category\": \"fnb\",\n            \"province_id\": 1,\n            \"regency_id\": 2,\n            \"district_id\": 27,\n            \"image\": \"contents/food-11.jpg\",\n            \"recommendation\": false,\n            \"since_century\": null,\n            \"established_year\": null,\n            \"latitude\": null,\n            \"longitude\": null,\n            \"is_visible\": true,\n            \"order\": 0,\n            \"created_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"updated_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"district\": {\n                \"id\": 27,\n                \"code\": \"1103022\",\n                \"regency_id\": 3,\n                \"name\": \"KOTA BAHAGIA\",\n                \"created_at\": \"2025-04-14T16:17:07.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:07.000000Z\"\n            },\n            \"province\": {\n                \"id\": 1,\n                \"code\": \"11\",\n                \"name\": \"ACEH\",\n                \"island_id\": 1,\n                \"description\": null,\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-17T17:20:57.000000Z\",\n                \"island\": {\n                    \"id\": 1,\n                    \"name\": \"Sumatra\",\n                    \"description\": \"The sixth largest island in the world, known for its diverse wildlife, rainforests, and rich cultural heritage.\",\n                    \"image\": \"islands/island-1.jpg\",\n                    \"created_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"updated_at\": \"2025-04-17T17:10:29.000000Z\",\n                    \"provinces_count\": 4\n                }\n            },\n            \"regency\": {\n                \"id\": 2,\n                \"code\": \"1102\",\n                \"province_id\": 1,\n                \"name\": \"KABUPATEN ACEH SINGKIL\",\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:06.000000Z\"\n            }\n        }\n    ],\n    \"links\": {\n        \"first\": \"http://localhost:8000/api/food-and-beverages?page=1\",\n        \"last\": \"http://localhost:8000/api/food-and-beverages?page=1\",\n        \"prev\": null,\n        \"next\": null\n    },\n    \"meta\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"last_page\": 1,\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"&laquo; Previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http://localhost:8000/api/food-and-beverages?page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"Next &raquo;\",\n                \"active\": false\n            }\n        ],\n        \"path\": \"http://localhost:8000/api/food-and-beverages\",\n        \"per_page\": 10,\n        \"to\": 7,\n        \"total\": 7\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "favorites",
+			"item": [
+				{
+					"name": "index",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "4|yKYDwuSxhfTCrQxAAp34zkUT8ppyz8gsze2kM0Ge0967d379",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/favorites/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"favorites",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/api/favorites/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"favorites",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.4.1"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 18 Apr 2025 03:28:00 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"title\": \"Pantai Kuta\",\n            \"description\": \"A beautiful destination in Indonesia featuring natural wonders and cultural heritage.\",\n            \"category\": \"destination\",\n            \"province_id\": 8,\n            \"regency_id\": 14,\n            \"district_id\": 7,\n            \"image\": \"contents/destination-1.jpg\",\n            \"recommendation\": false,\n            \"since_century\": null,\n            \"established_year\": null,\n            \"latitude\": null,\n            \"longitude\": null,\n            \"is_visible\": true,\n            \"order\": 0,\n            \"created_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"updated_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"district\": {\n                \"id\": 7,\n                \"code\": \"1101032\",\n                \"regency_id\": 1,\n                \"name\": \"SIMEULUE CUT\",\n                \"created_at\": \"2025-04-14T16:17:07.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:07.000000Z\"\n            },\n            \"province\": {\n                \"id\": 8,\n                \"code\": \"18\",\n                \"name\": \"LAMPUNG\",\n                \"island_id\": null,\n                \"description\": null,\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"island\": []\n            },\n            \"regency\": {\n                \"id\": 14,\n                \"code\": \"1114\",\n                \"province_id\": 1,\n                \"name\": \"KABUPATEN ACEH TAMIANG\",\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:06.000000Z\"\n            },\n            \"pivot\": {\n                \"user_id\": 1,\n                \"content_id\": 1,\n                \"created_at\": \"2025-04-18T03:09:37.000000Z\",\n                \"updated_at\": \"2025-04-18T03:09:37.000000Z\"\n            }\n        }\n    ],\n    \"links\": {\n        \"first\": \"http://localhost:8000/api/favorites?page=1\",\n        \"last\": \"http://localhost:8000/api/favorites?page=1\",\n        \"prev\": null,\n        \"next\": null\n    },\n    \"meta\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"last_page\": 1,\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"&laquo; Previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http://localhost:8000/api/favorites?page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"Next &raquo;\",\n                \"active\": false\n            }\n        ],\n        \"path\": \"http://localhost:8000/api/favorites\",\n        \"per_page\": 10,\n        \"to\": 1,\n        \"total\": 1\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "check-favorite",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "4|yKYDwuSxhfTCrQxAAp34zkUT8ppyz8gsze2kM0Ge0967d379",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/favorites/1/check",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"favorites",
+								"1",
+								"check"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/api/favorites?per_page=10",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"favorites"
+									],
+									"query": [
+										{
+											"key": "per_page",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.4.1"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 18 Apr 2025 03:10:09 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"title\": \"Pantai Kuta\",\n            \"description\": \"A beautiful destination in Indonesia featuring natural wonders and cultural heritage.\",\n            \"category\": \"destination\",\n            \"province_id\": 8,\n            \"regency_id\": 14,\n            \"district_id\": 7,\n            \"image\": \"contents/destination-1.jpg\",\n            \"recommendation\": false,\n            \"since_century\": null,\n            \"established_year\": null,\n            \"latitude\": null,\n            \"longitude\": null,\n            \"is_visible\": true,\n            \"order\": 0,\n            \"created_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"updated_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"district\": {\n                \"id\": 7,\n                \"code\": \"1101032\",\n                \"regency_id\": 1,\n                \"name\": \"SIMEULUE CUT\",\n                \"created_at\": \"2025-04-14T16:17:07.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:07.000000Z\"\n            },\n            \"province\": {\n                \"id\": 8,\n                \"code\": \"18\",\n                \"name\": \"LAMPUNG\",\n                \"island_id\": null,\n                \"description\": null,\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"island\": []\n            },\n            \"regency\": {\n                \"id\": 14,\n                \"code\": \"1114\",\n                \"province_id\": 1,\n                \"name\": \"KABUPATEN ACEH TAMIANG\",\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:06.000000Z\"\n            },\n            \"pivot\": {\n                \"user_id\": 1,\n                \"content_id\": 1,\n                \"created_at\": \"2025-04-18T03:09:37.000000Z\",\n                \"updated_at\": \"2025-04-18T03:09:37.000000Z\"\n            }\n        }\n    ],\n    \"links\": {\n        \"first\": \"http://localhost:8000/api/favorites?page=1\",\n        \"last\": \"http://localhost:8000/api/favorites?page=1\",\n        \"prev\": null,\n        \"next\": null\n    },\n    \"meta\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"last_page\": 1,\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"&laquo; Previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http://localhost:8000/api/favorites?page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"Next &raquo;\",\n                \"active\": false\n            }\n        ],\n        \"path\": \"http://localhost:8000/api/favorites\",\n        \"per_page\": 10,\n        \"to\": 1,\n        \"total\": 1\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "toggle-favorite-content",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "4|yKYDwuSxhfTCrQxAAp34zkUT8ppyz8gsze2kM0Ge0967d379",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/favorites/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"favorites",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/api/favorites/1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"favorites",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.4.1"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 18 Apr 2025 03:09:37 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"message\": \"Content added to favorites\",\n    \"is_favorited\": true\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "wishlist",
+			"item": [
+				{
+					"name": "index",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "4|yKYDwuSxhfTCrQxAAp34zkUT8ppyz8gsze2kM0Ge0967d379",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/wishlists",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"wishlists"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/api/wishlists",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"wishlists"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.4.1"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 18 Apr 2025 04:03:29 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"title\": \"Pantai Kuta\",\n            \"description\": \"A beautiful destination in Indonesia featuring natural wonders and cultural heritage.\",\n            \"category\": \"destination\",\n            \"province_id\": 8,\n            \"regency_id\": 14,\n            \"district_id\": 7,\n            \"image\": \"contents/destination-1.jpg\",\n            \"recommendation\": false,\n            \"since_century\": null,\n            \"established_year\": null,\n            \"latitude\": null,\n            \"longitude\": null,\n            \"is_visible\": true,\n            \"order\": 0,\n            \"created_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"updated_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"district\": {\n                \"id\": 7,\n                \"code\": \"1101032\",\n                \"regency_id\": 1,\n                \"name\": \"SIMEULUE CUT\",\n                \"created_at\": \"2025-04-14T16:17:07.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:07.000000Z\"\n            },\n            \"province\": {\n                \"id\": 8,\n                \"code\": \"18\",\n                \"name\": \"LAMPUNG\",\n                \"island_id\": null,\n                \"description\": null,\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"island\": []\n            },\n            \"regency\": {\n                \"id\": 14,\n                \"code\": \"1114\",\n                \"province_id\": 1,\n                \"name\": \"KABUPATEN ACEH TAMIANG\",\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:06.000000Z\"\n            },\n            \"pivot\": {\n                \"user_id\": 1,\n                \"content_id\": 1,\n                \"created_at\": \"2025-04-18T03:35:22.000000Z\",\n                \"updated_at\": \"2025-04-18T03:35:22.000000Z\"\n            }\n        }\n    ],\n    \"links\": {\n        \"first\": \"http://localhost:8000/api/wishlists?page=1\",\n        \"last\": \"http://localhost:8000/api/wishlists?page=1\",\n        \"prev\": null,\n        \"next\": null\n    },\n    \"meta\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"last_page\": 1,\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"&laquo; Previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http://localhost:8000/api/wishlists?page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"Next &raquo;\",\n                \"active\": false\n            }\n        ],\n        \"path\": \"http://localhost:8000/api/wishlists\",\n        \"per_page\": 10,\n        \"to\": 1,\n        \"total\": 1\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "check-wishlist",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "4|yKYDwuSxhfTCrQxAAp34zkUT8ppyz8gsze2kM0Ge0967d379",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/wishlists/1/check",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"wishlists",
+								"1",
+								"check"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/api/favorites?per_page=10",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"favorites"
+									],
+									"query": [
+										{
+											"key": "per_page",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.4.1"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 18 Apr 2025 03:10:09 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"title\": \"Pantai Kuta\",\n            \"description\": \"A beautiful destination in Indonesia featuring natural wonders and cultural heritage.\",\n            \"category\": \"destination\",\n            \"province_id\": 8,\n            \"regency_id\": 14,\n            \"district_id\": 7,\n            \"image\": \"contents/destination-1.jpg\",\n            \"recommendation\": false,\n            \"since_century\": null,\n            \"established_year\": null,\n            \"latitude\": null,\n            \"longitude\": null,\n            \"is_visible\": true,\n            \"order\": 0,\n            \"created_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"updated_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"district\": {\n                \"id\": 7,\n                \"code\": \"1101032\",\n                \"regency_id\": 1,\n                \"name\": \"SIMEULUE CUT\",\n                \"created_at\": \"2025-04-14T16:17:07.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:07.000000Z\"\n            },\n            \"province\": {\n                \"id\": 8,\n                \"code\": \"18\",\n                \"name\": \"LAMPUNG\",\n                \"island_id\": null,\n                \"description\": null,\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"island\": []\n            },\n            \"regency\": {\n                \"id\": 14,\n                \"code\": \"1114\",\n                \"province_id\": 1,\n                \"name\": \"KABUPATEN ACEH TAMIANG\",\n                \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n                \"updated_at\": \"2025-04-14T16:17:06.000000Z\"\n            },\n            \"pivot\": {\n                \"user_id\": 1,\n                \"content_id\": 1,\n                \"created_at\": \"2025-04-18T03:09:37.000000Z\",\n                \"updated_at\": \"2025-04-18T03:09:37.000000Z\"\n            }\n        }\n    ],\n    \"links\": {\n        \"first\": \"http://localhost:8000/api/favorites?page=1\",\n        \"last\": \"http://localhost:8000/api/favorites?page=1\",\n        \"prev\": null,\n        \"next\": null\n    },\n    \"meta\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"last_page\": 1,\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"&laquo; Previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http://localhost:8000/api/favorites?page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"Next &raquo;\",\n                \"active\": false\n            }\n        ],\n        \"path\": \"http://localhost:8000/api/favorites\",\n        \"per_page\": 10,\n        \"to\": 1,\n        \"total\": 1\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "toggle-wishlist-content",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "4|yKYDwuSxhfTCrQxAAp34zkUT8ppyz8gsze2kM0Ge0967d379",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/wishlists/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"wishlists",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/api/favorites/1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"favorites",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.4.1"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 18 Apr 2025 03:09:37 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"message\": \"Content added to favorites\",\n    \"is_favorited\": true\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "trips",
+			"item": [
+				{
+					"name": "trips",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "4|yKYDwuSxhfTCrQxAAp34zkUT8ppyz8gsze2kM0Ge0967d379",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/trips",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"trips"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "4|yKYDwuSxhfTCrQxAAp34zkUT8ppyz8gsze2kM0Ge0967d379",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Bali Adventure\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/trips",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"trips"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "201",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Bali Adventure\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/trips",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"trips"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.4.1"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 18 Apr 2025 06:47:46 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"Bali Adventure\",\n        \"description\": null,\n        \"user_id\": 1,\n        \"created_at\": \"2025-04-18T06:47:45.000000Z\",\n        \"updated_at\": \"2025-04-18T06:47:45.000000Z\",\n        \"contents\": []\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "add-content-to-trips",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "4|yKYDwuSxhfTCrQxAAp34zkUT8ppyz8gsze2kM0Ge0967d379",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content_id\": 3\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/trips/1/contents",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"trips",
+								"1",
+								"contents"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"content_id\": 3\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/trips/1/contents",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"trips",
+										"1",
+										"contents"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.4.1"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 18 Apr 2025 07:53:24 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"Bali Adventure\",\n        \"description\": \"Gowes to Bali!\",\n        \"user_id\": 1,\n        \"created_at\": \"2025-04-18T06:47:45.000000Z\",\n        \"updated_at\": \"2025-04-18T07:52:12.000000Z\",\n        \"contents\": [\n            {\n                \"id\": 1,\n                \"title\": \"Pantai Kuta\",\n                \"type\": null\n            },\n            {\n                \"id\": 2,\n                \"title\": \"Gunung Bromo\",\n                \"type\": null\n            },\n            {\n                \"id\": 3,\n                \"title\": \"Danau Toba\",\n                \"type\": null\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "trips-detail",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "4|yKYDwuSxhfTCrQxAAp34zkUT8ppyz8gsze2kM0Ge0967d379",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content_id\": 3\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/trips/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"trips",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"content_id\": 3\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/trips/1/contents",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"trips",
+										"1",
+										"contents"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.4.1"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 18 Apr 2025 07:53:24 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"Bali Adventure\",\n        \"description\": \"Gowes to Bali!\",\n        \"user_id\": 1,\n        \"created_at\": \"2025-04-18T06:47:45.000000Z\",\n        \"updated_at\": \"2025-04-18T07:52:12.000000Z\",\n        \"contents\": [\n            {\n                \"id\": 1,\n                \"title\": \"Pantai Kuta\",\n                \"type\": null\n            },\n            {\n                \"id\": 2,\n                \"title\": \"Gunung Bromo\",\n                \"type\": null\n            },\n            {\n                \"id\": 3,\n                \"title\": \"Danau Toba\",\n                \"type\": null\n            }\n        ]\n    }\n}"
+						},
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"content_id\": 3\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/trips/1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"trips",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.4.1"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 18 Apr 2025 07:59:27 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"Bali Adventure\",\n        \"description\": \"Gowes to Bali!\",\n        \"user_id\": 1,\n        \"created_at\": \"2025-04-18T06:47:45.000000Z\",\n        \"updated_at\": \"2025-04-18T07:52:12.000000Z\",\n        \"contents\": [\n            {\n                \"id\": 1,\n                \"title\": \"Pantai Kuta\",\n                \"description\": \"A beautiful destination in Indonesia featuring natural wonders and cultural heritage.\",\n                \"category\": \"destination\",\n                \"province_id\": 8,\n                \"regency_id\": 14,\n                \"district_id\": 7,\n                \"image\": \"contents/destination-1.jpg\",\n                \"recommendation\": false,\n                \"since_century\": null,\n                \"established_year\": null,\n                \"latitude\": null,\n                \"longitude\": null,\n                \"is_visible\": true,\n                \"order\": 0,\n                \"created_at\": \"2025-04-14T16:21:54.000000Z\",\n                \"updated_at\": \"2025-04-14T16:21:54.000000Z\",\n                \"pivot\": {\n                    \"trip_id\": 1,\n                    \"content_id\": 1\n                }\n            },\n            {\n                \"id\": 2,\n                \"title\": \"Gunung Bromo\",\n                \"description\": \"A beautiful destination in Indonesia featuring natural wonders and cultural heritage.\",\n                \"category\": \"destination\",\n                \"province_id\": 7,\n                \"regency_id\": 4,\n                \"district_id\": 7,\n                \"image\": \"contents/destination-2.jpg\",\n                \"recommendation\": false,\n                \"since_century\": null,\n                \"established_year\": null,\n                \"latitude\": null,\n                \"longitude\": null,\n                \"is_visible\": true,\n                \"order\": 0,\n                \"created_at\": \"2025-04-14T16:21:54.000000Z\",\n                \"updated_at\": \"2025-04-14T16:21:54.000000Z\",\n                \"pivot\": {\n                    \"trip_id\": 1,\n                    \"content_id\": 2\n                }\n            },\n            {\n                \"id\": 3,\n                \"title\": \"Danau Toba\",\n                \"description\": \"A beautiful destination in Indonesia featuring natural wonders and cultural heritage.\",\n                \"category\": \"destination\",\n                \"province_id\": 1,\n                \"regency_id\": 20,\n                \"district_id\": 3,\n                \"image\": \"contents/destination-3.jpg\",\n                \"recommendation\": false,\n                \"since_century\": null,\n                \"established_year\": null,\n                \"latitude\": null,\n                \"longitude\": null,\n                \"is_visible\": true,\n                \"order\": 0,\n                \"created_at\": \"2025-04-14T16:21:54.000000Z\",\n                \"updated_at\": \"2025-04-14T16:21:54.000000Z\",\n                \"pivot\": {\n                    \"trip_id\": 1,\n                    \"content_id\": 3\n                }\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "update-trips",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "4|yKYDwuSxhfTCrQxAAp34zkUT8ppyz8gsze2kM0Ge0967d379",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Bali Adventure\",\n    \"description\":\"Gowes to Bali!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/trips/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"trips",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Bali Adventure\",\n    \"description\":\"Gowes to Bali!\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/trips/1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"trips",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.4.1"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 18 Apr 2025 07:52:12 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"Bali Adventure\",\n        \"description\": \"Gowes to Bali!\",\n        \"user_id\": 1,\n        \"created_at\": \"2025-04-18T06:47:45.000000Z\",\n        \"updated_at\": \"2025-04-18T07:52:12.000000Z\",\n        \"contents\": []\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "profile",
+			"item": [
+				{
+					"name": "detail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/profile",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"profile"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/profile",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"profile"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.4.1"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 18 Apr 2025 08:07:56 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"Ragil Pamungkas\",\n        \"email\": \"test@sipamungkas.com\",\n        \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n        \"updated_at\": \"2025-04-14T16:17:06.000000Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "update-profile",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"ragil bp\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/profile",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"profile"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/profile",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"profile"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.4.1"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 18 Apr 2025 08:07:56 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"Ragil Pamungkas\",\n        \"email\": \"test@sipamungkas.com\",\n        \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n        \"updated_at\": \"2025-04-14T16:17:06.000000Z\"\n    }\n}"
+						},
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\":\"ragil bp\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/profile",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"profile"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.4.1"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 18 Apr 2025 08:08:40 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"ragil bp\",\n        \"email\": \"test@sipamungkas.com\",\n        \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n        \"updated_at\": \"2025-04-18T08:08:40.000000Z\"\n    }\n}"
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "4|yKYDwuSxhfTCrQxAAp34zkUT8ppyz8gsze2kM0Ge0967d379",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "2|ifntzO8M9JvyZAiiICuMT4QYsb6tElm5ecySmixYb05ad88f",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/profile",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"profile"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/profile",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"profile"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.4.1"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 17 Apr 2025 16:26:57 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"data\": {\n        \"user\": {\n            \"id\": 1,\n            \"name\": \"Ragil Pamungkas\",\n            \"email\": \"test@sipamungkas.com\",\n            \"email_verified_at\": \"2025-04-14T16:17:06.000000Z\",\n            \"created_at\": \"2025-04-14T16:17:06.000000Z\",\n            \"updated_at\": \"2025-04-14T16:17:06.000000Z\"\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "news",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "4|yKYDwuSxhfTCrQxAAp34zkUT8ppyz8gsze2kM0Ge0967d379",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/news",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"news"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/news",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"news"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.4.1"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 17 Apr 2025 17:02:48 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": [\n        {\n            \"id\": 6,\n            \"title\": \"Qui error quis repellat cum.\",\n            \"description\": \"Incidunt odio est ab similique omnis. Quisquam placeat inventore voluptas omnis labore assumenda. Accusamus quisquam cum excepturi.\\n\\nFacilis eligendi molestiae molestiae rerum quia eaque rem beatae. Saepe minima aut eveniet quae. Eius voluptatem quia voluptatem. Modi beatae neque modi et explicabo omnis.\\n\\nError neque id dolorum officia quam hic rem repellendus. Repellat laborum neque iure explicabo velit omnis. Voluptatem non cum omnis dolor quos temporibus. Id est qui quisquam dolores voluptatem.\",\n            \"image\": \"news/news-1.jpg\",\n            \"is_visible\": true,\n            \"order\": 1,\n            \"created_at\": \"2025-04-17T17:02:41.000000Z\",\n            \"updated_at\": \"2025-04-17T17:02:41.000000Z\"\n        },\n        {\n            \"id\": 7,\n            \"title\": \"Quia sit assumenda laborum at ipsam harum.\",\n            \"description\": \"Ipsum nemo et tempora quod. Fuga doloremque praesentium dolorum ullam facere velit. Voluptate aut tenetur eum corporis ipsam et. Debitis quibusdam voluptatem ea et voluptates.\\n\\nIpsam distinctio qui minima cumque quam. Est dolore et et. Eum eos est ad.\\n\\nFacere labore omnis quidem aut. Repellendus omnis commodi qui provident cum. Inventore voluptatem libero totam. Nemo quibusdam cupiditate id quaerat.\",\n            \"image\": \"news/news-2.jpg\",\n            \"is_visible\": true,\n            \"order\": 2,\n            \"created_at\": \"2025-04-17T17:02:41.000000Z\",\n            \"updated_at\": \"2025-04-17T17:02:41.000000Z\"\n        },\n        {\n            \"id\": 8,\n            \"title\": \"Voluptatibus reprehenderit dolore ipsam est enim enim.\",\n            \"description\": \"Voluptates atque omnis explicabo est quae dicta porro. Quaerat ut rerum sunt ex ipsam iusto tempore culpa. Sunt voluptates ab suscipit corporis.\\n\\nQuasi perspiciatis tempore et eveniet impedit. Omnis itaque laborum voluptatem suscipit. Rerum nesciunt quam atque quis. Odit dolor quis sint iure.\\n\\nConsequatur ratione sint consequatur cum rem architecto. Doloribus et impedit aut. Et et rem consequatur nobis maxime. Qui eos reiciendis autem quia.\",\n            \"image\": \"news/news-3.jpg\",\n            \"is_visible\": true,\n            \"order\": 3,\n            \"created_at\": \"2025-04-17T17:02:42.000000Z\",\n            \"updated_at\": \"2025-04-17T17:02:42.000000Z\"\n        },\n        {\n            \"id\": 9,\n            \"title\": \"Iste enim quos fugiat ex cumque totam sunt adipisci.\",\n            \"description\": \"Aut ad perspiciatis ut. Placeat quo alias repellat sit animi a. Sit veniam aut totam dicta. Dolores voluptatem sit facere eos est natus.\\n\\nOmnis vitae odit eum dolorem est. Quo et et aliquam expedita et ut sapiente soluta. Vel nobis et reprehenderit laborum vero.\\n\\nIllum est qui hic voluptas dolorem. Fugiat deserunt saepe aut autem. Quia ad minus possimus cum voluptatum veritatis laboriosam. Velit dignissimos quisquam vitae nobis voluptatem nisi.\",\n            \"image\": \"news/news-4.jpg\",\n            \"is_visible\": true,\n            \"order\": 4,\n            \"created_at\": \"2025-04-17T17:02:42.000000Z\",\n            \"updated_at\": \"2025-04-17T17:02:42.000000Z\"\n        }\n    ],\n    \"links\": {\n        \"first\": \"http://localhost:8000/api/news?page=1\",\n        \"last\": \"http://localhost:8000/api/news?page=1\",\n        \"prev\": null,\n        \"next\": null\n    },\n    \"meta\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"last_page\": 1,\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"&laquo; Previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http://localhost:8000/api/news?page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"Next &raquo;\",\n                \"active\": false\n            }\n        ],\n        \"path\": \"http://localhost:8000/api/news\",\n        \"per_page\": 10,\n        \"to\": 4,\n        \"total\": 4\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "islands",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "4|yKYDwuSxhfTCrQxAAp34zkUT8ppyz8gsze2kM0Ge0967d379",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/islands?per_page=10",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"islands"
+					],
+					"query": [
+						{
+							"key": "per_page",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/islands?per_page=10",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"islands"
+							],
+							"query": [
+								{
+									"key": "per_page",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.4.1"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 17 Apr 2025 17:11:28 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": [\n        {\n            \"id\": 6,\n            \"name\": \"Bali\",\n            \"description\": \"Famous tourist destination known for its forested volcanic mountains, iconic rice paddies, beaches, and coral reefs.\",\n            \"image\": \"islands/island-6.jpg\",\n            \"created_at\": \"2025-04-17T17:10:29.000000Z\",\n            \"updated_at\": \"2025-04-17T17:10:29.000000Z\",\n            \"provinces_count\": 0\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Jawa\",\n            \"description\": \"The most populous island in Indonesia, home to the capital city Jakarta and rich in Javanese culture.\",\n            \"image\": \"islands/island-2.jpg\",\n            \"created_at\": \"2025-04-17T17:10:29.000000Z\",\n            \"updated_at\": \"2025-04-17T17:10:29.000000Z\",\n            \"provinces_count\": 0\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Kalimantan\",\n            \"description\": \"The third largest island in the world, famous for its ancient rainforests and diverse indigenous cultures.\",\n            \"image\": \"islands/island-3.jpg\",\n            \"created_at\": \"2025-04-17T17:10:29.000000Z\",\n            \"updated_at\": \"2025-04-17T17:10:29.000000Z\",\n            \"provinces_count\": 0\n        },\n        {\n            \"id\": 8,\n            \"name\": \"Maluku\",\n            \"description\": \"Also known as the Moluccas or Spice Islands, historically important for spice trade and rich marine life.\",\n            \"image\": \"islands/island-8.jpg\",\n            \"created_at\": \"2025-04-17T17:10:29.000000Z\",\n            \"updated_at\": \"2025-04-17T17:10:29.000000Z\",\n            \"provinces_count\": 0\n        },\n        {\n            \"id\": 7,\n            \"name\": \"Nusa Tenggara\",\n            \"description\": \"A chain of islands east of Bali, including Lombok, Flores, and Komodo, home to unique wildlife and cultures.\",\n            \"image\": \"islands/island-7.jpg\",\n            \"created_at\": \"2025-04-17T17:10:29.000000Z\",\n            \"updated_at\": \"2025-04-17T17:10:29.000000Z\",\n            \"provinces_count\": 0\n        },\n        {\n            \"id\": 5,\n            \"name\": \"Papua\",\n            \"description\": \"The largest and easternmost province of Indonesia, known for its diverse indigenous cultures and unique wildlife.\",\n            \"image\": \"islands/island-5.jpg\",\n            \"created_at\": \"2025-04-17T17:10:29.000000Z\",\n            \"updated_at\": \"2025-04-17T17:10:29.000000Z\",\n            \"provinces_count\": 0\n        },\n        {\n            \"id\": 4,\n            \"name\": \"Sulawesi\",\n            \"description\": \"Known for its unique K-shape and incredible marine biodiversity, home to unique cultures like the Toraja.\",\n            \"image\": \"islands/island-4.jpg\",\n            \"created_at\": \"2025-04-17T17:10:29.000000Z\",\n            \"updated_at\": \"2025-04-17T17:10:29.000000Z\",\n            \"provinces_count\": 0\n        },\n        {\n            \"id\": 1,\n            \"name\": \"Sumatra\",\n            \"description\": \"The sixth largest island in the world, known for its diverse wildlife, rainforests, and rich cultural heritage.\",\n            \"image\": \"islands/island-1.jpg\",\n            \"created_at\": \"2025-04-17T17:10:29.000000Z\",\n            \"updated_at\": \"2025-04-17T17:10:29.000000Z\",\n            \"provinces_count\": 0\n        }\n    ],\n    \"links\": {\n        \"first\": \"http://localhost:8000/api/islands?page=1\",\n        \"last\": \"http://localhost:8000/api/islands?page=1\",\n        \"prev\": null,\n        \"next\": null\n    },\n    \"meta\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"last_page\": 1,\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"&laquo; Previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http://localhost:8000/api/islands?page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"Next &raquo;\",\n                \"active\": false\n            }\n        ],\n        \"path\": \"http://localhost:8000/api/islands\",\n        \"per_page\": 10,\n        \"to\": 8,\n        \"total\": 8\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "recommendations",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "4|yKYDwuSxhfTCrQxAAp34zkUT8ppyz8gsze2kM0Ge0967d379",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/recommendations?per_page=10",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"recommendations"
+					],
+					"query": [
+						{
+							"key": "per_page",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/recommendations?per_page=10",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"recommendations"
+							],
+							"query": [
+								{
+									"key": "per_page",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.4.1"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 18 Apr 2025 02:55:32 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": [\n        {\n            \"id\": 38,\n            \"title\": \"Angklung Performance\",\n            \"description\": \"Traditional Indonesian cultural performance and heritage.\",\n            \"category\": \"culture\",\n            \"province_id\": 6,\n            \"regency_id\": 10,\n            \"district_id\": 22,\n            \"image\": \"contents/culture-8.jpg\",\n            \"recommendation\": true,\n            \"since_century\": null,\n            \"established_year\": null,\n            \"latitude\": null,\n            \"longitude\": null,\n            \"is_visible\": true,\n            \"order\": 0,\n            \"created_at\": \"2025-04-14T16:21:54.000000Z\",\n            \"updated_at\": \"2025-04-18T02:52:00.000000Z\",\n            \"district\": {\n                \"id\": 22,\n                \"name\": \"TRUMON\",\n                \"regency_id\": 3,\n                \"regency\": {\n                    \"id\": 3,\n                    \"name\": \"KABUPATEN ACEH SELATAN\",\n                    \"province_id\": 1,\n                    \"province\": {\n                        \"id\": 1,\n                        \"name\": \"ACEH\"\n                    }\n                }\n            }\n        }\n    ],\n    \"links\": {\n        \"first\": \"http://localhost:8000/api/recommendations?page=1\",\n        \"last\": \"http://localhost:8000/api/recommendations?page=1\",\n        \"prev\": null,\n        \"next\": null\n    },\n    \"meta\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"last_page\": 1,\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"&laquo; Previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http://localhost:8000/api/recommendations?page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"Next &raquo;\",\n                \"active\": false\n            }\n        ],\n        \"path\": \"http://localhost:8000/api/recommendations\",\n        \"per_page\": 10,\n        \"to\": 1,\n        \"total\": 1\n    }\n}"
+				}
+			]
+		}
+	]
+}
