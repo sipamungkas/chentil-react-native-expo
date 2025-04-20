@@ -59,7 +59,6 @@ export const useAuthStore = create<AuthState>()(
         try {
           apiLogout();
           set({ user: null, token: null });
-          console.log('Logged out');
           router.replace('/(auth)/login');
         } finally {
           set({ isLoading: false });

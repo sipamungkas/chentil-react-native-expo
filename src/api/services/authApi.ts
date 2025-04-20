@@ -5,7 +5,6 @@ import type {
   LoginResponse,
   RegisterResponse,
 } from '../../types/api';
-import { useAuthStore } from '@/store/authStore';
 
 // Auth API functions (no hooks, just async functions)
 
@@ -17,7 +16,6 @@ export async function login(credentials: {
     endpoints.auth.login,
     credentials
   );
-  console.log({ response });
   return response;
 }
 
@@ -36,7 +34,6 @@ export async function register(data: {
 
 export async function logout(): Promise<void> {
   await post(endpoints.auth.logout);
-  useAuthStore.getState().logout();
 }
 
 export async function getProfile(): Promise<ApiUser> {

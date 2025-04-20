@@ -74,6 +74,18 @@ export const endpoints = {
     logout: '/logout',
     profile: '/profile',
   },
+  contents: {
+    destinations: '/destinations',
+    outbounds: '/outbounds',
+    cultures: '/cultures',
+    foodAndBeverages: '/food-and-beverages',
+    topFavorites: '/top-favorites',
+  },
+  favorites: {
+    list: '/favorites',
+    toggle: (contentId: number) => `/favorites/${contentId}/toggle`,
+    check: (contentId: number) => `/favorites/${contentId}/check`,
+  },
   trips: {
     list: '/trips',
     create: '/trips',
@@ -84,13 +96,7 @@ export const endpoints = {
     removeContent: (tripId: number, contentId: number) =>
       `/trips/${tripId}/contents/${contentId}`,
   },
-  contents: {
-    destinations: '/contents/destinations',
-    outbounds: '/contents/outbounds',
-    cultures: '/contents/cultures',
-    foodAndBeverages: '/contents/food-and-beverages',
-    topFavorites: '/contents/top-favorites',
-  },
+
   wishlists: {
     list: '/wishlists',
     toggle: (contentId: number) => `/wishlists/${contentId}/toggle`,
@@ -98,5 +104,11 @@ export const endpoints = {
   },
   news: {
     list: '/news',
+  },
+  islands: {
+    list: '/islands',
+  },
+  recommendations: {
+    list: '/recommendations',
   },
 };

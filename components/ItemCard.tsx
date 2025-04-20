@@ -12,7 +12,7 @@ import type {
 
 export interface ItemCardProps {
   entering: EntryExitAnimationFunction | undefined | FadeInDown;
-  id: string;
+  id: number;
   image: string;
   name: string;
   location?: string; //use it on destination or something that need location
@@ -34,11 +34,7 @@ export function ItemCard({
   return (
     <Animated.View entering={entering} style={styles.card}>
       <Pressable onPress={onPress}>
-        <Animated.Image
-          sharedTransitionTag={id}
-          source={{ uri: image }}
-          style={styles.image}
-        />
+        <Animated.Image source={{ uri: image }} style={styles.image} />
         <View style={styles.info}>
           <Text style={styles.name}>{name}</Text>
 

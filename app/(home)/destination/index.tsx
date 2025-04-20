@@ -4,6 +4,9 @@ import { useRouter } from 'expo-router';
 import { ChevronRight } from 'lucide-react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import { colors } from '@/theme/colors';
+import { useEffect, useState } from 'react';
+import { Island } from '@/src/types/api';
+import { getIslands } from '@/src/api/services/islandApi';
 
 const ISLANDS = [
   {
@@ -102,6 +105,19 @@ const ISLANDS = [
 
 export default function DestinationScreen() {
   const router = useRouter();
+  const [islands, setIslands] = useState<Island[]>([]);
+
+  useEffect(() => {
+    const fetchIslands = async () => {
+      try {
+        const islands = await getIslands();
+        setIslands(islands);
+      } catch (error) {
+        console.error('Failed to fetch islands:', error);
+      }
+    };
+    fetchIslands();
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -115,20 +131,28 @@ export default function DestinationScreen() {
         </View>
 
         <View style={styles.content}>
-          {ISLANDS.map((island, index) => (
+          {islands.map((island, index) => (
             <Animated.View
               key={island.id}
               entering={FadeInDown.delay(index * 100)}
             >
               <Pressable
                 style={styles.islandCard}
-                onPress={() => router.push(`/destination/${island.id}`)}
+                onPress={() =>
+                  router.push({
+                    pathname: '/destination/[island]',
+                    params: {
+                      island: island.id,
+                      title: island.name,
+                    },
+                  })
+                }
               >
                 <View style={styles.islandInfo}>
                   <Text style={styles.islandName}>{island.name}</Text>
                   <Text style={styles.provinceCount}>
-                    {island.provinces.length}{' '}
-                    {island.provinces.length === 1 ? 'Province' : 'Provinces'}
+                    {island.provinces_count}{' '}
+                    {island.provinces_count === 1 ? 'Province' : 'Provinces'}
                   </Text>
                   <Text style={styles.islandDescription} numberOfLines={2}>
                     {island.description}

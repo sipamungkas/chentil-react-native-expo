@@ -33,11 +33,11 @@ export interface RegisterResponse {
 export interface Island {
   id: number;
   name: string;
-  description: string;
-  image: string;
-  created_at: string;
-  updated_at: string;
-  provinces_count: number;
+  description?: string;
+  image?: string;
+  created_at?: string;
+  updated_at?: string;
+  provinces_count?: number;
 }
 
 export interface Province {

@@ -11,8 +11,9 @@ import {
 } from 'lucide-react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Animated from 'react-native-reanimated';
+import { checkWishlist, toggleWishlist } from '@/api/services/wishlistApi';
 
 interface DetailScreenProps {
   image: string;
@@ -26,8 +27,9 @@ export default function DetailScreen() {
   const { id, image, name, description, location, since, date } =
     useLocalSearchParams();
   const router = useRouter();
-  const [isFavorite, setIsFavorite] = useState(false);
+
   const [isWishlisted, setIsWishlisted] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   const formatDate = (dateString: string) => {
     try {
@@ -45,6 +47,20 @@ export default function DetailScreen() {
 
   const handleMapPress = () => {
     router.push('/map');
+  };
+
+  useEffect(() => {
+    checkWishlist(Number(id)).then((res) => {
+      setIsWishlisted(res.is_wishlisted);
+    });
+  }, []);
+
+  const handleWishlistPress = () => {
+    toggleWishlist(Number(id)).then(() => {
+      checkWishlist(Number(id)).then((res) => {
+        setIsWishlisted(res.is_wishlisted);
+      });
+    });
   };
 
   return (
@@ -112,7 +128,7 @@ export default function DetailScreen() {
 
             <Pressable
               style={[styles.actionButton, isWishlisted && styles.activeButton]}
-              onPress={() => setIsWishlisted(!isWishlisted)}
+              onPress={() => handleWishlistPress()}
             >
               <BookmarkPlus
                 size={20}
