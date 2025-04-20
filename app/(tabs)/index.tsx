@@ -114,13 +114,14 @@ export default function HomeScreen() {
         showsVerticalScrollIndicator={false}
       >
         <NewsSlider news={news} loading={loading} />
-        <View style={styles.searchContainer}>
+        {/* <View style={styles.searchContainer}>
           <SearchBar
             value={searchText}
             onChangeText={setSearchText}
             placeholder="Search destinations..."
           />
-        </View>
+        </View> */}
+        <View style={{ marginVertical: 16 }} />
         <MenuGrid items={MENU_ITEMS} onItemPress={handleMenuPress} />
         <MapSection />
         <TopPicks places={TOP_PICKS} onPlacePress={handlePlacePress} />
