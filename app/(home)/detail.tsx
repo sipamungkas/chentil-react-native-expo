@@ -8,6 +8,8 @@ import {
   BookmarkPlus,
   Map,
   ChevronLeft,
+  Utensils,
+  Palette,
 } from 'lucide-react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -100,22 +102,23 @@ export default function DetailScreen() {
 
         <View style={styles.content}>
           <Text style={styles.name}>{name || title}</Text>
-          <Text
-            style={[
-              styles.categoryBadge,
-              {
-                color:
-                  categoryTextColors[
-                    category as keyof typeof categoryTextColors
-                  ],
-              },
-            ]}
-          >
-            {category === 'outbound' && 'Outbound'}
-            {category === 'culture' && 'Culture'}
-            {category === 'fnb' && 'Food & Beverage'}
-            {category === 'destination' && 'Destination'}
-          </Text>
+          <View style={styles.typeContainer}>
+            {category === 'destination' && (
+              <MapPin size={16} color={colors.chentil.rosePink} />
+            )}
+            {category === 'fnb' && (
+              <Utensils size={16} color={colors.chentil.rosePink} />
+            )}
+            {category === 'culture' && (
+              <Palette size={16} color={colors.chentil.rosePink} />
+            )}
+            <Text style={styles.categoryBadge}>
+              {category === 'outbound' && 'Outbound'}
+              {category === 'culture' && 'Culture'}
+              {category === 'fnb' && 'Food & Beverage'}
+              {category === 'destination' && 'Destination'}
+            </Text>
+          </View>
 
           {location && (
             <View style={styles.infoRow}>
@@ -216,12 +219,18 @@ const styles = StyleSheet.create({
     color: colors.brand.primary,
     marginBottom: 16,
   },
+  typeContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
   categoryBadge: {
     fontFamily: 'PlusJakartaSans-Medium',
     fontSize: 14,
     padding: 4,
     borderRadius: 4,
-    marginBottom: 12,
+    marginLeft: 8,
+    color: colors.chentil.rosePink,
   },
   infoRow: {
     flexDirection: 'row',

@@ -1,77 +1,64 @@
-import {
-  StyleSheet,
-  View,
-  Text,
-  ScrollView,
-  Image,
-  Pressable,
-} from 'react-native';
+import { StyleSheet, View, Text, Image, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MapPin, Utensils, Palette } from 'lucide-react-native';
 import { useRouter } from 'expo-router';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import { colors } from '@/theme/colors';
+import { useEffect, useState, useCallback } from 'react';
+import { ActivityIndicator, FlatList } from 'react-native';
+import { getRecommendations } from '@/src/api/services/recommendationApi';
+import type { Content } from '@/src/types/api';
 
-const RECOMMENDATIONS = [
-  {
-    id: '1',
-    type: 'destination',
-    title: 'Karimun Jawa',
-    description:
-      'A pristine archipelago featuring crystal clear waters, vibrant coral reefs, and white sandy beaches.',
-    image:
-      'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&q=80&w=800',
-    location: 'Central Java',
-    route: '/destination/java/karimunjawa',
-  },
-  {
-    id: '2',
-    type: 'food',
-    title: 'Sate Padang',
-    description:
-      'Traditional Minangkabau satay served with thick, spicy yellow sauce made from rice flour, turmeric, ginger, and various spices.',
-    image:
-      'https://images.unsplash.com/photo-1625938144755-652e08e08f79?auto=format&fit=crop&q=80&w=800',
-    location: 'West Sumatra',
-    route: '/food-and-beverage/west-sumatra/sate-padang',
-  },
-  {
-    id: '3',
-    type: 'culture',
-    title: 'Kecak Fire Dance',
-    description:
-      'A mesmerizing Balinese dance and music drama developed in the 1930s, known for its unique vocal chanting.',
-    image:
-      'https://images.unsplash.com/photo-1583309217394-d35d84b4c544?auto=format&fit=crop&q=80&w=800',
-    location: 'Bali',
-    route: '/culture/bali/kecak',
-  },
-  {
-    id: '4',
-    type: 'destination',
-    title: 'Raja Ampat',
-    description:
-      'A stunning archipelago comprising over 1,500 small islands, known for the richest marine biodiversity on Earth.',
-    image:
-      'https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?auto=format&fit=crop&q=80&w=800',
-    location: 'West Papua',
-    route: '/destination/papua/raja-ampat',
-  },
-  {
-    id: '5',
-    type: 'food',
-    title: 'Rendang',
-    description:
-      "A rich and tender coconut beef stew that's considered one of the world's most delicious foods.",
-    image:
-      'https://images.unsplash.com/photo-1628534795735-0a0b6720828f?auto=format&fit=crop&q=80&w=800',
-    location: 'West Sumatra',
-    route: '/food-and-beverage/west-sumatra/rendang',
-  },
-];
+const PAGE_SIZE = 10;
 
 export default function RecommendationsScreen() {
   const router = useRouter();
+  const [recommendations, setRecommendations] = useState<Content[]>([]);
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const fetchRecommendations = useCallback(
+    async (pageNum = 1, isRefresh = false) => {
+      if (loading && !isRefresh) return;
+      if (isRefresh) setRefreshing(true);
+      else setLoading(true);
+      try {
+        const res = await getRecommendations({
+          per_page: PAGE_SIZE,
+          page: pageNum,
+        });
+        const newData = res.data || [];
+        if (isRefresh) {
+          setRecommendations(newData);
+        } else {
+          setRecommendations((prev) => [...prev, ...newData]);
+        }
+        setHasMore(newData.length === PAGE_SIZE);
+        setPage(pageNum);
+      } finally {
+        setLoading(false);
+        setRefreshing(false);
+      }
+    },
+    [loading]
+  );
+
+  useEffect(() => {
+    fetchRecommendations(1, true);
+  }, [fetchRecommendations]);
+
+  const handleLoadMore = () => {
+    if (!loading && hasMore && !refreshing) {
+      const nextPage = page + 1;
+      fetchRecommendations(nextPage);
+    }
+  };
+
+  const handleRefresh = () => {
+    fetchRecommendations(1, true);
+  };
 
   const getIcon = (type: string) => {
     switch (type) {
@@ -86,58 +73,88 @@ export default function RecommendationsScreen() {
     }
   };
 
-  const onPress = (params: any) => {
+  const onPress = (params: Content) => {
     router.push({
       pathname: '/detail',
-      params,
+      params: {
+        id: params.id.toString(),
+        image: params.image,
+        name: params.title,
+        category: params.category,
+        location:
+          params.province?.name ||
+          params.regency?.name ||
+          params.district?.name,
+        description: params.description,
+      },
     });
   };
 
+  const renderItem = ({ item, index }: { item: Content; index: number }) => (
+    <Animated.View key={item.id} entering={FadeInDown.delay(index * 100)}>
+      <Pressable
+        style={styles.recommendationCard}
+        onPress={() => onPress(item)}
+      >
+        <Image source={{ uri: item.image }} style={styles.itemImage} />
+        <View style={styles.itemInfo}>
+          <View style={styles.typeContainer}>
+            {getIcon(item.category)}
+            <Text style={styles.typeText}>
+              {item.category.charAt(0).toUpperCase() + item.category.slice(1)}
+            </Text>
+          </View>
+          <Text style={styles.itemTitle}>{item.title}</Text>
+          <Text style={styles.itemDescription} numberOfLines={2}>
+            {item.description}
+          </Text>
+          <View style={styles.locationContainer}>
+            <MapPin size={14} color={colors.chentil.rosePink} />
+            <Text style={styles.locationText}>
+              {item.province?.name || item.regency?.name || item.district?.name}
+            </Text>
+          </View>
+        </View>
+      </Pressable>
+    </Animated.View>
+  );
+
+  const ListFooterComponent = () =>
+    loading && !refreshing ? (
+      <ActivityIndicator
+        size="small"
+        color={colors.brand.primary}
+        style={{ marginVertical: 16 }}
+      />
+    ) : null;
+
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView
-        style={styles.scrollView}
+      <View style={styles.header}>
+        <Text style={styles.title}>Recommended for You</Text>
+        <Text style={styles.subtitle}>
+          Discover amazing places, food, and culture
+        </Text>
+      </View>
+      <FlatList
+        data={recommendations}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={renderItem}
+        contentContainerStyle={styles.content}
+        ListEmptyComponent={
+          !loading ? (
+            <Text style={styles.noRecommendations}>
+              No recommendations found
+            </Text>
+          ) : null
+        }
+        ListFooterComponent={ListFooterComponent}
+        onEndReached={handleLoadMore}
+        onEndReachedThreshold={0.5}
         showsVerticalScrollIndicator={false}
-      >
-        <View style={styles.header}>
-          <Text style={styles.title}>Recommended for You</Text>
-          <Text style={styles.subtitle}>
-            Discover amazing places, food, and culture
-          </Text>
-        </View>
-
-        <View style={styles.content}>
-          {RECOMMENDATIONS.map((item, index) => (
-            <Animated.View
-              key={item.id}
-              entering={FadeInDown.delay(index * 100)}
-            >
-              <Pressable
-                style={styles.recommendationCard}
-                onPress={() => onPress(item)}
-              >
-                <Image source={{ uri: item.image }} style={styles.itemImage} />
-                <View style={styles.itemInfo}>
-                  <View style={styles.typeContainer}>
-                    {getIcon(item.type)}
-                    <Text style={styles.typeText}>
-                      {item.type.charAt(0).toUpperCase() + item.type.slice(1)}
-                    </Text>
-                  </View>
-                  <Text style={styles.itemTitle}>{item.title}</Text>
-                  <Text style={styles.itemDescription} numberOfLines={2}>
-                    {item.description}
-                  </Text>
-                  <View style={styles.locationContainer}>
-                    <MapPin size={14} color={colors.chentil.rosePink} />
-                    <Text style={styles.locationText}>{item.location}</Text>
-                  </View>
-                </View>
-              </Pressable>
-            </Animated.View>
-          ))}
-        </View>
-      </ScrollView>
+        refreshing={refreshing}
+        onRefresh={handleRefresh}
+      />
     </SafeAreaView>
   );
 }
@@ -146,9 +163,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background.primary,
-  },
-  scrollView: {
-    flex: 1,
   },
   header: {
     padding: 20,
@@ -222,5 +236,12 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: colors.chentil.rosePink,
     marginLeft: 4,
+  },
+  noRecommendations: {
+    fontFamily: 'PlusJakartaSans-Regular',
+    fontSize: 14,
+    color: '#4A5568',
+    textAlign: 'center',
+    padding: 20,
   },
 });
