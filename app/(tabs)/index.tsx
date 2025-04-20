@@ -107,8 +107,6 @@ export default function HomeScreen() {
     router.push(route);
   };
 
-  console.log({ news });
-
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView
