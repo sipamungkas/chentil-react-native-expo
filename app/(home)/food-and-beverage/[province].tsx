@@ -1,7 +1,10 @@
+import { useEffect, useState, useCallback } from 'react';
 import {
   StyleSheet,
   View,
   Text,
+  FlatList,
+  ActivityIndicator,
   ScrollView,
   Image,
   Pressable,
@@ -11,75 +14,61 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { ArrowLeft, MapPin, Clock, Utensils } from 'lucide-react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import { colors } from '@/theme/colors';
+import { getFoodAndBeverages } from '@/src/api/services/contentApi';
 import { ItemCard } from '@/components/ItemCard';
+import type { Content } from '@/src/types/api';
 
-const PROVINCE_FOODS = {
-  aceh: {
-    name: 'Aceh',
-    foods: [
-      {
-        id: '1',
-        name: 'Mie Aceh',
-        description:
-          'Spicy noodle dish with a rich blend of spices, typically served with seafood or meat.',
-        image:
-          'https://images.unsplash.com/photo-1626804475297-41608ea09aeb?auto=format&fit=crop&q=80&w=800',
-        cookingTime: '30-45 minutes',
-        spiceLevel: 'Hot',
-        mainIngredients: [
-          'Thick yellow noodles',
-          'Shrimp',
-          'Beef',
-          'Curry spices',
-        ],
-      },
-      {
-        id: '2',
-        name: 'Kuah Pliek U',
-        description:
-          'Traditional Acehnese curry made with fermented coconut pulp and various vegetables.',
-        image:
-          'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&q=80&w=800',
-        cookingTime: '60-90 minutes',
-        spiceLevel: 'Medium',
-        mainIngredients: ['Fermented coconut', 'Local vegetables', 'Spices'],
-      },
-    ],
-  },
-  bali: {
-    name: 'Bali',
-    foods: [
-      {
-        id: '1',
-        name: 'Babi Guling',
-        description:
-          'Balinese-style roast pork with traditional spices and herbs.',
-        image:
-          'https://images.unsplash.com/photo-1625938144755-652e08e359b7?auto=format&fit=crop&q=80&w=800',
-        cookingTime: '4-5 hours',
-        spiceLevel: 'Medium',
-        mainIngredients: ['Pork', 'Turmeric', 'Lemongrass', 'Galangal'],
-      },
-      {
-        id: '2',
-        name: 'Bebek Betutu',
-        description:
-          'Slow-cooked duck with Balinese spices, wrapped in banana leaves.',
-        image:
-          'https://images.unsplash.com/photo-1567529726005-7fb5e8225349?auto=format&fit=crop&q=80&w=800',
-        cookingTime: '6-8 hours',
-        spiceLevel: 'Medium-Hot',
-        mainIngredients: ['Duck', 'Balinese spice paste', 'Banana leaves'],
-      },
-    ],
-  },
-  // Add more provinces and their foods...
-};
+const PAGE_SIZE = 10;
 
 export default function ProvinceFoodScreen() {
-  const { province } = useLocalSearchParams();
+  const { province, province_id, province_name } = useLocalSearchParams();
   const router = useRouter();
-  const provinceData = PROVINCE_FOODS[province as keyof typeof PROVINCE_FOODS];
+  const [foods, setFoods] = useState<Content[]>([]);
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const fetchFoods = useCallback(
+    async (pageNum = 1, isRefresh = false) => {
+      if (loading && !isRefresh) return;
+      if (isRefresh) setRefreshing(true);
+      else setLoading(true);
+      try {
+        const res = await getFoodAndBeverages(PAGE_SIZE, pageNum, {
+          province_id,
+        });
+        const newData = res.data || [];
+        if (isRefresh) {
+          setFoods(newData);
+        } else {
+          setFoods((prev) => [...prev, ...newData]);
+        }
+        setHasMore(newData.length === PAGE_SIZE);
+        setPage(pageNum);
+      } finally {
+        setLoading(false);
+        setRefreshing(false);
+      }
+    },
+    [province_id, loading]
+  );
+
+  useEffect(() => {
+    fetchFoods(1, true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [province_id]);
+
+  const handleLoadMore = () => {
+    if (hasMore && !loading) {
+      fetchFoods(page + 1);
+    }
+  };
+
+  const handleRefresh = () => {
+    fetchFoods(1, true);
+  };
+
   const onPress = (params: any) => {
     router.push({
       pathname: '/detail',
@@ -87,47 +76,48 @@ export default function ProvinceFoodScreen() {
     });
   };
 
-  if (!provinceData) {
-    return (
-      <SafeAreaView style={styles.container}>
-        <View style={styles.errorContainer}>
-          <Text style={styles.errorText}>Province not found</Text>
-          <Pressable style={styles.backButton} onPress={() => router.back()}>
-            <Text style={styles.backButtonText}>Back to Provinces</Text>
-          </Pressable>
-        </View>
-      </SafeAreaView>
-    );
-  }
-
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView
-        style={styles.scrollView}
-        showsVerticalScrollIndicator={false}
-      >
-        <View style={styles.header}>
-          <Pressable style={styles.backButton} onPress={() => router.back()}>
-            <ArrowLeft size={24} color="#1A202C" />
-          </Pressable>
-          <Text style={styles.title}>{provinceData.name} Cuisine</Text>
-          <Text style={styles.subtitle}>Traditional foods and delicacies</Text>
-        </View>
+      <View style={styles.header}>
+        <Pressable style={styles.backButton} onPress={() => router.back()}>
+          <ArrowLeft size={24} color="#1A202C" />
+        </Pressable>
+        <Text style={styles.title}>
+          {province_name || province} Food & Beverages
+        </Text>
+        <Text style={styles.subtitle}>Traditional foods and delicacies</Text>
+      </View>
 
-        <View style={styles.content}>
-          {provinceData.foods.map((food, index) => (
+      <View style={styles.content}>
+        <FlatList
+          data={foods}
+          renderItem={({ item, index }) => (
             <ItemCard
-              key={food.id}
-              entering={FadeInDown.delay(index * 100)}
-              name={food.name}
-              description={food.description}
-              onPress={() => onPress(food)}
-              image={food.image}
-              id={food.id}
+              entering={FadeInDown.delay(200 * index)}
+              id={item.id}
+              image={item.image}
+              name={item.title}
+              location={
+                item.province?.name || item.regency?.name || item.district?.name
+              }
+              description={item.description}
+              category={item.category}
+              onPress={() => onPress(item)}
             />
-          ))}
-        </View>
-      </ScrollView>
+          )}
+          keyExtractor={(item) => item.id.toString()}
+          onEndReached={handleLoadMore}
+          onEndReachedThreshold={0.5}
+          refreshing={refreshing}
+          onRefresh={handleRefresh}
+          ListFooterComponent={
+            loading && !refreshing ? (
+              <ActivityIndicator size="small" color={colors.brand.primary} />
+            ) : null
+          }
+          contentContainerStyle={styles.listContent}
+        />
+      </View>
     </SafeAreaView>
   );
 }
@@ -162,67 +152,9 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: 20,
+    paddingBottom: 150,
   },
-  errorContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-  },
-  errorText: {
-    fontFamily: 'PlusJakartaSans-SemiBold',
-    fontSize: 18,
-    color: '#1A202C',
-    marginBottom: 16,
-  },
-  foodCard: {
-    backgroundColor: colors.background.primary,
-    borderRadius: 16,
-    marginBottom: 20,
-    overflow: 'hidden',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 3,
-  },
-  foodImage: {
-    width: '100%',
-    height: 200,
-    borderTopLeftRadius: 16,
-    borderTopRightRadius: 16,
-  },
-  foodInfo: {
-    padding: 16,
-  },
-  foodName: {
-    fontFamily: 'PlusJakartaSans-SemiBold',
-    fontSize: 18,
-    color: '#1A202C',
-    marginBottom: 8,
-  },
-  foodDescription: {
-    fontFamily: 'PlusJakartaSans-Regular',
-    fontSize: 14,
-    color: '#4A5568',
-    lineHeight: 20,
-    marginBottom: 12,
-  },
-  foodDetails: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  detailItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  detailText: {
-    fontFamily: 'PlusJakartaSans-Medium',
-    fontSize: 14,
-    color: '#4A5568',
-    marginLeft: 8,
+  listContent: {
+    padding: 2,
   },
 });

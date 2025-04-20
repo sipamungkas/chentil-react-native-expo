@@ -111,4 +111,7 @@ export const endpoints = {
   recommendations: {
     list: '/recommendations',
   },
+  provinces: {
+    list: '/provinces',
+  },
 };

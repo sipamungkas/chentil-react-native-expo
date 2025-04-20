@@ -1,5 +1,5 @@
 import { endpoints, get } from '../apiClient';
-import type { ApiResponseSuccess, Content } from '../../types/api';
+import type { ApiResponseSuccess, Content, Province } from '../../types/api';
 
 export async function getDestinations(
   per_page = 10,
@@ -93,4 +93,11 @@ export async function getTopFavorites(
   return get<ApiResponseSuccess<Content[]>>(
     `${endpoints.contents.topFavorites}?${searchParams}`
   );
+}
+
+// --- ADDED: Fetch provinces ---
+export async function getProvinces(): Promise<Province[]> {
+  // This assumes you have an endpoint for provinces, e.g. endpoints.provinces.list
+  // If not, please adjust accordingly.
+  return get<{ data: Province[] }>(endpoints.provinces.list).then(res => res.data);
 }
