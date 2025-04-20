@@ -127,10 +127,6 @@ export default function CultureScreen() {
           Discover Indonesia's rich traditions
         </Text>
       </View>
-      {/* <Pressable style={styles.searchBar}>
-        <Search size={20} color="#4A5568" />
-        <Text style={styles.searchText}>Search cultural traditions</Text>
-      </Pressable> */}
       <FlatList
         data={culturesData.data}
         keyExtractor={(item) => item.id.toString()}
