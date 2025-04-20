@@ -12,20 +12,16 @@ import {
 import { useState, useRef } from 'react';
 import Animated from 'react-native-reanimated';
 import { router } from 'expo-router';
-
-interface NewsSlide {
-  id: string;
-  title: string;
-  image: string;
-}
+import { News } from '@/src/types/api';
 
 interface NewsSliderProps {
-  slides: NewsSlide[];
+  news: News[];
+  loading: boolean;
 }
 
 const { width } = Dimensions.get('window');
 
-export function NewsSlider({ slides }: NewsSliderProps) {
+export function NewsSlider({ news, loading }: NewsSliderProps) {
   const [activeSlide, setActiveSlide] = useState(0);
   const scrollViewRef = useRef<ScrollView>(null);
 
@@ -53,14 +49,13 @@ export function NewsSlider({ slides }: NewsSliderProps) {
         onScroll={handleScroll}
         scrollEventThrottle={16}
       >
-        {slides.map((slide) => (
+        {news.map((slide) => (
           <Pressable
             key={slide.id}
             onPress={() => onPress({ ...slide, name: slide.title })}
           >
             <View style={[styles.slideContainer, { width }]}>
               <Animated.Image
-                sharedTransitionTag={slide.id}
                 source={{ uri: slide.image }}
                 style={styles.slideImage}
               />
@@ -72,7 +67,7 @@ export function NewsSlider({ slides }: NewsSliderProps) {
         ))}
       </ScrollView>
       <View style={styles.pagination}>
-        {slides.map((_, index) => (
+        {news.map((_, index) => (
           <View
             key={index}
             style={[

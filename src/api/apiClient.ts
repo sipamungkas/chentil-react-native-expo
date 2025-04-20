@@ -1,12 +1,14 @@
 // Axios-based API client for REST requests
 import axios, { AxiosRequestConfig, AxiosInstance } from 'axios';
+import { useAuthStore } from '../store/authStore';
 
-const BASE_URL = process.env.EXPO_PUBLIC_API_URL || 'http://localhost:8000/api2';
+const BASE_URL =
+  process.env.EXPO_PUBLIC_API_URL || 'http://localhost:8000/api2';
 
 // Helper to get auth token (customize as needed)
-export function getAuthToken(): string | undefined {
+export function getAuthToken(): string | undefined | null {
   // Use your own storage (e.g., Zustand, Context, or SecureStore)
-  return (global as any).token;
+  return useAuthStore.getState().token;
 }
 
 // Create an Axios instance
@@ -93,5 +95,8 @@ export const endpoints = {
     list: '/wishlists',
     toggle: (contentId: number) => `/wishlists/${contentId}/toggle`,
     check: (contentId: number) => `/wishlists/${contentId}/check`,
+  },
+  news: {
+    list: '/news',
   },
 };

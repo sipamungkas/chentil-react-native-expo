@@ -103,6 +103,14 @@ export interface Trip {
   contents?: Content[];
 }
 
+export interface News {
+  id: number;
+  title: string;
+  image: string;
+  date: string;
+  description: string;
+}
+
 // Example usage:
 // ApiResponseSuccess<LoginResponse>
 // ApiResponseSuccess<RegisterResponse>
