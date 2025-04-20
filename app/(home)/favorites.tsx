@@ -1,105 +1,166 @@
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  ActivityIndicator,
+  Pressable,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { colors } from '@/theme/colors';
-import { PlaceCard } from '@/components/PlaceCard';
-import { ScreenHeader } from '@/components/ScreenHeader';
 import { ItemCard } from '@/components/ItemCard';
 import { FadeInDown } from 'react-native-reanimated';
+import { ArrowLeft } from 'lucide-react-native';
+import { useEffect, useState, useCallback } from 'react';
+import { getFavorites } from '@/src/api/services/favoriteApi';
+import type { ApiResponseSuccess, Content } from '@/src/types/api';
 
-// Example favorite items (in a real app, this would come from a state management system)
-const favorites = [
-  {
-    id: '1',
-    name: 'Borobudur Temple',
-    location: 'Magelang, Central Java',
-    image:
-      'https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?auto=format&fit=crop&q=80&w=600',
-    rating: 4.8,
-  },
-  {
-    id: '2',
-    name: 'Raja Ampat Islands',
-    location: 'West Papua',
-    image:
-      'https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?auto=format&fit=crop&q=80&w=600',
-    rating: 4.9,
-  },
-  {
-    id: '3',
-    name: 'Ramayana Ballet',
-    location: 'Prambanan, Yogyakarta',
-    image:
-      'https://images.unsplash.com/photo-1601959334795-2b7c04021807?auto=format&fit=crop&q=80&w=600',
-    rating: 4.7,
-  },
-  {
-    id: '4',
-    name: 'Batik Workshop',
-    location: 'Solo, Central Java',
-    image:
-      'https://images.unsplash.com/photo-1580916954804-2a85797cf50f?auto=format&fit=crop&q=80&w=600',
-    rating: 4.6,
-  },
-  {
-    id: '5',
-    name: 'Nasi Goreng Kambing',
-    location: 'Kebon Sirih, Jakarta',
-    image:
-      'https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&q=80&w=600',
-    rating: 4.8,
-  },
-  {
-    id: '6',
-    name: 'Sate Lilit',
-    location: 'Sanur, Bali',
-    image:
-      'https://images.unsplash.com/photo-1555126634-323283e090fa?auto=format&fit=crop&q=80&w=600',
-    rating: 4.7,
-  },
-  {
-    id: '7',
-    name: 'Rendang House',
-    location: 'Padang, West Sumatra',
-    image:
-      'https://images.unsplash.com/photo-1606491956689-2ea866880c84?auto=format&fit=crop&q=80&w=600',
-    rating: 4.9,
-  },
-];
+const PAGE_SIZE = 10;
 
 export default function FavoritesScreen() {
   const router = useRouter();
+  const [favoritesData, setFavoritesData] = useState<
+    ApiResponseSuccess<Content[]>
+  >({
+    data: [],
+    message: '',
+    status: 'success',
+    meta: undefined,
+    links: undefined,
+  });
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
-  const onPress = (params: any) => {
+  const onPress = (params: Content) => {
     router.push({
       pathname: '/detail',
-      params,
+      params: {
+        id: params.id,
+        title: params.title,
+        description: params.description,
+        image: params.image,
+        category: params.category,
+        province_id: params.province_id,
+        regency_id: params.regency_id,
+        district_id: params.district_id,
+        since_century: params.since_century,
+        established_year: params.established_year,
+        latitude: params.latitude,
+        longitude: params.longitude,
+        order: params.order,
+        created_at: params.created_at,
+        updated_at: params.updated_at,
+      },
     });
   };
 
+  const fetchFavorites = useCallback(
+    async (pageNum: number, isRefresh = false) => {
+      if (loading && !isRefresh) return;
+      if (isRefresh) setIsRefreshing(true);
+      else setLoading(true);
+      try {
+        const favorites = await getFavorites(pageNum, PAGE_SIZE);
+        if (pageNum === 1) {
+          setFavoritesData(favorites);
+        } else {
+          setFavoritesData((prev) => ({
+            ...favorites,
+            data: [...(prev.data || []), ...(favorites.data || [])],
+          }));
+        }
+        const currentPage = favorites.meta?.current_page || 1;
+        const lastPage = favorites.meta?.last_page || 1;
+        setHasMore(currentPage < lastPage);
+      } catch (e) {
+        setHasMore(false);
+      } finally {
+        if (isRefresh) setIsRefreshing(false);
+        else setLoading(false);
+      }
+    },
+    [loading]
+  );
+
+  useEffect(() => {
+    setPage(1);
+    setHasMore(true);
+    fetchFavorites(1, true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleLoadMore = () => {
+    if (!loading && hasMore && !isRefreshing) {
+      const nextPage = page + 1;
+      setPage(nextPage);
+      fetchFavorites(nextPage);
+    }
+  };
+
+  const handleRefresh = () => {
+    setPage(1);
+    setHasMore(true);
+    fetchFavorites(1, true);
+  };
+
+  const renderItem = ({ item, index }: { item: Content; index: number }) => (
+    <ItemCard
+      id={item.id}
+      key={item.id}
+      name={item.title}
+      location={
+        item.province?.name || item.regency?.name || item.district?.name
+      }
+      description={item.description}
+      entering={FadeInDown.delay(200 * index)}
+      onPress={() => onPress(item)}
+      image={item.image}
+    />
+  );
+
+  const ListFooterComponent = () =>
+    loading && hasMore ? (
+      <ActivityIndicator
+        size="small"
+        color={colors.chentil?.cerise || colors.text.primary}
+        style={{ marginVertical: 16 }}
+      />
+    ) : null;
+
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollView}>
-        <ScreenHeader
-          title="Favorites"
-          subtitle="Your saved places and experiences"
-        />
-        <View style={styles.section}>
-          {/* Destinations Section */}
-
-          {favorites.map((item, index) => (
-            <ItemCard
-              id={item.id}
-              key={item.id}
-              name={item.name}
-              location={item.location}
-              entering={FadeInDown.delay(200 * index)}
-              onPress={() => onPress(item)}
-              image={item.image}
-            />
-          ))}
-        </View>
-      </ScrollView>
+      <View style={styles.header}>
+        <Pressable style={styles.backButton} onPress={() => router.back()}>
+          <ArrowLeft size={24} color="#1A202C" />
+        </Pressable>
+        <Text style={styles.title}>Favorites</Text>
+        <Text style={styles.subtitle}>Your saved places and experiences</Text>
+      </View>
+      <FlatList
+        data={favoritesData.data}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={renderItem}
+        contentContainerStyle={styles.section}
+        ListEmptyComponent={
+          !loading ? (
+            <View style={styles.emptyState}>
+              <Text style={styles.emptyStateText}>No favorites yet</Text>
+              <Text style={styles.emptyStateSubtext}>
+                Start saving your favorite places and experiences!
+              </Text>
+            </View>
+          ) : null
+        }
+        ListFooterComponent={ListFooterComponent}
+        onEndReached={handleLoadMore}
+        onEndReachedThreshold={0.5}
+        showsVerticalScrollIndicator={false}
+        refreshing={isRefreshing}
+        onRefresh={handleRefresh}
+      />
     </SafeAreaView>
   );
 }
@@ -109,8 +170,25 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.background.primary,
   },
-  scrollView: {
-    flex: 1,
+  header: {
+    padding: 20,
+  },
+  backButton: {
+    width: 40,
+    height: 40,
+    justifyContent: 'center',
+    marginBottom: 16,
+  },
+  title: {
+    fontFamily: 'PlusJakartaSans-Bold',
+    fontSize: 24,
+    color: '#1A202C',
+  },
+  subtitle: {
+    fontFamily: 'PlusJakartaSans-Regular',
+    fontSize: 14,
+    color: '#4A5568',
+    marginTop: 4,
   },
   section: {
     padding: 16,

@@ -1,5 +1,5 @@
 import { endpoints, get, post } from '../apiClient';
-import type { Content } from '../../types/api';
+import type { ApiResponseSuccess, Content } from '../../types/api';
 
 // Favorite toggle response type
 export interface FavoriteToggleResponse {
@@ -17,8 +17,13 @@ export interface CheckFavoriteResponse {
 }
 
 // Get all favorite contents
-export async function getFavorites(): Promise<Content[]> {
-  return get<Content[]>(endpoints.favorites.list);
+export async function getFavorites(
+  page: number,
+  pageSize: number
+): Promise<ApiResponseSuccess<Content[]>> {
+  return get<ApiResponseSuccess<Content[]>>(endpoints.favorites.list, {
+    params: { page, pageSize },
+  });
 }
 
 // Check if a content is favorited
