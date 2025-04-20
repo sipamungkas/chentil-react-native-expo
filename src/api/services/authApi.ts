@@ -17,7 +17,7 @@ export async function login(credentials: {
     endpoints.auth.login,
     credentials
   );
-
+  console.log({ response });
   return response;
 }
 

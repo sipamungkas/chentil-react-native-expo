@@ -14,14 +14,15 @@ import { Link } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import { colors } from '@/theme/colors';
-import { useAuthStore } from '@/store/auth';
+import { useAuthStore } from '@/store/authStore';
+import { register } from '@/src/api/services/authApi';
 
 export default function RegisterScreen() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const { signUp, isLoading } = useAuthStore();
+  const { register, isLoading } = useAuthStore();
 
   const handleRegister = async () => {
     if (!name || !email || !password || !confirmPassword) {
@@ -35,9 +36,17 @@ export default function RegisterScreen() {
     }
 
     try {
-      await signUp(name, email, password);
+      await register({
+        name,
+        email,
+        password,
+        password_confirmation: confirmPassword,
+      });
     } catch (error) {
-      Alert.alert('Error', error instanceof Error ? error.message : 'Failed to create account');
+      Alert.alert(
+        'Error',
+        error instanceof Error ? error.message : 'Failed to create account'
+      );
     }
   };
 
@@ -110,8 +119,8 @@ export default function RegisterScreen() {
             />
           </View>
 
-          <TouchableOpacity 
-            style={[styles.button, isLoading && styles.buttonDisabled]} 
+          <TouchableOpacity
+            style={[styles.button, isLoading && styles.buttonDisabled]}
             onPress={handleRegister}
             disabled={isLoading}
           >
@@ -214,4 +223,4 @@ const styles = StyleSheet.create({
   buttonDisabled: {
     opacity: 0.7,
   },
-}); 
+});

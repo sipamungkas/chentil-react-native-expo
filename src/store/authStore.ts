@@ -9,19 +9,15 @@ import {
   updateProfile as apiUpdateProfile,
 } from '@/api/services/authApi';
 import type { ApiUser } from '@/types/api';
-
-// Store User type expects id as string
-interface User {
-  id: string;
-  name: string;
-  email: string;
-}
+import { router } from 'expo-router';
 
 type AuthState = {
-  user: User | null;
+  user: ApiUser | null;
   token: string | null;
-  setAuth: (user: User, token: string) => void;
-  logout: () => void;
+  isLoading: boolean;
+  setAuth: (user: ApiUser, token: string) => void;
+  setLoading: (loading: boolean) => void;
+  logout: () => Promise<void>;
   login: (credentials: { email: string; password: string }) => Promise<void>;
   register: (data: {
     name: string;
@@ -50,39 +46,61 @@ const ExpoSecureWrapper: StateStorage = {
   },
 };
 
-function apiUserToUser(apiUser: ApiUser): User {
-  return {
-    id: String(apiUser.id),
-    name: apiUser.name,
-    email: apiUser.email,
-  };
-}
-
 export const useAuthStore = create<AuthState>()(
   persist(
     (set, get) => ({
       user: null,
       token: null,
+      isLoading: false,
       setAuth: (user, token) => set({ user, token }),
+      setLoading: (loading) => set({ isLoading: loading }),
       logout: async () => {
-        await apiLogout();
-        set({ user: null, token: null });
+        set({ isLoading: true });
+        try {
+          apiLogout();
+          set({ user: null, token: null });
+          console.log('Logged out');
+          router.replace('/(auth)/login');
+        } finally {
+          set({ isLoading: false });
+        }
       },
       login: async (credentials) => {
-        const res = await apiLogin(credentials);
-        set({ user: apiUserToUser(res.data.user), token: res.data.token });
+        set({ isLoading: true });
+        try {
+          const res = await apiLogin(credentials);
+          console.log({ res });
+          set({ user: res.data.user, token: res.data.token });
+        } finally {
+          set({ isLoading: false });
+        }
       },
       register: async (data) => {
-        const res = await apiRegister(data);
-        set({ user: apiUserToUser(res.data.user), token: res.data.token });
+        set({ isLoading: true });
+        try {
+          const res = await apiRegister(data);
+          set({ user: res.data.user, token: res.data.token });
+        } finally {
+          set({ isLoading: false });
+        }
       },
       getProfile: async () => {
-        const profile = await apiGetProfile();
-        set((state) => ({ user: apiUserToUser(profile), token: state.token }));
+        set({ isLoading: true });
+        try {
+          const profile = await apiGetProfile();
+          set((state) => ({ user: profile, token: state.token }));
+        } finally {
+          set({ isLoading: false });
+        }
       },
       updateProfile: async (data) => {
-        const updated = await apiUpdateProfile(data);
-        set((state) => ({ user: apiUserToUser(updated), token: state.token }));
+        set({ isLoading: true });
+        try {
+          const updated = await apiUpdateProfile(data);
+          set((state) => ({ user: updated, token: state.token }));
+        } finally {
+          set({ isLoading: false });
+        }
       },
     }),
     {

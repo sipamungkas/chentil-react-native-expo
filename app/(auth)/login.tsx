@@ -14,12 +14,16 @@ import { Link } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import { colors } from '@/theme/colors';
-import { useAuthStore } from '@/store/auth';
+import { useAuthStore } from '@/store/authStore';
+
+const BASE_URL = process.env.EXPO_PUBLIC_API_URL;
 
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { signIn, isLoading } = useAuthStore();
+  const { login, isLoading } = useAuthStore();
+
+  console.log({ isLoading, BASE_URL });
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -28,9 +32,14 @@ export default function LoginScreen() {
     }
 
     try {
-      await signIn(email, password);
+      console.log('=== login ===', { email, password });
+      await login({ email, password });
     } catch (error) {
-      Alert.alert('Error', error instanceof Error ? error.message : 'Failed to sign in');
+      console.log('=== error ===', error);
+      Alert.alert(
+        'Error',
+        error instanceof Error ? error.message : 'Failed to sign in'
+      );
     }
   };
 
@@ -76,8 +85,8 @@ export default function LoginScreen() {
             />
           </View>
 
-          <TouchableOpacity 
-            style={[styles.button, isLoading && styles.buttonDisabled]} 
+          <TouchableOpacity
+            style={[styles.button, isLoading && styles.buttonDisabled]}
             onPress={handleLogin}
             disabled={isLoading}
           >
@@ -180,4 +189,4 @@ const styles = StyleSheet.create({
   buttonDisabled: {
     opacity: 0.7,
   },
-}); 
+});

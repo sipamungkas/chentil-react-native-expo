@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 import {
   StyleSheet,
   View,
@@ -12,12 +12,9 @@ import {
   Settings,
   MapPin,
   Calendar,
-  Star,
   ChevronRight,
   CreditCard as Edit3,
-  Bell,
   Shield,
-  CreditCard,
   CircleHelp as HelpCircle,
   LogOut,
   Trophy,
@@ -26,6 +23,7 @@ import {
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import { router } from 'expo-router';
 import { colors } from '@/theme/colors';
+import { useAuthStore } from '@/src/store/authStore';
 
 const PROFILE_DATA = {
   name: 'Ragil Pamungkas',
@@ -65,8 +63,15 @@ const MENU_SECTIONS = [
 ];
 
 export default function ProfileScreen() {
-  const [isEditing, setIsEditing] = useState(false);
+  const { logout, isLoading, user } = useAuthStore();
 
+  useEffect(() => {
+    if (isLoading) {
+      console.log({ loading: 'loading' });
+    }
+  }, [isLoading]);
+
+  console.info({ user });
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView
@@ -128,9 +133,12 @@ export default function ProfileScreen() {
               <Pressable
                 key={item.label}
                 style={styles.menuItem}
-                onPress={() => {
+                onPress={async () => {
                   if (item.route) {
                     router.push(item.route as '/challenges' | '/trips');
+                  }
+                  if (item.label === 'Log Out') {
+                    await logout();
                   }
                   // Handle menu item press
                 }}

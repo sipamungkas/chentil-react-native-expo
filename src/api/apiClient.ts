@@ -1,7 +1,8 @@
 // Axios-based API client for REST requests
 import axios, { AxiosRequestConfig, AxiosInstance } from 'axios';
 
-const BASE_URL = process.env.EXPO_PUBLIC_API_URL || 'http://localhost:8000/api';
+const BASE_URL = process.env.EXPO_PUBLIC_API_URL || 'http://localhost:8000/api2';
+console.log({ BASE_URL });
 
 // Helper to get auth token (customize as needed)
 export function getAuthToken(): string | undefined {
@@ -43,6 +44,7 @@ export async function post<T = any, D = any>(
   config?: AxiosRequestConfig
 ): Promise<T> {
   const res = await api.post<T>(url, data, config);
+  console.log({ res, url, data, config, api });
   return res.data;
 }
 
