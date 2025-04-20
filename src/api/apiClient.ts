@@ -83,7 +83,7 @@ export const endpoints = {
   },
   favorites: {
     list: '/favorites',
-    toggle: (contentId: number) => `/favorites/${contentId}/toggle`,
+    toggle: (contentId: number) => `/favorites/${contentId}`,
     check: (contentId: number) => `/favorites/${contentId}/check`,
   },
   trips: {
@@ -99,7 +99,7 @@ export const endpoints = {
 
   wishlists: {
     list: '/wishlists',
-    toggle: (contentId: number) => `/wishlists/${contentId}/toggle`,
+    toggle: (contentId: number) => `/wishlists/${contentId}`,
     check: (contentId: number) => `/wishlists/${contentId}/check`,
   },
   news: {

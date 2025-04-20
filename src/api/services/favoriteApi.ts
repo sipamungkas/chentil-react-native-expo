@@ -1,6 +1,21 @@
 import { endpoints, get, post } from '../apiClient';
 import type { Content } from '../../types/api';
 
+// Favorite toggle response type
+export interface FavoriteToggleResponse {
+  status: string;
+  message: string;
+  is_favorited: boolean;
+}
+
+// Check favorite response type
+export interface CheckFavoriteResponse {
+  status: string;
+  data: {
+    is_favorited: boolean;
+  };
+}
+
 // Get all favorite contents
 export async function getFavorites(): Promise<Content[]> {
   return get<Content[]>(endpoints.favorites.list);
@@ -10,10 +25,17 @@ export async function getFavorites(): Promise<Content[]> {
 export async function checkFavorite(
   contentId: number
 ): Promise<{ is_favorited: boolean }> {
-  return get<{ is_favorited: boolean }>(endpoints.favorites.check(contentId));
+  const res = await get<CheckFavoriteResponse>(
+    endpoints.favorites.check(contentId)
+  );
+  return res.data; // returns { is_favorited: boolean }
 }
 
 // Toggle favorite status for a content
-export async function toggleFavorite(contentId: number): Promise<void> {
-  await post(endpoints.favorites.toggle(contentId));
+export async function toggleFavorite(
+  contentId: number
+): Promise<FavoriteToggleResponse> {
+  return await post<FavoriteToggleResponse>(
+    endpoints.favorites.toggle(contentId)
+  );
 }

@@ -14,6 +14,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useEffect, useState } from 'react';
 import Animated from 'react-native-reanimated';
 import { checkWishlist, toggleWishlist } from '@/api/services/wishlistApi';
+import { checkFavorite, toggleFavorite } from '@/src/api/services/favoriteApi';
 
 interface DetailScreenProps {
   image: string;
@@ -24,7 +25,7 @@ interface DetailScreenProps {
 }
 
 export default function DetailScreen() {
-  const { id, image, name, description, location, since, date } =
+  const { id, image, name, description, location, since, date, title } =
     useLocalSearchParams();
   const router = useRouter();
 
@@ -55,11 +56,23 @@ export default function DetailScreen() {
     });
   }, []);
 
+  useEffect(() => {
+    checkFavorite(Number(id)).then((res) => {
+      setIsFavorite(res.is_favorited);
+    });
+  }, []);
+
   const handleWishlistPress = () => {
     toggleWishlist(Number(id)).then(() => {
       checkWishlist(Number(id)).then((res) => {
         setIsWishlisted(res.is_wishlisted);
       });
+    });
+  };
+
+  const handleFavoritePress = () => {
+    toggleFavorite(Number(id)).then((res) => {
+      setIsFavorite(res.is_favorited);
     });
   };
 
@@ -77,7 +90,7 @@ export default function DetailScreen() {
         />
 
         <View style={styles.content}>
-          <Text style={styles.name}>{name}</Text>
+          <Text style={styles.name}>{name || title}</Text>
 
           {location && (
             <View style={styles.infoRow}>
@@ -105,7 +118,7 @@ export default function DetailScreen() {
           <View style={styles.actionButtons}>
             <Pressable
               style={[styles.actionButton, isFavorite && styles.activeButton]}
-              onPress={() => setIsFavorite(!isFavorite)}
+              onPress={() => handleFavoritePress()}
             >
               <Heart
                 size={20}
