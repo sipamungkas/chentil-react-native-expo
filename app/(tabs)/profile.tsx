@@ -24,6 +24,7 @@ import Animated, { FadeInDown } from 'react-native-reanimated';
 import { router } from 'expo-router';
 import { colors } from '@/theme/colors';
 import { useAuthStore } from '@/src/store/authStore';
+import { formatDate } from '@/src/utils/date';
 
 const PROFILE_DATA = {
   name: 'Ragil Pamungkas',
@@ -65,13 +66,6 @@ const MENU_SECTIONS = [
 export default function ProfileScreen() {
   const { logout, isLoading, user } = useAuthStore();
 
-  useEffect(() => {
-    if (isLoading) {
-      console.log({ loading: 'loading' });
-    }
-  }, [isLoading]);
-
-  console.info({ user });
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView
@@ -95,20 +89,22 @@ export default function ProfileScreen() {
         >
           <Image source={{ uri: PROFILE_DATA.avatar }} style={styles.avatar} />
           <View style={styles.profileInfo}>
-            <Text style={styles.name}>{PROFILE_DATA.name}</Text>
+            <Text style={styles.name}>{user?.name}</Text>
             <View style={styles.locationRow}>
               <MapPin size={14} color={colors.chentil.rosePink} />
-              <Text style={styles.location}>{PROFILE_DATA.location}</Text>
+              <Text style={styles.location}>Indonesia</Text>
             </View>
             <View style={styles.joinDateRow}>
               <Calendar size={14} color={colors.chentil.rosePink} />
-              <Text style={styles.joinDate}>{PROFILE_DATA.joinDate}</Text>
+              <Text style={styles.joinDate}>
+                {formatDate(user?.created_at)}
+              </Text>
             </View>
           </View>
         </Animated.View>
 
         {/* Stats */}
-        <View style={styles.statsContainer}>
+        {/* <View style={styles.statsContainer}>
           {PROFILE_DATA.stats.map((stat, index) => (
             <Animated.View
               key={stat.label}
@@ -119,7 +115,7 @@ export default function ProfileScreen() {
               <Text style={styles.statLabel}>{stat.label}</Text>
             </Animated.View>
           ))}
-        </View>
+        </View> */}
 
         {/* Menu Sections */}
         {MENU_SECTIONS.map((section, sectionIndex) => (

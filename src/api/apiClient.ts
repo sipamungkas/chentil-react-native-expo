@@ -2,7 +2,6 @@
 import axios, { AxiosRequestConfig, AxiosInstance } from 'axios';
 
 const BASE_URL = process.env.EXPO_PUBLIC_API_URL || 'http://localhost:8000/api2';
-console.log({ BASE_URL });
 
 // Helper to get auth token (customize as needed)
 export function getAuthToken(): string | undefined {

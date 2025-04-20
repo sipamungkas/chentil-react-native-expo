@@ -25,7 +25,6 @@ export default function RootLayout() {
   });
 
   const user = useAuthStore((state) => state.user);
-  console.log({ user });
 
   useEffect(() => {
     if (fontsLoaded || fontError) {
