@@ -16,17 +16,18 @@ import Animated from 'react-native-reanimated';
 import { checkWishlist, toggleWishlist } from '@/api/services/wishlistApi';
 import { checkFavorite, toggleFavorite } from '@/src/api/services/favoriteApi';
 
-interface DetailScreenProps {
-  image: string;
-  name: string;
-  description: string;
-  location?: string;
-  since?: string;
-}
-
 export default function DetailScreen() {
-  const { id, image, name, description, location, since, date, title } =
-    useLocalSearchParams();
+  const {
+    id,
+    image,
+    name,
+    description,
+    location,
+    since,
+    date,
+    title,
+    category,
+  } = useLocalSearchParams();
   const router = useRouter();
 
   const [isWishlisted, setIsWishlisted] = useState(false);
@@ -76,6 +77,14 @@ export default function DetailScreen() {
     });
   };
 
+  // Category-to-text-color map using theme colors
+  const categoryTextColors = {
+    outbound: colors.chentil.rosePink,
+    culture: colors.chentil.creamy,
+    fnb: colors.chentil.bubbleGum,
+    destination: colors.chentil.thulian,
+  } as const;
+
   return (
     <SafeAreaView style={styles.container}>
       <Pressable style={styles.backButton} onPress={() => router.back()}>
@@ -91,6 +100,22 @@ export default function DetailScreen() {
 
         <View style={styles.content}>
           <Text style={styles.name}>{name || title}</Text>
+          <Text
+            style={[
+              styles.categoryBadge,
+              {
+                color:
+                  categoryTextColors[
+                    category as keyof typeof categoryTextColors
+                  ],
+              },
+            ]}
+          >
+            {category === 'outbound' && 'Outbound'}
+            {category === 'culture' && 'Culture'}
+            {category === 'fnb' && 'Food & Beverage'}
+            {category === 'destination' && 'Destination'}
+          </Text>
 
           {location && (
             <View style={styles.infoRow}>
@@ -190,6 +215,13 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: colors.brand.primary,
     marginBottom: 16,
+  },
+  categoryBadge: {
+    fontFamily: 'PlusJakartaSans-Medium',
+    fontSize: 14,
+    padding: 4,
+    borderRadius: 4,
+    marginBottom: 12,
   },
   infoRow: {
     flexDirection: 'row',
