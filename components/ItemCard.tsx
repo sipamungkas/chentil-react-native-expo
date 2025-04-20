@@ -18,6 +18,7 @@ export interface ItemCardProps {
   location?: string; //use it on destination or something that need location
   since?: string; //use it on culture
   description?: string;
+  category?: string;
   onPress?: ((event: GestureResponderEvent) => void) | null | undefined;
 }
 
@@ -30,6 +31,7 @@ export function ItemCard({
   description,
   since,
   onPress,
+  category,
 }: ItemCardProps) {
   return (
     <Animated.View entering={entering} style={styles.card}>
@@ -44,7 +46,7 @@ export function ItemCard({
               <Text style={styles.locationText}>{location}</Text>
             </View>
           )}
-          {since!! && (
+          {category === 'culture' && (
             <View style={styles.locationRow}>
               <Calendar size={14} color={colors.chentil.rosePink} />
               <Text style={styles.sinceText}>Since {since}</Text>
