@@ -101,6 +101,11 @@ export const endpoints = {
     list: '/wishlists',
     toggle: (contentId: number) => `/wishlists/${contentId}`,
     check: (contentId: number) => `/wishlists/${contentId}/check`,
+    count: '/wishlists/category-counts',
+    destinations: '/wishlists/destinations',
+    outbound: '/wishlists/outbounds',
+    fnb: '/wishlists/fnb',
+    culture: '/wishlists/culture',
   },
   news: {
     list: '/news',

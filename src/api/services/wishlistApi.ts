@@ -1,5 +1,9 @@
 import { endpoints, get, post } from '../apiClient';
-import type { Content } from '../../types/api';
+import type {
+  ApiResponseSuccess,
+  Content,
+  WishlistCount,
+} from '../../types/api';
 
 // Wishlist toggle response type
 export interface WishlistToggleResponse {
@@ -38,4 +42,24 @@ export async function checkWishlist(
     endpoints.wishlists.check(contentId)
   );
   return res.data; // returns { is_wishlisted: boolean }
+}
+
+export async function wishlistCounts(): Promise<
+  ApiResponseSuccess<WishlistCount>
+> {
+  return get<ApiResponseSuccess<WishlistCount>>(endpoints.wishlists.count);
+}
+
+export async function getWishlistsByCategory(
+  category: string,
+  page: number,
+  pageSize: number
+): Promise<ApiResponseSuccess<Content[]>> {
+  return get<ApiResponseSuccess<Content[]>>(endpoints.wishlists.list, {
+    params: {
+      category,
+      page,
+      pageSize,
+    },
+  });
 }

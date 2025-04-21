@@ -11,6 +11,9 @@ import { useRouter } from 'expo-router';
 import { Compass, Plane, Utensils, Palette } from 'lucide-react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import { colors } from '@/theme/colors';
+import { useEffect, useState } from 'react';
+import { WishlistCount } from '@/src/types/api';
+import { wishlistCounts } from '@/src/api/services/wishlistApi';
 
 const { width } = Dimensions.get('window');
 const GRID_SPACING = 16;
@@ -24,7 +27,6 @@ const CATEGORIES = [
     color: '#FF4D8D',
     backgroundColor: '#FFF5F7',
     description: 'Your favorite places to visit',
-    count: 12,
   },
   {
     id: 'outbound',
@@ -33,16 +35,14 @@ const CATEGORIES = [
     color: '#4299E1',
     backgroundColor: '#EBF8FF',
     description: 'Saved outdoor activities',
-    count: 5,
   },
   {
-    id: 'food',
+    id: 'fnb',
     name: 'Food & Beverage',
     icon: Utensils,
     color: '#ED8936',
     backgroundColor: '#FFFAF0',
     description: 'Culinary discoveries',
-    count: 8,
   },
   {
     id: 'culture',
@@ -51,12 +51,21 @@ const CATEGORIES = [
     color: '#48BB78',
     backgroundColor: '#F0FFF4',
     description: 'Cultural experiences',
-    count: 3,
   },
 ];
 
 export default function WishlistScreen() {
   const router = useRouter();
+  const [wishlistCount, setWishlistCount] = useState<WishlistCount>({
+    destination: 0,
+    outbound: 0,
+    culture: 0,
+    fnb: 0,
+  });
+
+  useEffect(() => {
+    wishlistCounts().then((res) => setWishlistCount(res.data));
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -94,7 +103,9 @@ export default function WishlistScreen() {
                     { backgroundColor: category.color },
                   ]}
                 >
-                  <Text style={styles.countText}>{category.count}</Text>
+                  <Text style={styles.countText}>
+                    {wishlistCount[category.id as keyof WishlistCount]}
+                  </Text>
                 </View>
               </Pressable>
             </Animated.View>

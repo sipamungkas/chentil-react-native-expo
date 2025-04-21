@@ -137,6 +137,13 @@ export interface News {
   description: string;
 }
 
+export interface WishlistCount {
+  destination: number;
+  outbound: number;
+  culture: number;
+  fnb: number;
+}
+
 // Example usage:
 // ApiResponseSuccess<LoginResponse>
 // ApiResponseSuccess<RegisterResponse>
