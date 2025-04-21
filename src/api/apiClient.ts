@@ -119,4 +119,7 @@ export const endpoints = {
   provinces: {
     list: '/provinces',
   },
+  nearby: {
+    list: '/nearby',
+  },
 };
