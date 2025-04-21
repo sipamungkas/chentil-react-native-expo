@@ -8,6 +8,8 @@ import { useEffect, useState } from 'react';
 import * as Location from 'expo-location';
 import { getNearby } from '@/src/api/services/nearbyApi';
 import { useLocalSearchParams } from 'expo-router';
+import { useRouter } from 'expo-router';
+import { Content } from '@/src/types/api';
 
 const INITIAL_REGION = {
   latitude: -6.2,
@@ -28,6 +30,7 @@ interface PointOfInterest {
 
 export default function MapScreen() {
   const { latitude, longitude } = useLocalSearchParams();
+  const router = useRouter();
 
   // Ensure latitude and longitude are numbers (not strings)
   const lat = latitude ? Number(latitude) : INITIAL_REGION.latitude;
@@ -38,7 +41,7 @@ export default function MapScreen() {
     latitude: lat,
     longitude: lng,
   });
-  const [points, setPoints] = useState<PointOfInterest[]>([]);
+  const [points, setPoints] = useState<Content[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -56,17 +59,8 @@ export default function MapScreen() {
           per_page: 15,
           max_distance: 5,
         });
-        console.log({ data });
-        setPoints(
-          data?.map((item) => ({
-            id: item.id.toString(),
-            title: item.title,
-            coordinate: {
-              latitude: Number(item.latitude),
-              longitude: Number(item.longitude),
-            },
-          }))
-        );
+
+        setPoints(data);
       } finally {
         setLoading(false);
       }
@@ -74,6 +68,29 @@ export default function MapScreen() {
   }, [lat, lng]);
 
   console.log({ points });
+
+  const handleMarkerPress = (poi: Content) => {
+    router.push({
+      pathname: '/detail',
+      params: {
+        id: poi.id,
+        title: poi.title,
+        description: poi.description,
+        image: poi.image,
+        category: poi.category,
+        province_id: poi.province_id,
+        regency_id: poi.regency_id,
+        district_id: poi.district_id,
+        since_century: poi.since_century,
+        established_year: poi.established_year,
+        latitude: poi.latitude,
+        longitude: poi.longitude,
+        order: poi.order,
+        created_at: poi.created_at,
+        updated_at: poi.updated_at,
+      },
+    });
+  };
 
   return (
     <View style={styles.container}>
@@ -85,6 +102,7 @@ export default function MapScreen() {
         <MapView
           initialRegion={region}
           pointsOfInterest={points}
+          onMarkerPress={handleMarkerPress}
           // loading={loading}
         />
       </View>

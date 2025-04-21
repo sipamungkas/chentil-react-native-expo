@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, Platform } from 'react-native';
 import { colors } from '../theme/colors';
+import { Content } from '@/src/types/api';
 
 // Only import MapView and Marker when not on web
 const { default: RNMapView, Marker } = Platform.select({
@@ -26,16 +27,22 @@ interface MapViewProps {
     latitudeDelta: number;
     longitudeDelta: number;
   };
-  pointsOfInterest: PointOfInterest[];
+  pointsOfInterest: Content[];
+  onMarkerPress?: (poi: Content) => void;
 }
 
-export function MapView({ initialRegion, pointsOfInterest }: MapViewProps) {
+export function MapView({
+  initialRegion,
+  pointsOfInterest,
+  onMarkerPress,
+}: MapViewProps) {
   // Show alternative content on web
   if (Platform.OS === 'web') {
     return (
       <View style={styles.webPlaceholder}>
         <Text style={styles.webPlaceholderText}>
-          For the best experience, please use our mobile app to access the interactive map features.
+          For the best experience, please use our mobile app to access the
+          interactive map features.
         </Text>
       </View>
     );
@@ -54,8 +61,12 @@ export function MapView({ initialRegion, pointsOfInterest }: MapViewProps) {
         {pointsOfInterest.map((poi) => (
           <Marker
             key={poi.id}
-            coordinate={poi.coordinate}
+            coordinate={{
+              latitude: Number(poi.latitude),
+              longitude: Number(poi.longitude),
+            }}
             title={poi.title}
+            onCalloutPress={() => onMarkerPress?.(poi)}
           />
         ))}
       </RNMapView>
@@ -91,4 +102,4 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     lineHeight: 24,
   },
-}); 
+});
