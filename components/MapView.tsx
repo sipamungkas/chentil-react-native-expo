@@ -41,11 +41,15 @@ export function MapView({ initialRegion, pointsOfInterest }: MapViewProps) {
     );
   }
 
+  // Add zoom controls for Android/iOS
   return (
     <View style={styles.mapContainer}>
       <RNMapView
         style={styles.map}
         initialRegion={initialRegion}
+        zoomEnabled={true}
+        zoomControlEnabled={true} // Only works on Android
+        showsUserLocation={true}
       >
         {pointsOfInterest.map((poi) => (
           <Marker

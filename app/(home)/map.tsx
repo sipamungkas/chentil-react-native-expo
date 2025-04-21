@@ -7,6 +7,7 @@ import { MapView } from '@/components/MapView';
 import { useEffect, useState } from 'react';
 import * as Location from 'expo-location';
 import { getNearby } from '@/src/api/services/nearbyApi';
+import { useLocalSearchParams } from 'expo-router';
 
 const INITIAL_REGION = {
   latitude: -6.2,
@@ -26,7 +27,17 @@ interface PointOfInterest {
 }
 
 export default function MapScreen() {
-  const [region, setRegion] = useState(INITIAL_REGION);
+  const { latitude, longitude } = useLocalSearchParams();
+
+  // Ensure latitude and longitude are numbers (not strings)
+  const lat = latitude ? Number(latitude) : INITIAL_REGION.latitude;
+  const lng = longitude ? Number(longitude) : INITIAL_REGION.longitude;
+
+  const [region, setRegion] = useState({
+    ...INITIAL_REGION,
+    latitude: lat,
+    longitude: lng,
+  });
   const [points, setPoints] = useState<PointOfInterest[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -37,25 +48,22 @@ export default function MapScreen() {
         setLoading(false);
         return;
       }
-      const location = await Location.getCurrentPositionAsync({});
-      const lat = location.coords.latitude;
-      const lng = location.coords.longitude;
-      // setRegion({ ...region, latitude: lat, longitude: lng });
-      setRegion({ ...region, latitude: -6.1753889, longitude: 106.8271389 });
+      setRegion((prev) => ({ ...prev, latitude: lat, longitude: lng }));
       try {
         const data = await getNearby({
           latitude: lat,
           longitude: lng,
           per_page: 15,
-          max_distance: 0.9,
+          max_distance: 5,
         });
+        console.log({ data });
         setPoints(
-          data.map((item) => ({
+          data?.map((item) => ({
             id: item.id.toString(),
             title: item.title,
             coordinate: {
-              latitude: item.latitude ?? lat,
-              longitude: item.longitude ?? lng,
+              latitude: Number(item.latitude),
+              longitude: Number(item.longitude),
             },
           }))
         );
@@ -63,7 +71,9 @@ export default function MapScreen() {
         setLoading(false);
       }
     })();
-  }, []);
+  }, [lat, lng]);
+
+  console.log({ points });
 
   return (
     <View style={styles.container}>
@@ -75,7 +85,7 @@ export default function MapScreen() {
         <MapView
           initialRegion={region}
           pointsOfInterest={points}
-          // loading={loading} // Remove this prop if not supported
+          // loading={loading}
         />
       </View>
     </View>

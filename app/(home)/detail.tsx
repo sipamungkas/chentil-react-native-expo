@@ -29,6 +29,8 @@ export default function DetailScreen() {
     date,
     title,
     category,
+    latitude,
+    longitude,
   } = useLocalSearchParams();
   const router = useRouter();
 
@@ -50,7 +52,13 @@ export default function DetailScreen() {
   };
 
   const handleMapPress = () => {
-    router.push('/map');
+    router.push({
+      pathname: '/map',
+      params: {
+        latitude,
+        longitude,
+      },
+    });
   };
 
   useEffect(() => {
