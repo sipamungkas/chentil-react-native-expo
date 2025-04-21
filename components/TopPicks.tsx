@@ -1,46 +1,64 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Image } from 'expo-image';
-import { Star } from 'lucide-react-native';
+import { Star, MapPin, Utensils, Palette } from 'lucide-react-native';
 import { colors } from '../theme/colors';
-
-interface Place {
-  id: string;
-  name: string;
-  location: string;
-  image: string;
-  rating: number;
-}
+import { Content } from '@/src/types/api';
 
 interface TopPicksProps {
-  places: Place[];
+  contents: Content[];
   onPlacePress: (id: string) => void;
 }
 
-export function TopPicks({ places, onPlacePress }: TopPicksProps) {
+export function TopPicks({ contents, onPlacePress }: TopPicksProps) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Top Picks</Text>
-      {places.map((place) => (
+      {contents.map((content) => (
         <TouchableOpacity
-          key={place.id}
+          key={content.id}
           style={styles.card}
-          onPress={() => onPlacePress(place.id)}
+          onPress={() => onPlacePress(content.id.toString())}
         >
           <Image
-            source={{ uri: place.image }}
+            source={{ uri: content.image }}
             style={styles.image}
             contentFit="cover"
           />
           <View style={styles.content}>
-            <Text style={styles.name}>{place.name}</Text>
-            <Text style={styles.location}>{place.location}</Text>
+            <Text style={styles.name}>{content.title}</Text>
+            <Text style={styles.location}>
+              {content.province?.name ||
+                content.regency?.name ||
+                content.district?.name ||
+                ''}
+            </Text>
+            <View style={styles.categoryRow}>
+              {content.category === 'destination' && (
+                <MapPin size={14} color={colors.chentil.rosePink} />
+              )}
+              {content.category === 'food' && (
+                <Utensils size={14} color={colors.chentil.rosePink} />
+              )}
+              {content.category === 'culture' && (
+                <Palette size={14} color={colors.chentil.rosePink} />
+              )}
+              {content.category === 'outbound' && (
+                <MapPin size={14} color={colors.chentil.rosePink} />
+              )}
+              <Text style={styles.categoryText}>
+                {content.category === 'destination' && 'Destination'}
+                {content.category === 'food' && 'Food & Beverage'}
+                {content.category === 'culture' && 'Culture'}
+                {content.category === 'outbound' && 'Outbound'}
+              </Text>
+            </View>
             {/* <View style={styles.ratingContainer}>
               <Star
                 size={16}
                 color={colors.chentil.watermelon}
                 fill={colors.chentil.watermelon}
               />
-              <Text style={styles.rating}>{place.rating}</Text>
+              <Text style={styles.rating}>{content.rating}</Text>
             </View> */}
           </View>
         </TouchableOpacity>
@@ -84,7 +102,18 @@ const styles = StyleSheet.create({
   location: {
     fontSize: 14,
     color: colors.text.secondary,
-    marginBottom: 8,
+    marginBottom: 4,
+  },
+  categoryRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 4,
+  },
+  categoryText: {
+    fontSize: 13,
+    color: colors.chentil.rosePink,
+    marginLeft: 6,
+    fontFamily: 'PlusJakartaSans-Medium',
   },
   ratingContainer: {
     flexDirection: 'row',

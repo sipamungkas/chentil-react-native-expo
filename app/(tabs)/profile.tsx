@@ -1,12 +1,5 @@
 import { useEffect } from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  ScrollView,
-  Image,
-  Pressable,
-} from 'react-native';
+import { StyleSheet, View, Text, ScrollView, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {
   Settings,
@@ -25,19 +18,6 @@ import { router } from 'expo-router';
 import { colors } from '@/theme/colors';
 import { useAuthStore } from '@/src/store/authStore';
 import { formatDate } from '@/src/utils/date';
-
-const PROFILE_DATA = {
-  name: 'Ragil Pamungkas',
-  location: 'Jakarta, Indonesia',
-  joinDate: 'Member since 2023',
-  avatar:
-    'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&q=80&w=200',
-  stats: [
-    { label: 'Trips', value: '12' },
-    { label: 'Reviews', value: '28' },
-    { label: 'Photos', value: '154' },
-  ],
-};
 
 const MENU_SECTIONS = [
   {
@@ -87,7 +67,18 @@ export default function ProfileScreen() {
           entering={FadeInDown.duration(600)}
           style={styles.profileCard}
         >
-          <Image source={{ uri: PROFILE_DATA.avatar }} style={styles.avatar} />
+          {/* Avatar with user initials */}
+          <View style={styles.avatarInitials}>
+            <Text style={styles.avatarInitialsText} numberOfLines={1}>
+              {user?.name
+                ? user.name
+                    .split(' ')
+                    .map((n) => n[0])
+                    .join('')
+                    .toUpperCase()
+                : '?'}
+            </Text>
+          </View>
           <View style={styles.profileInfo}>
             <Text style={styles.name}>{user?.name}</Text>
             <View style={styles.locationRow}>
@@ -191,12 +182,21 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: 20,
     alignItems: 'center',
+    gap: 20,
   },
-  avatar: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    marginRight: 16,
+  avatarInitials: {
+    width: 90,
+    height: 90,
+    borderRadius: 90,
+    backgroundColor: colors.chentil.rosePink,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 12,
+  },
+  avatarInitialsText: {
+    color: '#fff',
+    fontSize: 32,
+    fontWeight: 'bold',
   },
   profileInfo: {
     flex: 1,
@@ -206,6 +206,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#1A202C',
     marginBottom: 4,
+    textTransform: 'capitalize',
   },
   locationRow: {
     flexDirection: 'row',

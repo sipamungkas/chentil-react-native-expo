@@ -19,7 +19,9 @@ import { TopPicks } from '@/components/TopPicks';
 import { FloatingActionButton } from '@/components/FloatingActionButton';
 import { colors } from '@/theme/colors';
 import { getNews } from '@/api/services/newsApi';
+import { getTopFavorites } from '@/src/api/services/contentApi';
 import { News } from '@/src/types/api';
+import type { Content } from '@/src/types/api';
 
 const MENU_ITEMS = [
   {
@@ -60,29 +62,11 @@ const MENU_ITEMS = [
   },
 ];
 
-const TOP_PICKS = [
-  {
-    id: '1',
-    name: 'Borobudur Temple',
-    location: 'Magelang, Central Java',
-    image:
-      'https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?auto=format&fit=crop&q=80&w=600',
-    rating: 4.8,
-  },
-  {
-    id: '2',
-    name: 'Raja Ampat Islands',
-    location: 'West Papua',
-    image:
-      'https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?auto=format&fit=crop&q=80&w=600',
-    rating: 4.9,
-  },
-];
-
 export default function HomeScreen() {
   const [news, setNews] = useState<News[]>([]);
   const [loading, setLoading] = useState(false);
   const [searchText, setSearchText] = useState('');
+  const [topPicks, setTopPicks] = useState<Content[]>([]);
   const router = useRouter();
 
   useEffect(() => {
@@ -94,6 +78,13 @@ export default function HomeScreen() {
         setNews([]);
       })
       .finally(() => setLoading(false));
+    // Fetch top picks
+    getTopFavorites(5, 1)
+      .then((data) => setTopPicks(data.data))
+      .catch((err) => {
+        console.error('Failed to fetch top picks:', err);
+        setTopPicks([]);
+      });
   }, []);
 
   const handleMenuPress = (route: string | null) => {
@@ -124,7 +115,7 @@ export default function HomeScreen() {
         <View style={{ marginVertical: 16 }} />
         <MenuGrid items={MENU_ITEMS} onItemPress={handleMenuPress} />
         <MapSection />
-        <TopPicks places={TOP_PICKS} onPlacePress={handlePlacePress} />
+        <TopPicks contents={topPicks} onPlacePress={handlePlacePress} />
       </ScrollView>
       <FloatingActionButton onPress={() => router.push('/calendar' as const)} />
     </SafeAreaView>

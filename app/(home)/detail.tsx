@@ -112,6 +112,9 @@ export default function DetailScreen() {
             {category === 'culture' && (
               <Palette size={16} color={colors.chentil.rosePink} />
             )}
+            {category === 'outbound' && (
+              <MapPin size={14} color={colors.chentil.rosePink} />
+            )}
             <Text style={styles.categoryBadge}>
               {category === 'outbound' && 'Outbound'}
               {category === 'culture' && 'Culture'}
