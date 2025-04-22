@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, ScrollView, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Calendar as CalendarIcon, Clock, MapPin } from 'lucide-react-native';
@@ -6,48 +6,33 @@ import { Calendar } from 'react-native-calendars';
 import { useRouter } from 'expo-router';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import { colors } from '@/theme/colors';
-
-const EVENTS = {
-  '2024-03-15': [
-    {
-      id: '1',
-      title: 'Borobudur Sunrise Tour',
-      time: '04:30 AM - 07:00 AM',
-      location: 'Magelang, Central Java',
-      type: 'tour',
-    },
-  ],
-  '2024-03-20': [
-    {
-      id: '2',
-      title: 'Bali Arts Festival',
-      time: '10:00 AM - 08:00 PM',
-      location: 'Denpasar, Bali',
-      type: 'festival',
-    },
-  ],
-  '2024-04-01': [
-    {
-      id: '3',
-      title: 'Traditional Dance Workshop',
-      time: '02:00 PM - 04:00 PM',
-      location: 'Yogyakarta',
-      type: 'workshop',
-    },
-  ],
-};
+import {
+  fetchEventCalendar,
+  EventCalendarResponse,
+} from '@/api/services/eventApi';
 
 export default function CalendarScreen() {
-  const router = useRouter();
   const [selectedDate, setSelectedDate] = useState('');
+  const [calendarEvents, setCalendarEvents] = useState<
+    EventCalendarResponse['data']
+  >({});
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchEventCalendar()
+      .then((res) => setCalendarEvents(res.data))
+      .catch((err) => console.error('Failed to fetch events', err))
+      .finally(() => setLoading(false));
+  }, []);
 
   // Create marked dates object with proper structure
-  const markedDates = Object.keys(EVENTS).reduce((acc, date) => {
+  const markedDates = Object.keys(calendarEvents).reduce((acc, date) => {
     acc[date] = {
-      marked: true,
-      dotColor: '#FF4D8D',
+      marked: calendarEvents[date].marked,
+      dotColor: calendarEvents[date].selectedColor,
       selected: date === selectedDate,
-      selectedColor: date === selectedDate ? '#FF4D8D' : undefined,
+      selectedColor:
+        date === selectedDate ? calendarEvents[date].selectedColor : undefined,
     };
     return acc;
   }, {} as Record<string, any>);
@@ -60,7 +45,7 @@ export default function CalendarScreen() {
     };
   }
 
-  const selectedEvents = EVENTS[selectedDate] || [];
+  const selectedEvent = calendarEvents[selectedDate];
   const formattedDate = selectedDate
     ? new Date(selectedDate).toLocaleDateString('en-US', {
         month: 'long',
@@ -97,7 +82,7 @@ export default function CalendarScreen() {
             textDayHeaderFontFamily: 'PlusJakartaSans-Medium',
           }}
           markedDates={markedDates}
-          onDayPress={(day) => setSelectedDate(day.dateString)}
+          onDayPress={(day: any) => setSelectedDate(day.dateString)}
           enableSwipeMonths={true}
         />
 
@@ -106,31 +91,39 @@ export default function CalendarScreen() {
             {selectedDate ? `Events on ${formattedDate}` : 'Upcoming Events'}
           </Text>
 
-          {selectedEvents.length > 0 ? (
-            selectedEvents.map((event) => (
-              <Animated.View
-                key={event.id}
-                entering={FadeInDown.duration(400)}
-                style={styles.eventCard}
-              >
-                <View style={styles.eventHeader}>
-                  <CalendarIcon size={20} color="#FF4D8D" />
-                  <Text style={styles.eventTitle}>{event.title}</Text>
+          {loading ? (
+            <Text style={styles.noEvents}>Loading events...</Text>
+          ) : selectedEvent ? (
+            <Animated.View
+              key={selectedDate}
+              entering={FadeInDown.duration(400)}
+              style={styles.eventCard}
+            >
+              <View style={styles.eventHeader}>
+                <CalendarIcon
+                  size={20}
+                  color={selectedEvent.selectedColor || '#FF4D8D'}
+                />
+                <Text style={styles.eventTitle}>{selectedEvent.event}</Text>
+              </View>
+
+              <View style={styles.eventDetails}>
+                {/* <View style={styles.eventDetail}>
+                  <Clock size={16} color={colors.chentil.rosePink} />
+                  <Text style={styles.eventDetailText}>
+                    {selectedEvent.time}
+                  </Text>
                 </View>
 
-                <View style={styles.eventDetails}>
-                  <View style={styles.eventDetail}>
-                    <Clock size={16} color={colors.chentil.rosePink} />
-                    <Text style={styles.eventDetailText}>{event.time}</Text>
-                  </View>
-
-                  <View style={styles.eventDetail}>
-                    <MapPin size={16} color={colors.chentil.rosePink} />
-                    <Text style={styles.eventDetailText}>{event.location}</Text>
-                  </View>
-                </View>
-              </Animated.View>
-            ))
+                <View style={styles.eventDetail}>
+                  <MapPin size={16} color={colors.chentil.rosePink} />
+                  <Text style={styles.eventDetailText}>
+                    {selectedEvent.description}
+                  </Text>
+                </View> */}
+                <Text>{selectedEvent.description}</Text>
+              </View>
+            </Animated.View>
           ) : (
             <Text style={styles.noEvents}>
               {selectedDate

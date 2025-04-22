@@ -30,13 +30,13 @@ const MENU_SECTIONS = [
   {
     title: 'Preferences',
     items: [
-      {
-        icon: Trophy,
-        label: 'Challenges',
-        color: '#4299E1',
-        route: '/challenges',
-      },
-      { icon: Plane, label: 'Trips', color: '#4299E1', route: 'trips' },
+      // {
+      //   icon: Trophy,
+      //   label: 'Challenges',
+      //   color: '#4299E1',
+      //   route: '/challenges',
+      // },
+      // { icon: Plane, label: 'Trips', color: '#4299E1', route: 'trips' },
       { icon: HelpCircle, label: 'Help & Support', color: '#4299E1' },
       { icon: LogOut, label: 'Log Out', color: '#E53E3E' },
     ],
