@@ -30,6 +30,18 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
+// Response interceptor for 401 signout
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      // Call signout logic from auth store
+      const signOut = useAuthStore().logout;
+    }
+    return Promise.reject(error);
+  }
+);
+
 // Generic helpers
 export async function get<T = any>(
   url: string,
